@@ -456,3 +456,32 @@ Oracle Corporation. (2025). Open Agent Specification (Agent Spec) Technical Repo
 ---
 
 *This skill enables you to design portable, reusable AI agents using Oracle's open specification standard for 2025 and beyond.*
+
+---
+
+## Quality Checklist
+
+Before deploying an Agent Spec:
+
+**Specification:**
+- [ ] Version field present and follows semver
+- [ ] All components have unique names
+- [ ] Input/output schemas defined for each node
+- [ ] Entry point clearly specified
+
+**Portability:**
+- [ ] No framework-specific syntax
+- [ ] No hardcoded credentials
+- [ ] Environment variables used for secrets
+- [ ] Tested compilation to at least 2 runtimes
+
+**Workflow:**
+- [ ] Clear data flow between nodes
+- [ ] Error handling strategy defined
+- [ ] Conditional logic properly structured
+- [ ] Loop conditions have max iterations
+
+**Documentation:**
+- [ ] Description fields populated
+- [ ] Tool parameters documented
+- [ ] Expected outputs specified

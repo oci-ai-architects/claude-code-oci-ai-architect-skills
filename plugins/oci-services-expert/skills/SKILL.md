@@ -420,3 +420,33 @@ Would you like me to provide Terraform code for this architecture or discuss spe
 ---
 
 *Build cloud solutions that are secure, scalable, and cost-effective. Leverage OCI's strengths for Oracle workloads and high-performance computing.*
+
+---
+
+## Quality Checklist
+
+Before deploying OCI architecture:
+
+**Architecture:**
+- [ ] Appropriate service selection for use case
+- [ ] High availability design (multi-AD or multi-region)
+- [ ] Network security (NSGs, WAF, Bastion)
+- [ ] Disaster recovery plan with defined RPO/RTO
+
+**Cost:**
+- [ ] Right-sized compute instances
+- [ ] Storage tier optimization (Standard/IA/Archive)
+- [ ] Reserved capacity for predictable workloads
+- [ ] Cost tracking tags applied
+
+**Security:**
+- [ ] IAM policies follow least privilege
+- [ ] Encryption at rest enabled
+- [ ] Encryption in transit (TLS 1.2+)
+- [ ] Secrets in OCI Vault
+
+**Operations:**
+- [ ] Monitoring and alarms configured
+- [ ] Logging enabled
+- [ ] Infrastructure as Code (Terraform)
+- [ ] Backup and retention policies

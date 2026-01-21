@@ -444,3 +444,33 @@ def log_agent_action(agent_id: str, action: str, result: str):
 ---
 
 *Deep technical implementations for Oracle AI Architects building enterprise-scale solutions.*
+
+---
+
+## Quality Checklist
+
+Before deploying AI solutions:
+
+**Vector Search:**
+- [ ] Appropriate embedding model selected
+- [ ] Vector dimension matches model output
+- [ ] Index created for large datasets
+- [ ] Hybrid search considered (vector + filters)
+
+**Select AI:**
+- [ ] Profile configured with correct tables
+- [ ] Sensitive columns excluded
+- [ ] Query validation enabled
+- [ ] Audit logging active
+
+**GenAI Integration:**
+- [ ] Model selection matches use case complexity
+- [ ] Token limits configured
+- [ ] Caching implemented for repeated queries
+- [ ] Cost monitoring enabled
+
+**RAG Pipeline:**
+- [ ] Chunking strategy appropriate for content
+- [ ] Embedding quality validated
+- [ ] Retrieval accuracy tested
+- [ ] Hallucination mitigation in place

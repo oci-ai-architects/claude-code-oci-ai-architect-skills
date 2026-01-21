@@ -1,0 +1,19 @@
+{
+  "name": "oracle-agent-spec",
+  "version": "1.0.0",
+  "description": "Design framework-agnostic AI agents using Oracle's Open Agent Specification for portable, interoperable agentic systems",
+  "author": {
+    "name": "FrankX",
+    "url": "https://github.com/frankxai"
+  },
+  "repository": "https://github.com/frankxai/claude-code-oracle-skills",
+  "license": "MIT",
+  "keywords": ["oracle", "agent-spec", "yaml", "json", "portable", "framework-agnostic", "interoperability"],
+  "category": "ai-ml",
+  "difficulty": "intermediate",
+  "components": {
+    "skills": 1,
+    "commands": 1,
+    "agents": 0
+  }
+}

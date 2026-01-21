@@ -742,3 +742,32 @@ When outputting Python:
 ---
 
 *Generate professional OCI architecture diagrams with verified Oracle styling and icons.*
+
+---
+
+## Quality Checklist
+
+Before finalizing diagrams:
+
+**Visual:**
+- [ ] Uses Oracle Red (#C74634) for OCI services
+- [ ] Correct icon shapes (mxgraph.oci.*)
+- [ ] Consistent spacing and alignment
+- [ ] Clear connection lines with labels
+
+**Content:**
+- [ ] All services labeled clearly
+- [ ] Cost estimates included (where relevant)
+- [ ] Data flow direction indicated
+- [ ] Security boundaries shown (VCN, subnets)
+
+**Accuracy:**
+- [ ] Services match actual architecture
+- [ ] Connections are logically correct
+- [ ] Region/AD placement accurate
+- [ ] Pricing from current OCI pricing page
+
+**Presentation:**
+- [ ] Title clearly states architecture purpose
+- [ ] Legend included for complex diagrams
+- [ ] Exportable format (PNG, SVG, PDF)

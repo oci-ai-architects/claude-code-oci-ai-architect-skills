@@ -1,0 +1,19 @@
+{
+  "name": "oracle-adk",
+  "version": "1.0.0",
+  "description": "Build production agentic applications on OCI using Oracle Agent Development Kit with multi-agent orchestration, function tools, and enterprise patterns",
+  "author": {
+    "name": "FrankX",
+    "url": "https://github.com/frankxai"
+  },
+  "repository": "https://github.com/frankxai/claude-code-oracle-skills",
+  "license": "MIT",
+  "keywords": ["oracle", "adk", "agents", "multi-agent", "oci", "genai", "python", "enterprise"],
+  "category": "ai-ml",
+  "difficulty": "intermediate",
+  "components": {
+    "skills": 1,
+    "commands": 1,
+    "agents": 0
+  }
+}

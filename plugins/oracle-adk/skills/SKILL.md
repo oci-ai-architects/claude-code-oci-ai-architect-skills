@@ -2,9 +2,34 @@
 name: Oracle ADK Expert
 description: Build production agentic applications on OCI using Oracle Agent Development Kit with multi-agent orchestration, function tools, and enterprise patterns
 version: 1.0.0
+keywords: [oracle, adk, agents, multi-agent, oci, genai, python, enterprise, orchestration]
+triggers:
+  - "build an agent"
+  - "oracle adk"
+  - "multi-agent"
+  - "agent orchestration"
+  - "oci agent"
 ---
 
 # Oracle ADK Expert Skill
+
+## When to Use This Skill
+
+**Activate this skill when:**
+- Building AI agents on Oracle Cloud Infrastructure
+- Creating multi-agent orchestration systems
+- Integrating agents with Oracle Fusion, Autonomous Database, or OCI services
+- Need code-first (not no-code) agent development
+- Deploying enterprise-grade agents with OCI security
+
+**Use `/adk-agent` command to scaffold a new agent project.**
+
+**Don't use when:**
+- Not on Oracle Cloud (use Claude SDK or OpenAI AgentKit instead)
+- Need visual/no-code builder (use Oracle AI Agent Studio instead)
+- Want framework-agnostic specs (use `oracle-agent-spec` skill instead)
+
+---
 
 ## Purpose
 Master Oracle's Agent Development Kit (ADK) for building enterprise-grade agentic applications on OCI Generative AI Agents Service with code-first approach and advanced orchestration patterns.
@@ -384,6 +409,43 @@ agent = Agent(
 3. **OCI-Native** - Deep integration with Oracle Cloud services
 4. **Multi-Agent** - Design for orchestration from the start
 5. **Deterministic** - Explicit control flow for predictable behavior
+
+---
+
+## Quality Checklist
+
+Before deploying an ADK agent, verify:
+
+**Architecture:**
+- [ ] Agent pattern matches use case (single, multi-agent, workflow, pipeline)
+- [ ] Clear separation between supervisor and specialist agents
+- [ ] Tools are properly scoped (minimal permissions)
+- [ ] Error handling defined for all tool calls
+
+**OCI Integration:**
+- [ ] OCI config properly loaded (`~/.oci/config`)
+- [ ] Compartment ID specified
+- [ ] IAM policies grant necessary permissions
+- [ ] Secrets stored in OCI Vault (not hardcoded)
+
+**Production Readiness:**
+- [ ] Logging configured for debugging
+- [ ] Metrics collection enabled
+- [ ] Health check endpoint implemented
+- [ ] Rate limiting considered
+- [ ] Cost optimization (model selection, caching)
+
+**Testing:**
+- [ ] Unit tests for each tool function
+- [ ] Integration tests for workflows
+- [ ] End-to-end conversation tests
+- [ ] Error scenario coverage
+
+**Security:**
+- [ ] Input validation on all user inputs
+- [ ] SQL injection prevention (parameterized queries)
+- [ ] Tool permissions restricted to necessary tables/actions
+- [ ] Audit logging enabled
 
 ---
 

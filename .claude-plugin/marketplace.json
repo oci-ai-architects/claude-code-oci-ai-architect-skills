@@ -1,0 +1,96 @@
+{
+  "name": "oracle-ai-architect-skills",
+  "version": "2.0.0",
+  "description": "Production-grade Claude Code skills for Oracle Cloud AI Architects",
+  "author": {
+    "name": "FrankX",
+    "url": "https://github.com/frankxai"
+  },
+  "repository": "https://github.com/frankxai/claude-code-oracle-skills",
+  "license": "MIT",
+  "metadata": {
+    "totalPlugins": 5,
+    "totalSkills": 5,
+    "totalCommands": 5,
+    "lastUpdated": "2026-01-21",
+    "ociSdkVersion": "2.130.0",
+    "testedModels": ["cohere.command-a", "cohere.embed-english-v3.0"]
+  },
+  "plugins": [
+    {
+      "name": "oracle-adk",
+      "source": "./plugins/oracle-adk",
+      "description": "Build production agentic applications on OCI using Oracle Agent Development Kit",
+      "version": "1.0.0",
+      "category": "ai-ml",
+      "difficulty": "intermediate",
+      "keywords": ["oracle", "adk", "agents", "multi-agent", "oci", "genai"],
+      "components": {
+        "skills": 1,
+        "commands": 1,
+        "agents": 0
+      }
+    },
+    {
+      "name": "oracle-agent-spec",
+      "source": "./plugins/oracle-agent-spec",
+      "description": "Design framework-agnostic AI agents using Oracle's Open Agent Specification",
+      "version": "1.0.0",
+      "category": "ai-ml",
+      "difficulty": "intermediate",
+      "keywords": ["oracle", "agent-spec", "yaml", "portable", "framework-agnostic"],
+      "components": {
+        "skills": 1,
+        "commands": 1,
+        "agents": 0
+      }
+    },
+    {
+      "name": "oci-services-expert",
+      "source": "./plugins/oci-services-expert",
+      "description": "Expert guidance on OCI services, architecture patterns, and cost optimization",
+      "version": "1.0.0",
+      "category": "cloud",
+      "difficulty": "beginner",
+      "keywords": ["oracle", "oci", "cloud", "architecture", "cost-optimization"],
+      "components": {
+        "skills": 1,
+        "commands": 1,
+        "agents": 0
+      }
+    },
+    {
+      "name": "oracle-ai-architect",
+      "source": "./plugins/oracle-ai-architect",
+      "description": "Deep technical implementations: Vector Search, Select AI, NVIDIA NIM",
+      "version": "1.0.0",
+      "category": "ai-ml",
+      "difficulty": "advanced",
+      "keywords": ["oracle", "ai", "vector-search", "select-ai", "nim", "rag"],
+      "components": {
+        "skills": 1,
+        "commands": 1,
+        "agents": 0
+      }
+    },
+    {
+      "name": "oracle-diagram-generator",
+      "source": "./plugins/oracle-diagram-generator",
+      "description": "Generate professional OCI architecture diagrams with Oracle styling",
+      "version": "1.0.0",
+      "category": "productivity",
+      "difficulty": "beginner",
+      "keywords": ["oracle", "oci", "diagrams", "draw.io", "mermaid", "architecture"],
+      "components": {
+        "skills": 1,
+        "commands": 1,
+        "agents": 0
+      }
+    }
+  ],
+  "categories": {
+    "ai-ml": "AI & Machine Learning",
+    "cloud": "Cloud Infrastructure",
+    "productivity": "Productivity & Documentation"
+  }
+}

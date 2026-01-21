@@ -1,51 +1,62 @@
 # Claude Code Oracle Skills
 
-Production-grade Claude Code skills for Oracle Cloud AI Architects and Cloud Engineers.
+[![Version](https://img.shields.io/badge/version-2.0.0-blue)]()
+[![Plugins](https://img.shields.io/badge/plugins-5-green)]()
+[![Commands](https://img.shields.io/badge/commands-5-orange)]()
+[![License](https://img.shields.io/badge/license-MIT-lightgrey)]()
+
+Production-grade Claude Code plugins for Oracle Cloud AI Architects and Cloud Engineers.
 
 ## Quick Install
 
 ```bash
-# Install all skills
-curl -sSL https://raw.githubusercontent.com/FrankX/claude-code-oracle-skills/main/install.sh | bash
+# Add marketplace
+/plugin marketplace add frankxai/claude-code-oracle-skills
 
-# Or install individual skills
-curl -sSL https://raw.githubusercontent.com/FrankX/claude-code-oracle-skills/main/install.sh | bash -s -- oracle-adk
+# Install all plugins
+/plugin install oracle-adk oracle-agent-spec oci-services-expert oracle-ai-architect oracle-diagram-generator
 ```
 
-## Manual Installation
+## Available Plugins
 
-Copy skills to your Claude Code skills directory:
+| Plugin | Description | Commands | Difficulty |
+|--------|-------------|----------|------------|
+| **[oracle-adk](plugins/oracle-adk/)** | Build production agents with Oracle ADK | `/adk-agent` | Intermediate |
+| **[oracle-agent-spec](plugins/oracle-agent-spec/)** | Framework-agnostic agent specifications | `/agent-spec` | Intermediate |
+| **[oci-services-expert](plugins/oci-services-expert/)** | OCI services and architecture patterns | `/oci-cost` | Beginner |
+| **[oracle-ai-architect](plugins/oracle-ai-architect/)** | Vector Search, Select AI, NVIDIA NIM | `/vector-search` | Advanced |
+| **[oracle-diagram-generator](plugins/oracle-diagram-generator/)** | Professional OCI architecture diagrams | `/oci-diagram` | Beginner |
+
+## Slash Commands
 
 ```bash
-# Clone the repo
-git clone https://github.com/FrankX/claude-code-oracle-skills.git
-cd claude-code-oracle-skills
+# Generate OCI architecture diagram
+/oci-diagram rag drawio
+/oci-diagram three-tier python
+/oci-diagram multi-agent mermaid
 
-# Copy all skills
-cp -r skills/* ~/.claude/skills/
+# Scaffold an Oracle ADK agent
+/adk-agent customer-support multi-agent
+/adk-agent etl-processor pipeline
 
-# Or copy specific skills
-cp -r skills/oracle-adk ~/.claude/skills/
+# Generate Agent Spec definition
+/agent-spec research-assistant yaml
+
+# Estimate OCI costs
+/oci-cost "RAG platform with vector search"
+
+# Implement vector search
+/vector-search "document Q&A system"
 ```
-
-## Available Skills
-
-| Skill | Description | Audience | Difficulty |
-|-------|-------------|----------|------------|
-| **[oracle-adk](skills/oracle-adk/)** | Build production agentic applications on OCI using Oracle Agent Development Kit | AI Architects, Agent Developers | Intermediate |
-| **[oracle-agent-spec](skills/oracle-agent-spec/)** | Design framework-agnostic AI agents using Oracle's Open Agent Specification | AI Architects, Enterprise Architects | Intermediate |
-| **[oci-services-expert](skills/oci-services-expert/)** | Expert guidance on OCI services, architecture patterns, and cost optimization | Solution Architects, Cloud Engineers | Beginner |
-| **[oracle-ai-architect](skills/oracle-ai-architect/)** | Deep technical implementations: Vector Search, Select AI, NVIDIA NIM | AI Architects, Data Engineers | Advanced |
-| **[oracle-diagram-generator](skills/oracle-diagram-generator/)** | Generate professional OCI architecture diagrams (Draw.io, Python, Mermaid) | Solution Architects, Sales Engineers | Beginner |
 
 ## Who Is This For?
 
 ### AI Architects
-All 5 skills provide comprehensive coverage for building enterprise AI solutions on Oracle Cloud.
+All 5 plugins provide comprehensive coverage for building enterprise AI solutions on Oracle Cloud.
 
 ### Solution Architects
 - **oci-services-expert** - OCI service selection and architecture patterns
-- **oracle-diagram-generator** - Create professional diagrams for proposals and presentations
+- **oracle-diagram-generator** - Create professional diagrams for proposals
 
 ### Cloud Engineers / DevOps
 - **oci-services-expert** - Infrastructure patterns, security, cost optimization
@@ -56,109 +67,53 @@ All 5 skills provide comprehensive coverage for building enterprise AI solutions
 - **oracle-agent-spec** - Framework-agnostic agent design
 
 ### Sales Engineers / Pre-sales
-- **oracle-diagram-generator** - Quickly generate customer-ready architecture diagrams
+- **oracle-diagram-generator** - Quickly generate customer-ready diagrams
 - **oci-services-expert** - Cost estimates and service recommendations
 
-## Usage Examples
+## Plugin Structure
 
-### Build a Multi-Agent System
+Each plugin follows the standard Claude Code plugin structure:
+
 ```
-You: I need to build a customer support agent with Oracle ADK
-
-Claude: (Uses oracle-adk skill to provide code patterns, best practices, and OCI integration)
-```
-
-### Design Portable Agents
-```
-You: Design an agent that can run on both Oracle ADK and LangGraph
-
-Claude: (Uses oracle-agent-spec skill to create framework-agnostic YAML specification)
-```
-
-### Generate Architecture Diagrams
-```
-You: Create an architecture diagram for an enterprise RAG platform on OCI
-
-Claude: (Uses oracle-diagram-generator to produce Draw.io XML or Python diagrams code)
+plugin-name/
+├── .claude-plugin/
+│   └── plugin.json      # Plugin metadata
+├── commands/
+│   └── command.md       # Slash command definitions
+├── skills/
+│   └── SKILL.md         # Skill reference material
+└── README.md
 ```
 
-### Optimize OCI Costs
-```
-You: Review this architecture for cost optimization opportunities
+## Quality Standards
 
-Claude: (Uses oci-services-expert to identify savings from right-sizing, reserved capacity, etc.)
-```
-
-## Keeping Skills Updated
-
-### Automatic Updates (Recommended)
-
-Add to your crontab or scheduled task:
-
-```bash
-# Weekly update (Sundays at midnight)
-0 0 * * 0 cd ~/.claude/skills-repos/claude-code-oracle-skills && git pull && cp -r skills/* ~/.claude/skills/
-```
-
-### Manual Updates
-
-```bash
-cd ~/.claude/skills-repos/claude-code-oracle-skills
-git pull
-cp -r skills/* ~/.claude/skills/
-```
-
-### Version Tracking
-
-Check `manifest.yaml` for:
-- `last_verified` - When examples were last tested
-- `oci_sdk_version` - Compatible OCI SDK version
-- `tested_models` - Verified OCI GenAI models
-
-## Contributing
-
-### Adding New Skills
-
-1. Create skill directory: `skills/your-skill-name/`
-2. Add `SKILL.md` following the template in `docs/SKILL_TEMPLATE.md`
-3. Update `manifest.yaml` with skill metadata
-4. Add tests in `tests/test_your_skill.py`
-5. Submit PR
-
-### Updating Existing Skills
-
-1. Update the skill's `SKILL.md`
-2. Bump version in `manifest.yaml`
-3. Update `last_verified` date
-4. Run tests: `pytest tests/`
-5. Submit PR
-
-### Quality Standards
-
-All skills must:
-- [ ] Have working code examples
-- [ ] Include cost estimates where applicable
-- [ ] Reference official Oracle documentation
-- [ ] Pass linting (`markdownlint`)
-- [ ] Pass link checking
-- [ ] Be tested with current OCI SDK
+Every skill includes:
+- **When to Use** - Clear activation triggers at the top
+- **Code Examples** - Production-ready, tested patterns
+- **Quality Checklist** - Verification points before deployment
+- **Decision Framework** - When to use vs. alternatives
+- **Official Resources** - Links to Oracle documentation
 
 ## Verification Status
 
-| Skill | Last Verified | OCI SDK | Status |
-|-------|---------------|---------|--------|
-| oracle-adk | 2026-01-21 | 2.130.0 | Active |
-| oracle-agent-spec | 2026-01-21 | 2.130.0 | Active |
-| oci-services-expert | 2026-01-21 | 2.130.0 | Active |
-| oracle-ai-architect | 2026-01-21 | 2.130.0 | Active |
-| oracle-diagram-generator | 2026-01-21 | 2.130.0 | Active |
+| Plugin | Version | OCI SDK | Last Verified | Status |
+|--------|---------|---------|---------------|--------|
+| oracle-adk | 1.0.0 | 2.130.0 | 2026-01-21 | Active |
+| oracle-agent-spec | 1.0.0 | 2.130.0 | 2026-01-21 | Active |
+| oci-services-expert | 1.0.0 | 2.130.0 | 2026-01-21 | Active |
+| oracle-ai-architect | 1.0.0 | 2.130.0 | 2026-01-21 | Active |
+| oracle-diagram-generator | 1.0.0 | 2.130.0 | 2026-01-21 | Active |
 
 ## Related Resources
 
-- [Oracle Agent Development Kit Docs](https://docs.oracle.com/en-us/iaas/Content/generative-ai-agents/adk/)
-- [Oracle Agent Spec GitHub](https://github.com/oracle/agent-spec)
+- [Oracle Agent Development Kit](https://docs.oracle.com/en-us/iaas/Content/generative-ai-agents/adk/)
+- [Oracle Agent Spec](https://github.com/oracle/agent-spec)
 - [OCI Generative AI](https://docs.oracle.com/en-us/iaas/Content/generative-ai/home.htm)
 - [OCI Architecture Center](https://docs.oracle.com/en/solutions/)
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## License
 
