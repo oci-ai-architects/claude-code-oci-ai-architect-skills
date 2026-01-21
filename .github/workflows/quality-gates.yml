@@ -1,0 +1,122 @@
+# Quality Gates for Claude Code Oracle Skills
+# Runs on every PR and push to main
+
+name: Quality Gates
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Weekly verification - Mondays at 9am UTC
+    - cron: '0 9 * * 1'
+
+jobs:
+  lint-markdown:
+    name: Lint Markdown
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lint Markdown files
+        uses: DavidAnson/markdownlint-cli2-action@v14
+        with:
+          globs: |
+            skills/**/*.md
+            README.md
+            docs/**/*.md
+
+  check-links:
+    name: Check Links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for broken links
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: --verbose --no-progress 'skills/**/*.md' 'README.md' 'docs/**/*.md'
+          fail: true
+
+  validate-yaml:
+    name: Validate YAML
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate manifest.yaml
+        run: |
+          python -c "import yaml; yaml.safe_load(open('manifest.yaml'))"
+          echo "manifest.yaml is valid"
+
+  validate-code-examples:
+    name: Validate Code Examples
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install oci pytest pyyaml
+
+      - name: Extract and validate Python code blocks
+        run: |
+          python tests/validate_code_examples.py
+
+  skill-completeness:
+    name: Check Skill Completeness
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required sections
+        run: |
+          python tests/check_skill_completeness.py
+
+  verify-oci-compatibility:
+    name: Verify OCI Compatibility
+    runs-on: ubuntu-latest
+    # Only run on schedule or when triggered manually
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install OCI SDK
+        run: pip install oci
+
+      - name: Verify OCI SDK version compatibility
+        run: |
+          python -c "import oci; print(f'OCI SDK Version: {oci.__version__}')"
+
+  update-verification-date:
+    name: Update Verification Date
+    runs-on: ubuntu-latest
+    needs: [lint-markdown, check-links, validate-yaml, validate-code-examples, skill-completeness]
+    if: github.event_name == 'schedule'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update last_verified in manifest
+        run: |
+          sed -i "s/last_verified:.*/last_verified: $(date +%Y-%m-%d)/" manifest.yaml
+
+      - name: Commit and push
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add manifest.yaml
+          git diff --staged --quiet || git commit -m "chore: Update verification date [skip ci]"
+          git push

@@ -1,0 +1,87 @@
+# Claude Code Oracle Skills Marketplace
+# https://github.com/FrankX/claude-code-oracle-skills
+
+name: oracle-ai-architect-skills
+version: 1.0.0
+description: Production-grade Claude Code skills for Oracle Cloud AI Architects
+author: FrankX
+license: MIT
+homepage: https://github.com/FrankX/claude-code-oracle-skills
+
+# Target audiences
+audiences:
+  - AI Architects
+  - Solution Architects
+  - Cloud Engineers
+  - Agent Developers
+  - Data Engineers
+  - Sales Engineers / Pre-sales
+
+# Skill registry
+skills:
+  oracle-adk:
+    name: Oracle ADK Expert
+    description: Build production agentic applications on OCI using Oracle Agent Development Kit
+    version: 1.0.0
+    file: skills/oracle-adk/SKILL.md
+    tags: [adk, agents, multi-agent, oci, python]
+    audience: [AI Architects, Agent Developers]
+    difficulty: intermediate
+
+  oracle-agent-spec:
+    name: Oracle Agent Spec Expert
+    description: Design framework-agnostic AI agents using Oracle's Open Agent Specification
+    version: 1.0.0
+    file: skills/oracle-agent-spec/SKILL.md
+    tags: [agent-spec, yaml, json, portable, framework-agnostic]
+    audience: [AI Architects, Enterprise Architects]
+    difficulty: intermediate
+
+  oci-services-expert:
+    name: OCI Services Expert
+    description: Expert guidance on Oracle Cloud Infrastructure services and architecture patterns
+    version: 1.0.0
+    file: skills/oci-services-expert/SKILL.md
+    tags: [oci, cloud, architecture, cost-optimization, security]
+    audience: [Solution Architects, Cloud Engineers, DevOps]
+    difficulty: beginner
+
+  oracle-ai-architect:
+    name: Oracle AI Architect
+    description: Extended reference for Oracle AI architecture with deep technical implementations
+    version: 1.0.0
+    file: skills/oracle-ai-architect/SKILL.md
+    tags: [ai, vector-search, select-ai, nim, genai]
+    audience: [AI Architects, Data Engineers, ML Engineers]
+    difficulty: advanced
+
+  oracle-diagram-generator:
+    name: Oracle Diagram Generator
+    description: Generate professional OCI architecture diagrams with verified Oracle styling
+    version: 1.0.0
+    file: skills/oracle-diagram-generator/SKILL.md
+    tags: [diagrams, draw.io, mermaid, architecture, presentations]
+    audience: [Solution Architects, Sales Engineers, All]
+    difficulty: beginner
+
+# Dependencies (optional OCI tools)
+recommended_tools:
+  - name: OCI CLI
+    install: pip install oci-cli
+    docs: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/cliconcepts.htm
+
+  - name: Oracle ADK
+    install: pip install oci-adk
+    docs: https://docs.oracle.com/en-us/iaas/Content/generative-ai-agents/adk/
+
+  - name: PyAgentSpec
+    install: pip install pyagentspec
+    docs: https://pypi.org/project/pyagentspec/
+
+# Quality metadata
+quality:
+  last_verified: 2026-01-21
+  oci_sdk_version: 2.130.0
+  tested_models:
+    - cohere.command-a
+    - cohere.embed-english-v3.0
