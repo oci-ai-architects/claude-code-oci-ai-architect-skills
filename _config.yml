@@ -1,0 +1,55 @@
+# Oracle Claude Code Skills - GitHub Pages Configuration
+
+title: Oracle Claude Code Skills
+description: Production-grade Claude Code skills for Oracle Cloud AI Architects
+url: "https://frankxai.github.io"
+baseurl: "/claude-code-oracle-skills"
+
+# Theme
+remote_theme: pages-themes/minimal@v0.2.0
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Plugins
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - tests/
+  - plugins/
+  - .github/
+  - "*.py"
+  - install.sh
+  - manifest.yaml
+  - CONTRIBUTING.md
+  - "*.yaml"
+
+# Collections
+collections:
+  skills:
+    output: true
+    permalink: /skills/:name/
+
+# Default values
+defaults:
+  - scope:
+      path: ""
+      type: "skills"
+    values:
+      layout: "default"
+
+# Site configuration
+author: FrankX
+github_username: FrankXAI
+twitter_username: FrankXAI
+
+# Analytics (optional)
+# google_analytics: UA-XXXXXXXXX-X
+
+# Custom variables
+oracle_red: "#C74634"
+version: "2.0.0"

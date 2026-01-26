@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture Diagrams - Oracle Claude Code Skills</title>
+    <meta name="description" content="Interactive architecture diagrams for Oracle Cloud Infrastructure. RAG Platform, Multi-Agent Factory, Three-Tier Web App patterns.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        oracle: {
+                            red: '#C74634',
+                            darkred: '#A63A2C',
+                            black: '#1A1A1A',
+                            gray: '#6B7280',
+                            light: '#F9FAFB',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#C74634',
+                primaryTextColor: '#ffffff',
+                primaryBorderColor: '#A63A2C',
+                lineColor: '#6B7280',
+                secondaryColor: '#FEF2F2',
+                tertiaryColor: '#F9FAFB',
+                fontFamily: 'Inter, sans-serif'
+            },
+            flowchart: {
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-oracle {
+            background: linear-gradient(135deg, #C74634 0%, #8B2E23 100%);
+        }
+        .diagram-card {
+            transition: all 0.3s ease;
+        }
+        .diagram-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .tab-btn.active {
+            background-color: #C74634;
+            color: white;
+            border-color: #C74634;
+        }
+    </style>
+</head>
+<body class="bg-oracle-light min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 gradient-oracle rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold text-oracle-black">Oracle Skills</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="index.html" class="text-oracle-gray hover:text-oracle-red transition-colors">Home</a>
+                    <a href="skills.html" class="text-oracle-gray hover:text-oracle-red transition-colors">Skills</a>
+                    <a href="diagrams.html" class="text-oracle-red font-medium">Diagrams</a>
+                    <a href="https://github.com/FrankXAI/claude-code-oracle-skills" target="_blank" class="flex items-center space-x-1 text-oracle-gray hover:text-oracle-red transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <h1 class="text-4xl font-bold text-oracle-black mb-4">Architecture Diagrams</h1>
+            <p class="text-lg text-oracle-gray max-w-2xl">
+                Interactive OCI architecture diagrams generated with the <code class="text-oracle-red font-mono">/oci-diagram</code> command. Click any diagram to view full-screen.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- RAG Platform Architecture -->
+        <section class="mb-16">
+            <div class="diagram-card bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                <div class="p-6 border-b border-gray-100">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold text-oracle-black mb-2">RAG Platform Architecture</h2>
+                            <p class="text-oracle-gray">Enterprise Retrieval-Augmented Generation platform on OCI with vector search, embeddings, and generative AI.</p>
+                        </div>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-oracle-red/10 text-oracle-red">
+                            AI Architecture
+                        </span>
+                    </div>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">OCI Generative AI</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">Vector Search</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">Autonomous Database</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">Object Storage</span>
+                    </div>
+                </div>
+                <div class="p-8 bg-gray-50">
+                    <div class="mermaid">
+flowchart TB
+    subgraph Users["fa:fa-users Users"]
+        U1[Web App]
+        U2[API Client]
+    end
+
+    subgraph OCI["Oracle Cloud Infrastructure"]
+        subgraph Frontend["Public Subnet"]
+            LB[fa:fa-balance-scale Load Balancer]
+            APIGW[fa:fa-door-open API Gateway]
+        end
+
+        subgraph App["Private Subnet - Application"]
+            OKE[fa:fa-dharmachakra OKE Cluster]
+            FN[fa:fa-bolt Functions]
+        end
+
+        subgraph AI["Private Subnet - AI Services"]
+            GENAI[fa:fa-brain OCI Generative AI]
+            EMBED[fa:fa-layer-group Embeddings API]
+        end
+
+        subgraph Data["Private Subnet - Data"]
+            ADB[(fa:fa-database Autonomous DB\nVector Search)]
+            OBJ[fa:fa-archive Object Storage\nDocuments]
+        end
+
+        subgraph Security["Security"]
+            VAULT[fa:fa-key Vault]
+            IAM[fa:fa-shield-alt IAM]
+        end
+    end
+
+    U1 --> LB
+    U2 --> APIGW
+    LB --> OKE
+    APIGW --> FN
+    OKE --> GENAI
+    OKE --> ADB
+    FN --> EMBED
+    FN --> ADB
+    EMBED --> ADB
+    OBJ --> EMBED
+    GENAI --> ADB
+    VAULT -.-> OKE
+    VAULT -.-> FN
+    IAM -.-> GENAI
+                    </div>
+                </div>
+                <div class="p-6 bg-white border-t border-gray-100">
+                    <h3 class="text-sm font-semibold text-oracle-black mb-3">Generate this diagram:</h3>
+                    <div class="bg-oracle-black rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                        <code class="text-green-400">/oci-diagram</code> <code class="text-yellow-300">rag mermaid</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Multi-Agent Factory -->
+        <section class="mb-16">
+            <div class="diagram-card bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                <div class="p-6 border-b border-gray-100">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold text-oracle-black mb-2">Multi-Agent Factory</h2>
+                            <p class="text-oracle-gray">Production multi-agent orchestration system using Oracle ADK with specialized agents and workflow coordination.</p>
+                        </div>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-oracle-red/10 text-oracle-red">
+                            Agent Architecture
+                        </span>
+                    </div>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">Oracle ADK</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">Multi-Agent</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">Orchestration</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">OKE</span>
+                    </div>
+                </div>
+                <div class="p-8 bg-gray-50">
+                    <div class="mermaid">
+flowchart TB
+    subgraph Input["Input Layer"]
+        REQ[fa:fa-envelope User Request]
+        API[fa:fa-server API Gateway]
+    end
+
+    subgraph Orchestration["Orchestration Layer"]
+        ORCH[fa:fa-sitemap Orchestrator Agent]
+        ROUTER[fa:fa-directions Router]
+    end
+
+    subgraph Specialists["Specialist Agents"]
+        RA[fa:fa-search Research Agent]
+        AA[fa:fa-chart-line Analysis Agent]
+        WA[fa:fa-pen Writer Agent]
+        CA[fa:fa-code Code Agent]
+    end
+
+    subgraph Tools["Tool Layer"]
+        DB[(fa:fa-database Database)]
+        SEARCH[fa:fa-globe Web Search]
+        DOCS[fa:fa-file-alt Documents]
+        CODE[fa:fa-terminal Code Exec]
+    end
+
+    subgraph Output["Output Layer"]
+        AGG[fa:fa-layer-group Aggregator]
+        RESP[fa:fa-reply Response]
+    end
+
+    REQ --> API
+    API --> ORCH
+    ORCH --> ROUTER
+    ROUTER --> RA
+    ROUTER --> AA
+    ROUTER --> WA
+    ROUTER --> CA
+    RA --> SEARCH
+    RA --> DOCS
+    AA --> DB
+    WA --> DOCS
+    CA --> CODE
+    RA --> AGG
+    AA --> AGG
+    WA --> AGG
+    CA --> AGG
+    AGG --> RESP
+                    </div>
+                </div>
+                <div class="p-6 bg-white border-t border-gray-100">
+                    <h3 class="text-sm font-semibold text-oracle-black mb-3">Generate this diagram:</h3>
+                    <div class="bg-oracle-black rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                        <code class="text-green-400">/oci-diagram</code> <code class="text-yellow-300">multi-agent mermaid</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Three-Tier Web App -->
+        <section class="mb-16">
+            <div class="diagram-card bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                <div class="p-6 border-b border-gray-100">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold text-oracle-black mb-2">Three-Tier Web Application</h2>
+                            <p class="text-oracle-gray">Classic three-tier architecture on OCI with load balancing, auto-scaling, and high availability.</p>
+                        </div>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-oracle-red/10 text-oracle-red">
+                            Cloud Architecture
+                        </span>
+                    </div>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">OKE</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">Load Balancer</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">Autonomous DB</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">WAF</span>
+                    </div>
+                </div>
+                <div class="p-8 bg-gray-50">
+                    <div class="mermaid">
+flowchart TB
+    subgraph Internet["Internet"]
+        CLIENT[fa:fa-users Clients]
+        CDN[fa:fa-globe CDN]
+    end
+
+    subgraph OCI["Oracle Cloud Infrastructure"]
+        subgraph Edge["Edge Services"]
+            WAF[fa:fa-shield-alt WAF]
+            LB[fa:fa-balance-scale Load Balancer]
+        end
+
+        subgraph Web["Public Subnet - Web Tier"]
+            direction LR
+            WEB1[fa:fa-server Web Server 1]
+            WEB2[fa:fa-server Web Server 2]
+            WEB3[fa:fa-server Web Server 3]
+        end
+
+        subgraph App["Private Subnet - App Tier"]
+            direction LR
+            APP1[fa:fa-cogs App Server 1]
+            APP2[fa:fa-cogs App Server 2]
+            APP3[fa:fa-cogs App Server 3]
+        end
+
+        subgraph Data["Private Subnet - Data Tier"]
+            ADB[(fa:fa-database Autonomous DB\nPrimary)]
+            ADB_S[(fa:fa-database Autonomous DB\nStandby)]
+            CACHE[fa:fa-memory Redis Cache]
+        end
+
+        subgraph Ops["Operations"]
+            MON[fa:fa-chart-bar Monitoring]
+            LOG[fa:fa-file-alt Logging]
+            BASTION[fa:fa-lock Bastion]
+        end
+    end
+
+    CLIENT --> CDN
+    CDN --> WAF
+    WAF --> LB
+    LB --> WEB1
+    LB --> WEB2
+    LB --> WEB3
+    WEB1 --> APP1
+    WEB2 --> APP2
+    WEB3 --> APP3
+    APP1 --> CACHE
+    APP2 --> CACHE
+    APP3 --> CACHE
+    CACHE --> ADB
+    ADB --> ADB_S
+    APP1 -.-> MON
+    APP2 -.-> LOG
+    BASTION -.-> APP1
+                    </div>
+                </div>
+                <div class="p-6 bg-white border-t border-gray-100">
+                    <h3 class="text-sm font-semibold text-oracle-black mb-3">Generate this diagram:</h3>
+                    <div class="bg-oracle-black rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                        <code class="text-green-400">/oci-diagram</code> <code class="text-yellow-300">three-tier mermaid</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Pipeline Architecture -->
+        <section class="mb-16">
+            <div class="diagram-card bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                <div class="p-6 border-b border-gray-100">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold text-oracle-black mb-2">Data Pipeline Architecture</h2>
+                            <p class="text-oracle-gray">Modern data pipeline with streaming ingestion, transformation, and analytics on OCI.</p>
+                        </div>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-oracle-red/10 text-oracle-red">
+                            Data Architecture
+                        </span>
+                    </div>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">Streaming</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">Data Science</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">ADW</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">Data Catalog</span>
+                    </div>
+                </div>
+                <div class="p-8 bg-gray-50">
+                    <div class="mermaid">
+flowchart LR
+    subgraph Sources["Data Sources"]
+        IOT[fa:fa-microchip IoT Devices]
+        APP[fa:fa-mobile-alt Applications]
+        DB[fa:fa-database Databases]
+        API[fa:fa-plug APIs]
+    end
+
+    subgraph Ingest["Ingestion"]
+        STREAM[fa:fa-stream OCI Streaming]
+        CONN[fa:fa-link Connector Hub]
+    end
+
+    subgraph Process["Processing"]
+        FLOW[fa:fa-project-diagram Data Flow]
+        FN[fa:fa-bolt Functions]
+        SPARK[fa:fa-fire Spark on OKE]
+    end
+
+    subgraph Store["Storage"]
+        OBJ[fa:fa-archive Object Storage\nData Lake]
+        ADW[(fa:fa-warehouse ADW\nData Warehouse)]
+    end
+
+    subgraph Analytics["Analytics"]
+        OAC[fa:fa-chart-pie Oracle Analytics]
+        DS[fa:fa-brain Data Science]
+        CAT[fa:fa-book Data Catalog]
+    end
+
+    IOT --> STREAM
+    APP --> STREAM
+    DB --> CONN
+    API --> CONN
+    STREAM --> FLOW
+    CONN --> FLOW
+    FLOW --> FN
+    FLOW --> SPARK
+    FN --> OBJ
+    SPARK --> OBJ
+    OBJ --> ADW
+    ADW --> OAC
+    ADW --> DS
+    OBJ --> CAT
+    ADW --> CAT
+                    </div>
+                </div>
+                <div class="p-6 bg-white border-t border-gray-100">
+                    <h3 class="text-sm font-semibold text-oracle-black mb-3">Generate this diagram:</h3>
+                    <div class="bg-oracle-black rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                        <code class="text-green-400">/oci-diagram</code> <code class="text-yellow-300">data-pipeline mermaid</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Command Reference -->
+        <section class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+            <h2 class="text-2xl font-bold text-oracle-black mb-6">Diagram Generator Commands</h2>
+            <p class="text-oracle-gray mb-8">Use the <code class="text-oracle-red font-mono">/oci-diagram</code> command to generate architecture diagrams in multiple formats.</p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-oracle-black mb-4">Architecture Types</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <code class="text-oracle-red font-mono text-sm">rag</code>
+                            <span class="text-oracle-gray text-sm">RAG Platform</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <code class="text-oracle-red font-mono text-sm">multi-agent</code>
+                            <span class="text-oracle-gray text-sm">Multi-Agent System</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <code class="text-oracle-red font-mono text-sm">three-tier</code>
+                            <span class="text-oracle-gray text-sm">Three-Tier Web App</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <code class="text-oracle-red font-mono text-sm">data-pipeline</code>
+                            <span class="text-oracle-gray text-sm">Data Pipeline</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <code class="text-oracle-red font-mono text-sm">microservices</code>
+                            <span class="text-oracle-gray text-sm">Microservices on OKE</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-oracle-black mb-4">Output Formats</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <code class="text-oracle-red font-mono text-sm">mermaid</code>
+                            <span class="text-oracle-gray text-sm">Mermaid.js (web-ready)</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <code class="text-oracle-red font-mono text-sm">drawio</code>
+                            <span class="text-oracle-gray text-sm">Draw.io XML</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <code class="text-oracle-red font-mono text-sm">python</code>
+                            <span class="text-oracle-gray text-sm">Python diagrams library</span>
+                        </div>
+                    </div>
+
+                    <h3 class="text-lg font-semibold text-oracle-black mt-8 mb-4">Example Commands</h3>
+                    <div class="bg-oracle-black rounded-lg p-4 font-mono text-sm space-y-2">
+                        <div><code class="text-green-400">/oci-diagram</code> <code class="text-yellow-300">rag drawio</code></div>
+                        <div><code class="text-green-400">/oci-diagram</code> <code class="text-yellow-300">three-tier python</code></div>
+                        <div><code class="text-green-400">/oci-diagram</code> <code class="text-yellow-300">multi-agent mermaid</code></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-oracle-black py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <div class="w-10 h-10 gradient-oracle rounded-lg flex items-center justify-center mr-3">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <span class="text-white font-semibold">Oracle Claude Code Skills</span>
+                </div>
+                <div class="flex items-center space-x-6 text-gray-400">
+                    <a href="https://github.com/FrankXAI/claude-code-oracle-skills" target="_blank" class="hover:text-white transition-colors">GitHub</a>
+                    <a href="https://docs.oracle.com/en-us/iaas/Content/home.htm" target="_blank" class="hover:text-white transition-colors">OCI Docs</a>
+                    <span>MIT License</span>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+                <p>Maintained by FrankX | Oracle AI Architect</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

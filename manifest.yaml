@@ -64,6 +64,16 @@ skills:
     audience: [Solution Architects, Sales Engineers, All]
     difficulty: beginner
 
+  oracle-infogenius:
+    name: Oracle InfoGenius
+    description: AI Architect-grade visual generation for OCI with research grounding and brand compliance
+    version: 1.0.0
+    file: skills/oracle-infogenius/SKILL.md
+    tags: [visuals, images, infographics, presentations, ai-architect, brand]
+    audience: [AI Architects, Solution Architects, Sales Engineers, All]
+    difficulty: intermediate
+    mcp_required: [nanobanana]
+
 # Dependencies (optional OCI tools)
 recommended_tools:
   - name: OCI CLI
@@ -80,8 +90,20 @@ recommended_tools:
 
 # Quality metadata
 quality:
-  last_verified: 2026-01-21
+  last_verified: 2026-01-26
   oci_sdk_version: 2.130.0
+  oracle_db_version: 26ai
   tested_models:
     - cohere.command-a
-    - cohere.embed-english-v3.0
+    - cohere.embed-4
+    - meta.llama-4-maverick
+    - meta.llama-3.3-70b
+
+# MCP Server dependencies
+mcp_servers:
+  nanobanana:
+    description: Image generation using Gemini API
+    install: uvx nanobanana-mcp-server@latest
+    required_for: [oracle-infogenius]
+    env:
+      GEMINI_API_KEY: required

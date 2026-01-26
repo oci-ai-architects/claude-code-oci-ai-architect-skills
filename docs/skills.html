@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills Catalog - Oracle Claude Code Skills</title>
+    <meta name="description" content="Browse the complete catalog of Oracle Claude Code Skills. Filter by category, difficulty, and find the perfect skill for your use case.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        oracle: {
+                            red: '#C74634',
+                            darkred: '#A63A2C',
+                            black: '#1A1A1A',
+                            gray: '#6B7280',
+                            light: '#F9FAFB',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .gradient-oracle {
+            background: linear-gradient(135deg, #C74634 0%, #8B2E23 100%);
+        }
+        .skill-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .skill-card {
+            transition: all 0.3s ease;
+        }
+        .filter-btn.active {
+            background-color: #C74634;
+            color: white;
+        }
+        .code-block {
+            background: #1e1e1e;
+            border-radius: 8px;
+        }
+        .skill-card.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-oracle-light min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 gradient-oracle rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold text-oracle-black">Oracle Skills</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="index.html" class="text-oracle-gray hover:text-oracle-red transition-colors">Home</a>
+                    <a href="skills.html" class="text-oracle-red font-medium">Skills</a>
+                    <a href="diagrams.html" class="text-oracle-gray hover:text-oracle-red transition-colors">Diagrams</a>
+                    <a href="https://github.com/FrankXAI/claude-code-oracle-skills" target="_blank" class="flex items-center space-x-1 text-oracle-gray hover:text-oracle-red transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <h1 class="text-4xl font-bold text-oracle-black mb-4">Skills Catalog</h1>
+            <p class="text-lg text-oracle-gray max-w-2xl">
+                Browse all available Oracle Claude Code Skills. Filter by category or difficulty to find the perfect skill for your use case.
+            </p>
+        </div>
+    </header>
+
+    <!-- Filters -->
+    <section class="bg-white border-b border-gray-200 sticky top-16 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-wrap items-center gap-4">
+                <!-- Category Filters -->
+                <div class="flex items-center space-x-2">
+                    <span class="text-sm font-medium text-oracle-gray">Category:</span>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="filter-btn active px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-oracle-gray hover:bg-oracle-red hover:text-white transition-colors" data-filter="all">
+                            All
+                        </button>
+                        <button class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-oracle-gray hover:bg-oracle-red hover:text-white transition-colors" data-filter="agents">
+                            Agents
+                        </button>
+                        <button class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-oracle-gray hover:bg-oracle-red hover:text-white transition-colors" data-filter="cloud">
+                            Cloud
+                        </button>
+                        <button class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-oracle-gray hover:bg-oracle-red hover:text-white transition-colors" data-filter="ai">
+                            AI
+                        </button>
+                        <button class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-oracle-gray hover:bg-oracle-red hover:text-white transition-colors" data-filter="visuals">
+                            Visuals
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Difficulty Filter -->
+                <div class="flex items-center space-x-2 ml-auto">
+                    <span class="text-sm font-medium text-oracle-gray">Difficulty:</span>
+                    <select id="difficultyFilter" class="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-oracle-gray border-0 focus:ring-2 focus:ring-oracle-red">
+                        <option value="all">All Levels</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Grid -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid md:grid-cols-2 gap-8" id="skillsGrid">
+            <!-- Oracle ADK Expert -->
+            <div class="skill-card bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" data-category="agents" data-difficulty="intermediate">
+                <div class="p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-14 h-14 gradient-oracle rounded-xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                            Intermediate
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-oracle-black mb-2">Oracle ADK Expert</h3>
+                    <p class="text-oracle-gray mb-4">Build production agentic applications on OCI using Oracle Agent Development Kit with multi-agent orchestration, function tools, and enterprise patterns.</p>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">adk</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">agents</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">multi-agent</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">python</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">oci</span>
+                    </div>
+
+                    <div class="border-t border-gray-100 pt-4 mt-4">
+                        <h4 class="text-sm font-semibold text-oracle-black mb-2">Commands</h4>
+                        <div class="code-block p-3 text-sm">
+                            <code class="text-green-400">/adk-agent</code> <code class="text-yellow-300">customer-support multi-agent</code><br>
+                            <code class="text-green-400">/adk-agent</code> <code class="text-yellow-300">etl-processor pipeline</code>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-100 pt-4 mt-4">
+                        <h4 class="text-sm font-semibold text-oracle-black mb-2">When to Use</h4>
+                        <ul class="text-sm text-oracle-gray space-y-1">
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Building AI agents on Oracle Cloud
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Multi-agent orchestration systems
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Integration with Oracle Fusion or Autonomous DB
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Oracle Agent Spec -->
+            <div class="skill-card bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" data-category="agents" data-difficulty="intermediate">
+                <div class="p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-14 h-14 gradient-oracle rounded-xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                            Intermediate
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-oracle-black mb-2">Oracle Agent Spec</h3>
+                    <p class="text-oracle-gray mb-4">Design framework-agnostic AI agents using Oracle's Open Agent Specification for portable, interoperable systems with JSON/YAML definitions.</p>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">agent-spec</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">yaml</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">json</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">portable</span>
+                    </div>
+
+                    <div class="border-t border-gray-100 pt-4 mt-4">
+                        <h4 class="text-sm font-semibold text-oracle-black mb-2">Commands</h4>
+                        <div class="code-block p-3 text-sm">
+                            <code class="text-green-400">/agent-spec</code> <code class="text-yellow-300">research-assistant yaml</code><br>
+                            <code class="text-green-400">/agent-spec</code> <code class="text-yellow-300">data-pipeline json</code>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-100 pt-4 mt-4">
+                        <h4 class="text-sm font-semibold text-oracle-black mb-2">When to Use</h4>
+                        <ul class="text-sm text-oracle-gray space-y-1">
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Framework-agnostic agent design
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Portable agent definitions
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Enterprise agent interoperability
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OCI Services Expert -->
+            <div class="skill-card bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" data-category="cloud" data-difficulty="beginner">
+                <div class="p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-14 h-14 gradient-oracle rounded-xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+                            </svg>
+                        </div>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                            Beginner
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-oracle-black mb-2">OCI Services Expert</h3>
+                    <p class="text-oracle-gray mb-4">Expert guidance on Oracle Cloud Infrastructure services, cloud architecture patterns, cost optimization, and deployment strategies.</p>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">oci</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">cloud</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">architecture</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">cost-optimization</span>
+                    </div>
+
+                    <div class="border-t border-gray-100 pt-4 mt-4">
+                        <h4 class="text-sm font-semibold text-oracle-black mb-2">Commands</h4>
+                        <div class="code-block p-3 text-sm">
+                            <code class="text-green-400">/oci-cost</code> <code class="text-yellow-300">"RAG platform with vector search"</code><br>
+                            <code class="text-green-400">/oci-cost</code> <code class="text-yellow-300">"3-tier web app production"</code>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-100 pt-4 mt-4">
+                        <h4 class="text-sm font-semibold text-oracle-black mb-2">When to Use</h4>
+                        <ul class="text-sm text-oracle-gray space-y-1">
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                OCI service selection
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Cost estimation and optimization
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Cloud architecture patterns
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Oracle AI Architect -->
+            <div class="skill-card bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" data-category="ai" data-difficulty="advanced">
+                <div class="p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-14 h-14 gradient-oracle rounded-xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                            </svg>
+                        </div>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                            Advanced
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-oracle-black mb-2">Oracle AI Architect</h3>
+                    <p class="text-oracle-gray mb-4">Deep technical implementations for OCI Generative AI APIs, Database 26ai Vector Search, Select AI, and NVIDIA NIM deployment.</p>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">ai</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">vector-search</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">select-ai</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">nim</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">genai</span>
+                    </div>
+
+                    <div class="border-t border-gray-100 pt-4 mt-4">
+                        <h4 class="text-sm font-semibold text-oracle-black mb-2">Commands</h4>
+                        <div class="code-block p-3 text-sm">
+                            <code class="text-green-400">/vector-search</code> <code class="text-yellow-300">"document Q&A system"</code><br>
+                            <code class="text-green-400">/vector-search</code> <code class="text-yellow-300">"product catalog semantic"</code>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-100 pt-4 mt-4">
+                        <h4 class="text-sm font-semibold text-oracle-black mb-2">When to Use</h4>
+                        <ul class="text-sm text-oracle-gray space-y-1">
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Vector search implementations
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                RAG architecture design
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                OCI Generative AI API integration
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Oracle Diagram Generator -->
+            <div class="skill-card bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" data-category="visuals" data-difficulty="beginner">
+                <div class="p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-14 h-14 gradient-oracle rounded-xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
+                            </svg>
+                        </div>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                            Beginner
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-oracle-black mb-2">Diagram Generator</h3>
+                    <p class="text-oracle-gray mb-4">Generate professional OCI architecture diagrams with verified Oracle styling and official icons using Draw.io, Python, or Mermaid.js.</p>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">diagrams</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">draw.io</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">mermaid</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">architecture</span>
+                    </div>
+
+                    <div class="border-t border-gray-100 pt-4 mt-4">
+                        <h4 class="text-sm font-semibold text-oracle-black mb-2">Commands</h4>
+                        <div class="code-block p-3 text-sm">
+                            <code class="text-green-400">/oci-diagram</code> <code class="text-yellow-300">rag mermaid</code><br>
+                            <code class="text-green-400">/oci-diagram</code> <code class="text-yellow-300">three-tier drawio</code><br>
+                            <code class="text-green-400">/oci-diagram</code> <code class="text-yellow-300">multi-agent python</code>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-100 pt-4 mt-4">
+                        <h4 class="text-sm font-semibold text-oracle-black mb-2">When to Use</h4>
+                        <ul class="text-sm text-oracle-gray space-y-1">
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Customer presentations
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Architecture documentation
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Proposal diagrams
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Oracle InfoGenius -->
+            <div class="skill-card bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" data-category="visuals" data-difficulty="intermediate">
+                <div class="p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-14 h-14 gradient-oracle rounded-xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                            Intermediate
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-oracle-black mb-2">Oracle InfoGenius</h3>
+                    <p class="text-oracle-gray mb-4">AI Architect-grade visual generation for OCI with research grounding, Oracle brand compliance, and professional infographics.</p>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">visuals</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">infographics</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">brand</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">presentations</span>
+                    </div>
+
+                    <div class="border-t border-gray-100 pt-4 mt-4">
+                        <h4 class="text-sm font-semibold text-oracle-black mb-2">Requirements</h4>
+                        <div class="flex items-center text-sm text-oracle-gray">
+                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                            </svg>
+                            Requires Nano Banana MCP server
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-100 pt-4 mt-4">
+                        <h4 class="text-sm font-semibold text-oracle-black mb-2">When to Use</h4>
+                        <ul class="text-sm text-oracle-gray space-y-1">
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Executive presentations
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Marketing collateral
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Brand-compliant infographics
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- No Results Message -->
+        <div id="noResults" class="hidden text-center py-12">
+            <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <h3 class="text-lg font-semibold text-oracle-gray mb-2">No skills found</h3>
+            <p class="text-gray-400">Try adjusting your filters</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-oracle-black py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <div class="w-10 h-10 gradient-oracle rounded-lg flex items-center justify-center mr-3">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <span class="text-white font-semibold">Oracle Claude Code Skills</span>
+                </div>
+                <div class="flex items-center space-x-6 text-gray-400">
+                    <a href="https://github.com/FrankXAI/claude-code-oracle-skills" target="_blank" class="hover:text-white transition-colors">GitHub</a>
+                    <a href="https://docs.oracle.com/en-us/iaas/Content/home.htm" target="_blank" class="hover:text-white transition-colors">OCI Docs</a>
+                    <span>MIT License</span>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+                <p>Maintained by FrankX | Oracle AI Architect</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Filter Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const difficultyFilter = document.getElementById('difficultyFilter');
+            const skillCards = document.querySelectorAll('.skill-card');
+            const noResults = document.getElementById('noResults');
+
+            let activeCategory = 'all';
+            let activeDifficulty = 'all';
+
+            function filterSkills() {
+                let visibleCount = 0;
+
+                skillCards.forEach(card => {
+                    const cardCategory = card.dataset.category;
+                    const cardDifficulty = card.dataset.difficulty;
+
+                    const categoryMatch = activeCategory === 'all' || cardCategory === activeCategory;
+                    const difficultyMatch = activeDifficulty === 'all' || cardDifficulty === activeDifficulty;
+
+                    if (categoryMatch && difficultyMatch) {
+                        card.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+
+                noResults.classList.toggle('hidden', visibleCount > 0);
+            }
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    activeCategory = this.dataset.filter;
+                    filterSkills();
+                });
+            });
+
+            difficultyFilter.addEventListener('change', function() {
+                activeDifficulty = this.value;
+                filterSkills();
+            });
+        });
+    </script>
+</body>
+</html>

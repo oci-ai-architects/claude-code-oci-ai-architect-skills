@@ -1,6 +1,6 @@
 {
   "name": "oracle-ai-architect-skills",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Production-grade Claude Code skills for Oracle Cloud AI Architects",
   "author": {
     "name": "FrankX",
@@ -9,12 +9,18 @@
   "repository": "https://github.com/frankxai/claude-code-oracle-skills",
   "license": "MIT",
   "metadata": {
-    "totalPlugins": 5,
-    "totalSkills": 5,
-    "totalCommands": 5,
-    "lastUpdated": "2026-01-21",
+    "totalPlugins": 7,
+    "totalSkills": 7,
+    "totalCommands": 7,
+    "lastUpdated": "2026-01-26",
     "ociSdkVersion": "2.130.0",
-    "testedModels": ["cohere.command-a", "cohere.embed-english-v3.0"]
+    "oracleDbVersion": "26ai",
+    "testedModels": [
+      "cohere.command-a",
+      "cohere.embed-4",
+      "meta.llama-4-maverick",
+      "meta.llama-3.3-70b"
+    ]
   },
   "plugins": [
     {
@@ -25,11 +31,7 @@
       "category": "ai-ml",
       "difficulty": "intermediate",
       "keywords": ["oracle", "adk", "agents", "multi-agent", "oci", "genai"],
-      "components": {
-        "skills": 1,
-        "commands": 1,
-        "agents": 0
-      }
+      "components": { "skills": 1, "commands": 1, "agents": 0 }
     },
     {
       "name": "oracle-agent-spec",
@@ -39,11 +41,7 @@
       "category": "ai-ml",
       "difficulty": "intermediate",
       "keywords": ["oracle", "agent-spec", "yaml", "portable", "framework-agnostic"],
-      "components": {
-        "skills": 1,
-        "commands": 1,
-        "agents": 0
-      }
+      "components": { "skills": 1, "commands": 1, "agents": 0 }
     },
     {
       "name": "oci-services-expert",
@@ -53,11 +51,7 @@
       "category": "cloud",
       "difficulty": "beginner",
       "keywords": ["oracle", "oci", "cloud", "architecture", "cost-optimization"],
-      "components": {
-        "skills": 1,
-        "commands": 1,
-        "agents": 0
-      }
+      "components": { "skills": 1, "commands": 1, "agents": 0 }
     },
     {
       "name": "oracle-ai-architect",
@@ -67,11 +61,7 @@
       "category": "ai-ml",
       "difficulty": "advanced",
       "keywords": ["oracle", "ai", "vector-search", "select-ai", "nim", "rag"],
-      "components": {
-        "skills": 1,
-        "commands": 1,
-        "agents": 0
-      }
+      "components": { "skills": 1, "commands": 1, "agents": 0 }
     },
     {
       "name": "oracle-diagram-generator",
@@ -81,11 +71,28 @@
       "category": "productivity",
       "difficulty": "beginner",
       "keywords": ["oracle", "oci", "diagrams", "draw.io", "mermaid", "architecture"],
-      "components": {
-        "skills": 1,
-        "commands": 1,
-        "agents": 0
-      }
+      "components": { "skills": 1, "commands": 1, "agents": 0 }
+    },
+    {
+      "name": "oracle-infogenius",
+      "source": "./plugins/oracle-infogenius",
+      "description": "AI Architect-grade visual generation for OCI with research grounding",
+      "version": "1.0.0",
+      "category": "productivity",
+      "difficulty": "intermediate",
+      "keywords": ["oracle", "oci", "visuals", "infographics", "ai-architect", "gemini"],
+      "components": { "skills": 1, "commands": 1, "agents": 0, "mcpServers": 1 },
+      "mcp_required": ["nanobanana"]
+    },
+    {
+      "name": "agentic-orchestration",
+      "source": "./plugins/agentic-orchestration",
+      "description": "Multi-agent coordination patterns for enterprise AI on Oracle Cloud",
+      "version": "1.0.0",
+      "category": "ai-ml",
+      "difficulty": "advanced",
+      "keywords": ["oracle", "agents", "orchestration", "multi-agent", "coordination"],
+      "components": { "skills": 1, "commands": 1, "agents": 0 }
     }
   ],
   "categories": {

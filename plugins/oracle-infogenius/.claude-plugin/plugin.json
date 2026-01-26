@@ -1,0 +1,21 @@
+{
+  "name": "oracle-infogenius",
+  "version": "1.0.0",
+  "description": "AI Architect-grade visual generation for OCI with research grounding and brand compliance",
+  "author": {
+    "name": "FrankX",
+    "url": "https://github.com/frankxai"
+  },
+  "repository": "https://github.com/frankxai/claude-code-oracle-skills",
+  "license": "MIT",
+  "keywords": ["oracle", "oci", "visuals", "images", "infographics", "ai-architect", "brand", "gemini"],
+  "category": "productivity",
+  "difficulty": "intermediate",
+  "components": {
+    "skills": 1,
+    "commands": 1,
+    "agents": 0,
+    "mcpServers": 1
+  },
+  "mcp_required": ["nanobanana"]
+}
