@@ -1,7 +1,9 @@
 # Claude Code Oracle Skills
 
+> **Disclaimer:** This is an unofficial community project. Not affiliated with, endorsed by, or sponsored by Oracle Corporation. Oracle, OCI, and related marks are trademarks of Oracle Corporation.
+
 <p align="center">
-  <img src="examples/visuals/marketplace-header.png" alt="Claude Code Oracle Skills Marketplace" width="100%">
+  <img src="examples/visuals/marketplace-header-v2.png" alt="AI Architect Skills Marketplace" width="100%">
 </p>
 
 <p align="center">
