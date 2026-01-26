@@ -1,11 +1,22 @@
 # Claude Code Oracle Skills
 
-[![Version](https://img.shields.io/badge/version-2.0.0-blue)]()
-[![Plugins](https://img.shields.io/badge/plugins-5-green)]()
-[![Commands](https://img.shields.io/badge/commands-5-orange)]()
-[![License](https://img.shields.io/badge/license-MIT-lightgrey)]()
+<p align="center">
+  <img src="examples/visuals/marketplace-header.png" alt="Claude Code Oracle Skills Marketplace" width="100%">
+</p>
 
-Production-grade Claude Code plugins for Oracle Cloud AI Architects and Cloud Engineers.
+<p align="center">
+  <a href="#quick-install"><img src="https://img.shields.io/badge/version-3.0.0-blue" alt="Version"></a>
+  <a href="#available-plugins"><img src="https://img.shields.io/badge/plugins-7-green" alt="Plugins"></a>
+  <a href="#slash-commands"><img src="https://img.shields.io/badge/commands-7-orange" alt="Commands"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-lightgrey" alt="License"></a>
+  <a href="https://frankxai.github.io/claude-code-oracle-skills/"><img src="https://img.shields.io/badge/docs-GitHub%20Pages-blueviolet" alt="Docs"></a>
+</p>
+
+<p align="center">
+  <strong>Production-grade Claude Code skills for Oracle Cloud AI Architects</strong>
+</p>
+
+---
 
 ## Quick Install
 
@@ -14,95 +25,136 @@ Production-grade Claude Code plugins for Oracle Cloud AI Architects and Cloud En
 /plugin marketplace add frankxai/claude-code-oracle-skills
 
 # Install all plugins
-/plugin install oracle-adk oracle-agent-spec oci-services-expert oracle-ai-architect oracle-diagram-generator
+/plugin install oracle-adk oracle-agent-spec oci-services-expert oracle-ai-architect oracle-diagram-generator oracle-infogenius agentic-orchestration
 ```
 
 ## Available Plugins
 
-| Plugin | Description | Commands | Difficulty |
-|--------|-------------|----------|------------|
-| **[oracle-adk](plugins/oracle-adk/)** | Build production agents with Oracle ADK | `/adk-agent` | Intermediate |
-| **[oracle-agent-spec](plugins/oracle-agent-spec/)** | Framework-agnostic agent specifications | `/agent-spec` | Intermediate |
-| **[oci-services-expert](plugins/oci-services-expert/)** | OCI services and architecture patterns | `/oci-cost` | Beginner |
-| **[oracle-ai-architect](plugins/oracle-ai-architect/)** | Vector Search, Select AI, NVIDIA NIM | `/vector-search` | Advanced |
-| **[oracle-diagram-generator](plugins/oracle-diagram-generator/)** | Professional OCI architecture diagrams | `/oci-diagram` | Beginner |
+| Plugin | Command | Description | Difficulty |
+|--------|---------|-------------|------------|
+| **[oracle-adk](plugins/oracle-adk/)** | `/adk-agent` | Build production agents with Oracle ADK | Intermediate |
+| **[oracle-agent-spec](plugins/oracle-agent-spec/)** | `/agent-spec` | Framework-agnostic agent specifications | Intermediate |
+| **[oci-services-expert](plugins/oci-services-expert/)** | `/oci-cost` | OCI services, architecture & cost optimization | Beginner |
+| **[oracle-ai-architect](plugins/oracle-ai-architect/)** | `/vector-search` | Vector Search, Select AI, NVIDIA NIM | Advanced |
+| **[oracle-diagram-generator](plugins/oracle-diagram-generator/)** | `/oci-diagram` | Draw.io, Mermaid, Python diagrams | Beginner |
+| **[oracle-infogenius](plugins/oracle-infogenius/)** | `/oracle-infogenius` | AI-generated architecture visuals | Intermediate |
+| **[agentic-orchestration](plugins/agentic-orchestration/)** | `/orchestrate` | Multi-agent coordination patterns | Advanced |
+
+## Example Outputs
+
+### Enterprise RAG Platform Architecture
+
+<p align="center">
+  <img src="examples/visuals/rag-architecture.png" alt="RAG Architecture on OCI" width="80%">
+</p>
+
+Generated with:
+```bash
+/oracle-infogenius "Enterprise RAG Platform with OCI GenAI, Autonomous Database 26ai Vector Search, and Multi-Agent orchestration"
+```
+
+### Multi-Agent Orchestration Patterns
+
+<p align="center">
+  <img src="examples/visuals/orchestration-patterns.png" alt="Orchestration Patterns" width="60%">
+</p>
+
+Generated with:
+```bash
+/orchestrate "customer support automation" --pattern=conductor
+```
 
 ## Slash Commands
 
 ```bash
 # Generate OCI architecture diagram
-/oci-diagram rag drawio
-/oci-diagram three-tier python
-/oci-diagram multi-agent mermaid
+/oci-diagram "rag platform" drawio
+/oci-diagram "three-tier web app" mermaid
 
-# Scaffold an Oracle ADK agent
-/adk-agent customer-support multi-agent
-/adk-agent etl-processor pipeline
+# Generate AI architecture visuals
+/oracle-infogenius "Multi-agent factory for enterprise automation"
 
-# Generate Agent Spec definition
-/agent-spec research-assistant yaml
+# Design multi-agent orchestration
+/orchestrate "ETL data pipeline" --pattern=pipeline
 
-# Estimate OCI costs
-/oci-cost "RAG platform with vector search"
+# Scaffold Oracle ADK agent
+/adk-agent customer-support --type=multi-agent
 
 # Implement vector search
 /vector-search "document Q&A system"
+
+# Estimate OCI costs
+/oci-cost "RAG platform with 10K daily queries"
 ```
 
 ## Who Is This For?
 
+<table>
+<tr>
+<td width="50%">
+
 ### AI Architects
-All 5 plugins provide comprehensive coverage for building enterprise AI solutions on Oracle Cloud.
+All 7 plugins cover the complete AI development lifecycle on Oracle Cloud:
+- Agent development (ADK)
+- Multi-agent orchestration
+- Vector search & RAG
+- Professional visuals
+
+</td>
+<td width="50%">
 
 ### Solution Architects
-- **oci-services-expert** - OCI service selection and architecture patterns
-- **oracle-diagram-generator** - Create professional diagrams for proposals
+- **oci-services-expert** - Service selection & patterns
+- **oracle-diagram-generator** - Proposal diagrams
+- **oracle-infogenius** - Presentation visuals
 
-### Cloud Engineers / DevOps
-- **oci-services-expert** - Infrastructure patterns, security, cost optimization
-- **oracle-ai-architect** - Deployment patterns (Terraform, monitoring)
+</td>
+</tr>
+<tr>
+<td>
 
-### Agent Developers
-- **oracle-adk** - Code-first agent development on OCI
-- **oracle-agent-spec** - Framework-agnostic agent design
+### Cloud Engineers
+- **oci-services-expert** - Infrastructure patterns
+- **oracle-ai-architect** - Deployment automation
+- Cost optimization strategies
 
-### Sales Engineers / Pre-sales
-- **oracle-diagram-generator** - Quickly generate customer-ready diagrams
-- **oci-services-expert** - Cost estimates and service recommendations
+</td>
+<td>
 
-## Plugin Structure
+### Sales Engineers
+- **oracle-infogenius** - Customer-ready visuals
+- **oracle-diagram-generator** - Quick architecture diagrams
+- Cost estimates for proposals
 
-Each plugin follows the standard Claude Code plugin structure:
-
-```
-plugin-name/
-├── .claude-plugin/
-│   └── plugin.json      # Plugin metadata
-├── commands/
-│   └── command.md       # Slash command definitions
-├── skills/
-│   └── SKILL.md         # Skill reference material
-└── README.md
-```
+</td>
+</tr>
+</table>
 
 ## Quality Standards
 
 Every skill includes:
+
 - **When to Use** - Clear activation triggers at the top
 - **Code Examples** - Production-ready, tested patterns
-- **Quality Checklist** - Verification points before deployment
+- **Quality Checklist** - 15-20 verification points
 - **Decision Framework** - When to use vs. alternatives
 - **Official Resources** - Links to Oracle documentation
 
-## Verification Status
+## Tested With
 
-| Plugin | Version | OCI SDK | Last Verified | Status |
-|--------|---------|---------|---------------|--------|
-| oracle-adk | 1.0.0 | 2.130.0 | 2026-01-21 | Active |
-| oracle-agent-spec | 1.0.0 | 2.130.0 | 2026-01-21 | Active |
-| oci-services-expert | 1.0.0 | 2.130.0 | 2026-01-21 | Active |
-| oracle-ai-architect | 1.0.0 | 2.130.0 | 2026-01-21 | Active |
-| oracle-diagram-generator | 1.0.0 | 2.130.0 | 2026-01-21 | Active |
+| Component | Version |
+|-----------|---------|
+| OCI SDK | 2.130.0 |
+| Oracle Database | 26ai |
+| Cohere Command | A |
+| Cohere Embed | 4 |
+| Meta Llama | 4-maverick, 3.3-70b |
+
+## Documentation
+
+- **[GitHub Pages](https://frankxai.github.io/claude-code-oracle-skills/)** - Interactive skill catalog
+- **[Skill Catalog](docs/skills.html)** - Filterable plugin list
+- **[Diagram Gallery](docs/diagrams.html)** - Architecture examples
 
 ## Related Resources
 
@@ -121,5 +173,7 @@ MIT License - see [LICENSE](LICENSE)
 
 ---
 
-**Maintained by FrankX** | Oracle AI Architect
-*Building the future of enterprise AI on Oracle Cloud*
+<p align="center">
+  <strong>Maintained by FrankX</strong> | Oracle AI Architect<br>
+  <em>Building the future of enterprise AI on Oracle Cloud</em>
+</p>
