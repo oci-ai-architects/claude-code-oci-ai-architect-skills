@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Architecture Diagrams - Oracle Claude Code Skills</title>
-    <meta name="description" content="Interactive architecture diagrams for Oracle Cloud Infrastructure. RAG Platform, Multi-Agent Factory, Three-Tier Web App patterns.">
+    <title>Architecture Diagrams - AI Architect Skills for OCI</title>
+    <meta name="description" content="Interactive architecture diagrams for cloud infrastructure. RAG Platform, Multi-Agent Factory, Three-Tier Web App patterns.">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,12 +13,14 @@
             theme: {
                 extend: {
                     colors: {
-                        oracle: {
-                            red: '#C74634',
-                            darkred: '#A63A2C',
+                        brand: {
+                            primary: '#0EA5E9',
+                            secondary: '#06B6D4',
+                            accent: '#8B5CF6',
+                            dark: '#0C4A6E',
                             black: '#1A1A1A',
                             gray: '#6B7280',
-                            light: '#F9FAFB',
+                            light: '#F0F9FF',
                         }
                     }
                 }
@@ -38,12 +40,12 @@
             startOnLoad: true,
             theme: 'base',
             themeVariables: {
-                primaryColor: '#C74634',
+                primaryColor: '#0EA5E9',
                 primaryTextColor: '#ffffff',
-                primaryBorderColor: '#A63A2C',
+                primaryBorderColor: '#0C4A6E',
                 lineColor: '#6B7280',
-                secondaryColor: '#FEF2F2',
-                tertiaryColor: '#F9FAFB',
+                secondaryColor: '#E0F2FE',
+                tertiaryColor: '#F0F9FF',
                 fontFamily: 'Inter, sans-serif'
             },
             flowchart: {
@@ -57,8 +59,8 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-        .gradient-oracle {
-            background: linear-gradient(135deg, #C74634 0%, #8B2E23 100%);
+        .gradient-brand {
+            background: linear-gradient(135deg, #0EA5E9 0%, #0C4A6E 100%);
         }
         .diagram-card {
             transition: all 0.3s ease;
@@ -83,26 +85,26 @@
         }
     </style>
 </head>
-<body class="bg-oracle-light min-h-screen">
+<body class="bg-brand-light min-h-screen">
     <!-- Navigation -->
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <a href="index.html" class="flex items-center space-x-3">
-                        <div class="w-10 h-10 gradient-oracle rounded-lg flex items-center justify-center">
+                        <div class="w-10 h-10 gradient-brand rounded-lg flex items-center justify-center">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                             </svg>
                         </div>
-                        <span class="text-xl font-bold text-oracle-black">Oracle Skills</span>
+                        <span class="text-xl font-bold text-brand-black">AI Architect Skills</span>
                     </a>
                 </div>
                 <div class="flex items-center space-x-6">
-                    <a href="index.html" class="text-oracle-gray hover:text-oracle-red transition-colors">Home</a>
-                    <a href="skills.html" class="text-oracle-gray hover:text-oracle-red transition-colors">Skills</a>
-                    <a href="diagrams.html" class="text-oracle-red font-medium">Diagrams</a>
-                    <a href="https://github.com/FrankXAI/claude-code-oracle-skills" target="_blank" class="flex items-center space-x-1 text-oracle-gray hover:text-oracle-red transition-colors">
+                    <a href="index.html" class="text-brand-gray hover:text-brand-primary transition-colors">Home</a>
+                    <a href="skills.html" class="text-brand-gray hover:text-brand-primary transition-colors">Skills</a>
+                    <a href="diagrams.html" class="text-brand-primary font-medium">Diagrams</a>
+                    <a href="https://github.com/FrankXAI/claude-code-oracle-skills" target="_blank" class="flex items-center space-x-1 text-brand-gray hover:text-brand-primary transition-colors">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                         </svg>
@@ -116,9 +118,9 @@
     <!-- Header -->
     <header class="bg-white border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <h1 class="text-4xl font-bold text-oracle-black mb-4">Architecture Diagrams</h1>
-            <p class="text-lg text-oracle-gray max-w-2xl">
-                Interactive OCI architecture diagrams generated with the <code class="text-oracle-red font-mono">/oci-diagram</code> command. Click any diagram to view full-screen.
+            <h1 class="text-4xl font-bold text-brand-black mb-4">Architecture Diagrams</h1>
+            <p class="text-lg text-brand-gray max-w-2xl">
+                Interactive OCI architecture diagrams generated with the <code class="text-brand-primary font-mono">/oci-diagram</code> command. Click any diagram to view full-screen.
             </p>
         </div>
     </header>
@@ -130,10 +132,10 @@
                 <div class="p-6 border-b border-gray-100">
                     <div class="flex items-start justify-between">
                         <div>
-                            <h2 class="text-2xl font-bold text-oracle-black mb-2">RAG Platform Architecture</h2>
-                            <p class="text-oracle-gray">Enterprise Retrieval-Augmented Generation platform on OCI with vector search, embeddings, and generative AI.</p>
+                            <h2 class="text-2xl font-bold text-brand-black mb-2">RAG Platform Architecture</h2>
+                            <p class="text-brand-gray">Enterprise Retrieval-Augmented Generation platform on OCI with vector search, embeddings, and generative AI.</p>
                         </div>
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-oracle-red/10 text-oracle-red">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-brand-primary/10 text-brand-primary">
                             AI Architecture
                         </span>
                     </div>
@@ -196,8 +198,8 @@ flowchart TB
                     </div>
                 </div>
                 <div class="p-6 bg-white border-t border-gray-100">
-                    <h3 class="text-sm font-semibold text-oracle-black mb-3">Generate this diagram:</h3>
-                    <div class="bg-oracle-black rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                    <h3 class="text-sm font-semibold text-brand-black mb-3">Generate this diagram:</h3>
+                    <div class="bg-brand-black rounded-lg p-4 font-mono text-sm overflow-x-auto">
                         <code class="text-green-400">/oci-diagram</code> <code class="text-yellow-300">rag mermaid</code>
                     </div>
                 </div>
@@ -210,10 +212,10 @@ flowchart TB
                 <div class="p-6 border-b border-gray-100">
                     <div class="flex items-start justify-between">
                         <div>
-                            <h2 class="text-2xl font-bold text-oracle-black mb-2">Multi-Agent Factory</h2>
-                            <p class="text-oracle-gray">Production multi-agent orchestration system using Oracle ADK with specialized agents and workflow coordination.</p>
+                            <h2 class="text-2xl font-bold text-brand-black mb-2">Multi-Agent Factory</h2>
+                            <p class="text-brand-gray">Production multi-agent orchestration system using Oracle ADK with specialized agents and workflow coordination.</p>
                         </div>
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-oracle-red/10 text-oracle-red">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-brand-primary/10 text-brand-primary">
                             Agent Architecture
                         </span>
                     </div>
@@ -276,8 +278,8 @@ flowchart TB
                     </div>
                 </div>
                 <div class="p-6 bg-white border-t border-gray-100">
-                    <h3 class="text-sm font-semibold text-oracle-black mb-3">Generate this diagram:</h3>
-                    <div class="bg-oracle-black rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                    <h3 class="text-sm font-semibold text-brand-black mb-3">Generate this diagram:</h3>
+                    <div class="bg-brand-black rounded-lg p-4 font-mono text-sm overflow-x-auto">
                         <code class="text-green-400">/oci-diagram</code> <code class="text-yellow-300">multi-agent mermaid</code>
                     </div>
                 </div>
@@ -290,10 +292,10 @@ flowchart TB
                 <div class="p-6 border-b border-gray-100">
                     <div class="flex items-start justify-between">
                         <div>
-                            <h2 class="text-2xl font-bold text-oracle-black mb-2">Three-Tier Web Application</h2>
-                            <p class="text-oracle-gray">Classic three-tier architecture on OCI with load balancing, auto-scaling, and high availability.</p>
+                            <h2 class="text-2xl font-bold text-brand-black mb-2">Three-Tier Web Application</h2>
+                            <p class="text-brand-gray">Classic three-tier architecture on OCI with load balancing, auto-scaling, and high availability.</p>
                         </div>
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-oracle-red/10 text-oracle-red">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-brand-primary/10 text-brand-primary">
                             Cloud Architecture
                         </span>
                     </div>
@@ -365,8 +367,8 @@ flowchart TB
                     </div>
                 </div>
                 <div class="p-6 bg-white border-t border-gray-100">
-                    <h3 class="text-sm font-semibold text-oracle-black mb-3">Generate this diagram:</h3>
-                    <div class="bg-oracle-black rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                    <h3 class="text-sm font-semibold text-brand-black mb-3">Generate this diagram:</h3>
+                    <div class="bg-brand-black rounded-lg p-4 font-mono text-sm overflow-x-auto">
                         <code class="text-green-400">/oci-diagram</code> <code class="text-yellow-300">three-tier mermaid</code>
                     </div>
                 </div>
@@ -379,10 +381,10 @@ flowchart TB
                 <div class="p-6 border-b border-gray-100">
                     <div class="flex items-start justify-between">
                         <div>
-                            <h2 class="text-2xl font-bold text-oracle-black mb-2">Data Pipeline Architecture</h2>
-                            <p class="text-oracle-gray">Modern data pipeline with streaming ingestion, transformation, and analytics on OCI.</p>
+                            <h2 class="text-2xl font-bold text-brand-black mb-2">Data Pipeline Architecture</h2>
+                            <p class="text-brand-gray">Modern data pipeline with streaming ingestion, transformation, and analytics on OCI.</p>
                         </div>
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-oracle-red/10 text-oracle-red">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-brand-primary/10 text-brand-primary">
                             Data Architecture
                         </span>
                     </div>
@@ -443,8 +445,8 @@ flowchart LR
                     </div>
                 </div>
                 <div class="p-6 bg-white border-t border-gray-100">
-                    <h3 class="text-sm font-semibold text-oracle-black mb-3">Generate this diagram:</h3>
-                    <div class="bg-oracle-black rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                    <h3 class="text-sm font-semibold text-brand-black mb-3">Generate this diagram:</h3>
+                    <div class="bg-brand-black rounded-lg p-4 font-mono text-sm overflow-x-auto">
                         <code class="text-green-400">/oci-diagram</code> <code class="text-yellow-300">data-pipeline mermaid</code>
                     </div>
                 </div>
@@ -453,54 +455,54 @@ flowchart LR
 
         <!-- Command Reference -->
         <section class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
-            <h2 class="text-2xl font-bold text-oracle-black mb-6">Diagram Generator Commands</h2>
-            <p class="text-oracle-gray mb-8">Use the <code class="text-oracle-red font-mono">/oci-diagram</code> command to generate architecture diagrams in multiple formats.</p>
+            <h2 class="text-2xl font-bold text-brand-black mb-6">Diagram Generator Commands</h2>
+            <p class="text-brand-gray mb-8">Use the <code class="text-brand-primary font-mono">/oci-diagram</code> command to generate architecture diagrams in multiple formats.</p>
 
             <div class="grid md:grid-cols-2 gap-6">
                 <div>
-                    <h3 class="text-lg font-semibold text-oracle-black mb-4">Architecture Types</h3>
+                    <h3 class="text-lg font-semibold text-brand-black mb-4">Architecture Types</h3>
                     <div class="space-y-3">
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                            <code class="text-oracle-red font-mono text-sm">rag</code>
-                            <span class="text-oracle-gray text-sm">RAG Platform</span>
+                            <code class="text-brand-primary font-mono text-sm">rag</code>
+                            <span class="text-brand-gray text-sm">RAG Platform</span>
                         </div>
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                            <code class="text-oracle-red font-mono text-sm">multi-agent</code>
-                            <span class="text-oracle-gray text-sm">Multi-Agent System</span>
+                            <code class="text-brand-primary font-mono text-sm">multi-agent</code>
+                            <span class="text-brand-gray text-sm">Multi-Agent System</span>
                         </div>
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                            <code class="text-oracle-red font-mono text-sm">three-tier</code>
-                            <span class="text-oracle-gray text-sm">Three-Tier Web App</span>
+                            <code class="text-brand-primary font-mono text-sm">three-tier</code>
+                            <span class="text-brand-gray text-sm">Three-Tier Web App</span>
                         </div>
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                            <code class="text-oracle-red font-mono text-sm">data-pipeline</code>
-                            <span class="text-oracle-gray text-sm">Data Pipeline</span>
+                            <code class="text-brand-primary font-mono text-sm">data-pipeline</code>
+                            <span class="text-brand-gray text-sm">Data Pipeline</span>
                         </div>
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                            <code class="text-oracle-red font-mono text-sm">microservices</code>
-                            <span class="text-oracle-gray text-sm">Microservices on OKE</span>
+                            <code class="text-brand-primary font-mono text-sm">microservices</code>
+                            <span class="text-brand-gray text-sm">Microservices on OKE</span>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold text-oracle-black mb-4">Output Formats</h3>
+                    <h3 class="text-lg font-semibold text-brand-black mb-4">Output Formats</h3>
                     <div class="space-y-3">
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                            <code class="text-oracle-red font-mono text-sm">mermaid</code>
-                            <span class="text-oracle-gray text-sm">Mermaid.js (web-ready)</span>
+                            <code class="text-brand-primary font-mono text-sm">mermaid</code>
+                            <span class="text-brand-gray text-sm">Mermaid.js (web-ready)</span>
                         </div>
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                            <code class="text-oracle-red font-mono text-sm">drawio</code>
-                            <span class="text-oracle-gray text-sm">Draw.io XML</span>
+                            <code class="text-brand-primary font-mono text-sm">drawio</code>
+                            <span class="text-brand-gray text-sm">Draw.io XML</span>
                         </div>
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                            <code class="text-oracle-red font-mono text-sm">python</code>
-                            <span class="text-oracle-gray text-sm">Python diagrams library</span>
+                            <code class="text-brand-primary font-mono text-sm">python</code>
+                            <span class="text-brand-gray text-sm">Python diagrams library</span>
                         </div>
                     </div>
 
-                    <h3 class="text-lg font-semibold text-oracle-black mt-8 mb-4">Example Commands</h3>
-                    <div class="bg-oracle-black rounded-lg p-4 font-mono text-sm space-y-2">
+                    <h3 class="text-lg font-semibold text-brand-black mt-8 mb-4">Example Commands</h3>
+                    <div class="bg-brand-black rounded-lg p-4 font-mono text-sm space-y-2">
                         <div><code class="text-green-400">/oci-diagram</code> <code class="text-yellow-300">rag drawio</code></div>
                         <div><code class="text-green-400">/oci-diagram</code> <code class="text-yellow-300">three-tier python</code></div>
                         <div><code class="text-green-400">/oci-diagram</code> <code class="text-yellow-300">multi-agent mermaid</code></div>
@@ -511,11 +513,11 @@ flowchart LR
     </main>
 
     <!-- Footer -->
-    <footer class="bg-oracle-black py-12 mt-auto">
+    <footer class="bg-brand-black py-12 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="flex items-center mb-4 md:mb-0">
-                    <div class="w-10 h-10 gradient-oracle rounded-lg flex items-center justify-center mr-3">
+                    <div class="w-10 h-10 gradient-brand rounded-lg flex items-center justify-center mr-3">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
