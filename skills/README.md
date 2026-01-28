@@ -2,6 +2,20 @@
 
 > AI Architect-grade visual generation for Oracle Cloud Infrastructure
 
+**DISCLAIMER:** This is an unofficial community project. Not affiliated with, endorsed by, or sponsored by Oracle Corporation. Oracle, OCI, and related marks are trademarks of Oracle Corporation.
+
+## Logo Policy
+
+**DO NOT** include official Oracle logos in generated images.
+
+Instead, use:
+- Text labels ("Oracle Cloud", "OCI", service names)
+- Brand-inspired colors (Red #C74634)
+- Generic cloud/database icons
+- Text-based headers with accent bars
+
+This avoids trademark issues while maintaining professional appearance.
+
 ## Overview
 
 The Oracle InfoGenius skill family provides tiered image generation for Oracle architecture diagrams, using Google's Gemini image generation models via the Nano Banana MCP server.
