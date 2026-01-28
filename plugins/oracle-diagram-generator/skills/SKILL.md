@@ -1,7 +1,7 @@
 ---
 name: Oracle Diagram Generator
 description: Generate professional OCI architecture diagrams with verified Oracle styling and icons
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Oracle Diagram Generator - Complete Reference
@@ -9,12 +9,41 @@ version: 1.0.0
 ## Purpose
 Generate professional, accurate OCI architecture diagrams using official Oracle icons and styling. Supports Draw.io XML templates, Python diagrams library, and Mermaid.js for various output formats and workflows.
 
+---
+
+## PREREQUISITE: Import Official OCI Icons
+
+**CRITICAL**: Before using Draw.io templates, you MUST import the official Oracle icon library.
+
+### Quick Setup (2 Minutes)
+
+1. **Download** the official icons:
+   - [OCI-Style-Guide-for-Drawio.zip](https://docs.oracle.com/iaas/Content/Resources/Assets/OCI-Style-Guide-for-Drawio.zip)
+
+2. **Extract** the ZIP file
+
+3. **Import into Draw.io**:
+   - Open [app.diagrams.net](https://app.diagrams.net/)
+   - Go to **File → Open Library From → Device**
+   - Select the `.xml` file from the extracted ZIP
+
+4. **Verify**: OCI icons appear in the left sidebar under "OCI"
+
+**Full setup guide**: See [ORACLE_ICONS_SETUP.md](../ORACLE_ICONS_SETUP.md)
+
+---
+
 ## Official Oracle Icon Library
 
-### Download Sources
-- **Primary**: https://docs.oracle.com/en-us/iaas/Content/General/Reference/graphicsfordiagrams.htm
-- **Draw.io Library**: Download XML and import via File → Open Library From
-- **GitHub**: https://github.com/oracle-quickstart/oci-arch-template
+### Download Sources (Official)
+| Format | Download |
+|--------|----------|
+| **Draw.io** | [OCI-Style-Guide-for-Drawio.zip](https://docs.oracle.com/iaas/Content/Resources/Assets/OCI-Style-Guide-for-Drawio.zip) |
+| **PowerPoint** | [OCI_Icons.pptx](https://docs.oracle.com/iaas/Content/Resources/Assets/OCI_Icons.pptx) |
+| **Visio** | [OCI_Icons_Visio.zip](https://docs.oracle.com/iaas/Content/Resources/Assets/OCI_Icons_Visio.zip) |
+
+- **Documentation**: https://docs.oracle.com/en-us/iaas/Content/General/Reference/graphicsfordiagrams.htm
+- **Blog Tutorial**: https://blogs.oracle.com/cloud-infrastructure/post/layered-architecture-diagrams-drawio
 
 ---
 

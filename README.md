@@ -132,6 +132,17 @@ All 7 plugins cover the complete AI development lifecycle on Oracle Cloud:
 </tr>
 </table>
 
+## Setup: Official Oracle Icons
+
+**Important**: For Draw.io diagrams, import official Oracle icons first:
+
+1. Download: [OCI-Style-Guide-for-Drawio.zip](https://docs.oracle.com/iaas/Content/Resources/Assets/OCI-Style-Guide-for-Drawio.zip)
+2. Extract the ZIP
+3. In Draw.io: **File → Open Library From → Device** → select the XML
+4. OCI icons appear in left sidebar
+
+Full guide: [plugins/oracle-diagram-generator/ORACLE_ICONS_SETUP.md](plugins/oracle-diagram-generator/ORACLE_ICONS_SETUP.md)
+
 ## Quality Standards
 
 Every skill includes:
