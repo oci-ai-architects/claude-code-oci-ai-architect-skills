@@ -24,7 +24,59 @@ Thumbs.db
 *.log
 test-output/
 
-# Local config
+# ===========================================
+# SECRETS & CREDENTIALS - NEVER COMMIT
+# ===========================================
 .env
 .env.local
+.env.*.local
 config.local.yaml
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+service-account.json
+**/secrets/
+.private/
+
+# OCI/Cloud credentials
+oci_config
+oci_api_key.pem
+*.oci
+
+# API Keys
+.apikeys
+api-keys.txt
+
+# ===========================================
+# CLIENT/CUSTOMER DATA - NEVER COMMIT
+# ===========================================
+clients/*/deliverables/*
+clients/*/notes/*
+!clients/*/.gitkeep
+!clients/*/README.md
+
+# Customer files
+*-customer-*
+*-client-*
+*-confidential-*
+
+# ===========================================
+# GENERATED OUTPUTS - OPTIONAL
+# ===========================================
+# Uncomment if you don't want generated files
+# *.png
+# *.jpg
+# *.svg
+# *.drawio
+
+# Large files
+*.zip
+*.tar.gz
+*.7z
+
+# Backup files
+*.bak
+*.backup
+*~
