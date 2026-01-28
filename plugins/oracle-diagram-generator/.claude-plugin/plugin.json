@@ -1,7 +1,7 @@
 {
   "name": "oracle-diagram-generator",
-  "version": "1.0.0",
-  "description": "Generate professional OCI architecture diagrams with verified Oracle styling, icons, and templates",
+  "version": "3.0.0",
+  "description": "Generate professional OCI architecture diagrams with Python diagrams library (official OCI icons) or Mermaid.js",
   "author": {
     "name": "FrankX",
     "url": "https://github.com/frankxai"

@@ -1,7 +1,7 @@
 ---
 name: Oracle Diagram Generator
 description: Generate professional OCI architecture diagrams with verified Oracle styling and icons
-version: 2.0.0
+version: 3.0.0
 ---
 
 # Oracle Diagram Generator - Complete Reference
@@ -12,22 +12,54 @@ Generate professional, accurate OCI architecture diagrams using official Oracle 
 
 ---
 
-## CRITICAL: Understanding Icon Limitations
+## VALIDATED: Python Diagrams Library with OCI Icons
 
-**The Truth About OCI Icons in Draw.io:**
+**✅ WORKING SOLUTION (Tested January 2026)**
 
-Official OCI icons are stored as encoded stencils in `OCI Library.xml`:
-```xml
-shape=stencil(nZBLDoAgDERP0z3SIyjew0SURgSD...)  <!-- Base64 encoded SVG -->
+The Python `diagrams` library has official OCI icons built-in. Combined with Graphviz for layout, this produces professional architecture diagrams programmatically.
+
+### Setup (One-Time)
+
+```bash
+# Install miniconda (user-space, no sudo)
+curl -L -o miniconda.sh "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
+chmod +x miniconda.sh
+./miniconda.sh -b -p $HOME/miniconda3
+
+# Accept ToS and install Graphviz
+$HOME/miniconda3/bin/conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+$HOME/miniconda3/bin/conda install -y graphviz
+
+# Install Python diagrams library
+$HOME/miniconda3/bin/pip install diagrams
 ```
 
-**What Claude CANNOT Do:**
-- Generate these encoded stencil paths (binary format)
+### Quick Generate
+
+```bash
+# From plugin scripts directory
+python generate_oci_diagram.py --type rag --output /path/to/diagram
+python generate_oci_diagram.py --type agent --output /path/to/diagram
+python generate_oci_diagram.py --type platform --output /path/to/diagram
+```
+
+---
+
+## Understanding Icon Approaches
+
+| Approach | Quality | Icons | Automation |
+|----------|---------|-------|------------|
+| **Python diagrams** | ⭐⭐⭐⭐⭐ | Official OCI built-in | Full |
+| Mermaid.js | ⭐⭐⭐⭐ | Text-based styling | Full |
+| Draw.io template | ⭐⭐⭐ | User drags from library | Partial |
+| Draw.io with emojis | ⭐ | Unprofessional | Full |
+
+**What Claude CANNOT Do with Draw.io:**
+- Generate base64-encoded stencil paths (they're binary)
 - Reference icons by name like `mxgraph.oci.compute_vm` (doesn't exist)
-- Create pixel-perfect official icons programmatically
 
 **What Claude CAN Do:**
-- Generate Python `diagrams` code (HAS built-in OCI icons)
+- Generate Python `diagrams` code (HAS built-in OCI icons) ✅
 - Create Mermaid.js diagrams (good for documentation)
 - Generate Draw.io XML structure (user adds icons manually)
 - Create ASCII diagrams for quick visualization
@@ -43,6 +75,50 @@ shape=stencil(nZBLDoAgDERP0z3SIyjew0SURgSD...)  <!-- Base64 encoded SVG -->
 | Interactive editing | Draw.io template + manual icons | ⭐⭐⭐⭐ |
 | Quick planning | ASCII art | ⭐⭐⭐ |
 | DON'T USE | Draw.io with emojis | ⭐ |
+
+---
+
+## Python Diagrams: Complete OCI Icon Reference
+
+### Compute
+```python
+from diagrams.oci.compute import VM, BM, Container, OKE, Functions, InstancePools
+```
+
+### Database
+```python
+from diagrams.oci.database import Autonomous, DatabaseService, Dcat
+```
+
+### Network
+```python
+from diagrams.oci.network import LoadBalancer, Vcn, InternetGateway, ServiceGateway, Drg
+```
+
+### Storage
+```python
+from diagrams.oci.storage import ObjectStorage, BlockStorage, FileStorage
+```
+
+### Security
+```python
+from diagrams.oci.security import Vault, CloudGuard, IDCloud
+```
+
+### Monitoring
+```python
+from diagrams.oci.monitoring import Telemetry, Events, Notifications, Alarm
+```
+
+### DevOps
+```python
+from diagrams.oci.devops import ResourceManager
+```
+
+### GenAI (Use Generic Placeholder)
+```python
+from diagrams.generic.compute import Rack  # Use for GenAI services not in library
+```
 
 ---
 
