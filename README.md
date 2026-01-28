@@ -7,9 +7,9 @@
 </p>
 
 <p align="center">
-  <a href="#quick-install"><img src="https://img.shields.io/badge/version-3.0.0-blue" alt="Version"></a>
-  <a href="#available-plugins"><img src="https://img.shields.io/badge/plugins-7-green" alt="Plugins"></a>
-  <a href="#slash-commands"><img src="https://img.shields.io/badge/commands-7-orange" alt="Commands"></a>
+  <a href="#quick-install"><img src="https://img.shields.io/badge/version-3.1.0-blue" alt="Version"></a>
+  <a href="#available-plugins"><img src="https://img.shields.io/badge/plugins-8-green" alt="Plugins"></a>
+  <a href="#slash-commands"><img src="https://img.shields.io/badge/commands-10-orange" alt="Commands"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-lightgrey" alt="License"></a>
   <a href="https://frankxai.github.io/claude-code-oracle-skills/"><img src="https://img.shields.io/badge/docs-GitHub%20Pages-blueviolet" alt="Docs"></a>
 </p>
@@ -27,7 +27,7 @@
 /plugin marketplace add frankxai/claude-code-oracle-skills
 
 # Install all plugins
-/plugin install oracle-adk oracle-agent-spec oci-services-expert oracle-ai-architect oracle-diagram-generator oracle-infogenius agentic-orchestration
+/plugin install oracle-adk oracle-agent-spec oci-services-expert oracle-ai-architect oracle-diagram-generator oracle-infogenius agentic-orchestration oracle-work-mode
 ```
 
 ## Available Plugins
@@ -41,6 +41,7 @@
 | **[oracle-diagram-generator](plugins/oracle-diagram-generator/)** | `/oci-diagram` | Draw.io, Mermaid, Python diagrams | Beginner |
 | **[oracle-infogenius](plugins/oracle-infogenius/)** | `/oracle-infogenius` | AI-generated architecture visuals | Intermediate |
 | **[agentic-orchestration](plugins/agentic-orchestration/)** | `/orchestrate` | Multi-agent coordination patterns | Advanced |
+| **[oracle-work-mode](plugins/oracle-work-mode/)** | `/oracle-work` | Consulting workflow with confidentiality | Beginner |
 
 ## Example Outputs
 
@@ -87,6 +88,11 @@ Generated with:
 
 # Estimate OCI costs
 /oci-cost "RAG platform with 10K daily queries"
+
+# Oracle consulting workflow
+/oracle-work              # Activate confidentiality mode
+/daily-capture            # Log wins, learnings, blockers
+/research "OCI GPU shapes" # Confidential research session
 ```
 
 ## Who Is This For?
