@@ -40,8 +40,23 @@
 | **[oracle-ai-architect](plugins/oracle-ai-architect/)** | `/vector-search` | Vector Search, Select AI, NVIDIA NIM | Advanced |
 | **[oracle-diagram-generator](plugins/oracle-diagram-generator/)** | `/oci-diagram` | Draw.io, Mermaid, Python diagrams | Beginner |
 | **[oracle-infogenius](plugins/oracle-infogenius/)** | `/oracle-infogenius` | AI-generated architecture visuals | Intermediate |
+| **[oracle-infogenius-flash](skills/oracle-infogenius-flash/)** | `/oracle-infogenius-flash` | Budget visuals ($0.039/image) | Beginner |
+| **[oracle-infogenius-pro](skills/oracle-infogenius-pro/)** | `/oracle-infogenius-pro` | Professional visuals ($0.134/image) | Intermediate |
+| **[oracle-infogenius-premium](skills/oracle-infogenius-premium/)** | `/oracle-infogenius-premium` | 4K print-ready ($0.24/image) | Intermediate |
 | **[agentic-orchestration](plugins/agentic-orchestration/)** | `/orchestrate` | Multi-agent coordination patterns | Advanced |
 | **[oracle-work-mode](plugins/oracle-work-mode/)** | `/oracle-work` | Consulting workflow with confidentiality | Beginner |
+
+## Oracle InfoGenius Tiers
+
+Cost-optimized image generation using Google Gemini models:
+
+| Tier | Command | Cost/Image | Resolution | Best For |
+|------|---------|------------|------------|----------|
+| **Flash** | `/oracle-infogenius-flash` | $0.039 | 1024px | Drafts, iterations, volume |
+| **Pro** | `/oracle-infogenius-pro` | $0.134 | 2048px | Client presentations |
+| **Premium** | `/oracle-infogenius-premium` | $0.24 | 4096px | Print, large displays |
+
+See [skills/README.md](skills/README.md) for detailed pricing and usage guide.
 
 ## Example Outputs
 
@@ -174,6 +189,7 @@ Every skill includes:
 - **[GitHub Pages](https://frankxai.github.io/claude-code-oracle-skills/)** - Interactive skill catalog
 - **[Skill Catalog](docs/skills.html)** - Filterable plugin list
 - **[Diagram Gallery](docs/diagrams.html)** - Architecture examples
+- **[Skill Management Guide](docs/SKILL_MANAGEMENT.md)** - How to organize and maintain skills
 
 ## Related Resources
 
