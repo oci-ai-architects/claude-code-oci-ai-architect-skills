@@ -1,6 +1,8 @@
-# Claude Code Oracle Skills
+# Claude Code OCI AI Architect Skills
 
 > **Disclaimer:** This is an unofficial community project. Not affiliated with, endorsed by, or sponsored by Oracle Corporation. Oracle, OCI, and related marks are trademarks of Oracle Corporation.
+
+> **New Home:** This repo has moved to [oci-ai-architects/claude-code-oci-ai-architect-skills](https://github.com/oci-ai-architects/claude-code-oci-ai-architect-skills)
 
 <p align="center">
   <img src="examples/visuals/marketplace-header-v2.png" alt="AI Architect Skills Marketplace" width="100%">
