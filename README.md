@@ -70,7 +70,7 @@ See [skills/README.md](skills/README.md) for detailed pricing and usage guide.
 
 Generated with:
 ```bash
-/oracle-infogenius "Enterprise RAG Platform with OCI GenAI, Autonomous Database 26ai Vector Search, and Multi-Agent orchestration"
+/oracle-infogenius "Enterprise RAG Platform with OCI GenAI, Oracle AI Database 26ai Vector Search, Cohere Embed 4, and OCI GenAI Agents orchestration"
 ```
 
 ### Multi-Agent Orchestration Patterns
@@ -181,7 +181,7 @@ Every skill includes:
 | Component | Version |
 |-----------|---------|
 | OCI SDK | 2.130.0 |
-| Oracle Database | 26ai |
+| Oracle AI Database | 26ai |
 | Cohere Command | A |
 | Cohere Embed | 4 |
 | Meta Llama | 4-maverick, 3.3-70b |
