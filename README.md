@@ -68,10 +68,12 @@ See [skills/README.md](skills/README.md) for detailed pricing and usage guide.
   <img src="examples/visuals/rag-architecture.png" alt="RAG Architecture on OCI" width="80%">
 </p>
 
-Generated with:
-```bash
-/oracle-infogenius "Enterprise RAG Platform with OCI GenAI, Oracle AI Database 26ai Vector Search, Cohere Embed 4, and OCI GenAI Agents orchestration"
-```
+Generated with `/oracle-ai-architect-infogenius` — shows 3-tier enterprise architecture:
+- **Security & Governance** layer (IAM, Vault, Audit, Data Lineage)
+- **Core pipeline**: Data Sources → Processing → Embedding → Vector Store → Retrieval → Generation
+- **Observability & Evaluation** layer (Monitoring, Traces, LLM-as-Judge, Feedback Loops)
+
+See [Visual Architecture Patterns Guide](docs/VISUAL-ARCHITECTURE-PATTERNS.md) for design standards.
 
 ### Multi-Agent Orchestration Patterns
 
