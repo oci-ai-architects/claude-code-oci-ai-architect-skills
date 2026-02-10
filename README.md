@@ -205,7 +205,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 
 ## Disclaimer
-> **Disclaimer:** This is an unofficial community project. Not affiliated with, endorsed by, or sponsored by Oracle Corporation. Oracle, OCI, and related marks are trademarks of Oracle Corporation.
+> **Disclaimer:** This is a community project. Not endorsed by, or sponsored by Oracle Corporation. Oracle, OCI, and related marks are trademarks of Oracle Corporation.
 
 ## License
 
@@ -217,4 +217,5 @@ MIT License - see [LICENSE](LICENSE)
   <strong>Maintained by FrankX</strong> | Oracle AI Architect<br>
   <em>Building the future of enterprise AI on Oracle Cloud</em>
 </p>
+
 
