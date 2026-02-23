@@ -381,8 +381,8 @@ Create and open editable architecture diagrams.
 
 | Tool | Input | Best For |
 |------|-------|---------|
-| `open_drawio_xml` | Draw.io XML | Production architectures (Tier 3 — see Section 6) |
-| `open_drawio_mermaid` | Mermaid syntax | Quick flowcharts, sequence diagrams (Tier 1) |
+| `open_drawio_xml` | Draw.io XML | Styled architecture diagrams with precise layout (Option B) |
+| `open_drawio_mermaid` | Mermaid syntax | Quick architecture overviews, flowcharts, sequences (Option A) |
 | `open_drawio_csv` | CSV data | Org charts, structured layouts |
 
 ### 5.3 Configuration (All AI Coding Tools)
@@ -428,140 +428,178 @@ Create and open editable architecture diagrams.
 
 ---
 
-## 6. Architecture Diagrams: The Real Guide
+## 6. Architecture Diagrams: Draw.io MCP + More
 
-> **Honest assessment:** Generating production-quality OCI architecture diagrams is complex. There is no magic one-liner. Here are the three approaches, ranked by reliability.
+> **The Draw.io MCP is installed and working.** It's your primary diagram tool. Claude generates content, calls the MCP, and the diagram opens instantly in Draw.io for editing. Below are the 4 ways to use it, plus alternatives.
 
-### Tier 1: Mermaid → Draw.io (Quick Drafts)
+### Option A: Mermaid → Draw.io MCP (Fastest)
 
-**When:** Quick flowcharts, sequence diagrams, user journeys, decision trees. NOT for detailed OCI architecture diagrams.
+**When:** Any flowchart, sequence diagram, user journey, decision tree, or quick architecture overview. This is your go-to for most diagrams.
 
-**How it works:** Write Mermaid syntax, open in Draw.io via MCP. Result is editable.
+**How:** Claude writes Mermaid, calls `open_drawio_mermaid`, diagram opens in Draw.io. Fully editable.
 
 ```
-Create a Mermaid flowchart for the document processing pipeline and open it in Draw.io:
+Create a Mermaid architecture overview and open it in Draw.io:
 
-graph LR
-    A[Document Upload] --> B{File Type?}
-    B -->|PDF| C[OCR Engine]
-    B -->|Image| D[Vision AI]
-    C --> E[Extract Fields]
-    D --> E
-    E --> F[Classify Document]
-    F --> G[Route to Department]
-    G --> H[(AI Database 26ai)]
-    H --> I[Search & Retrieve]
+graph TB
+    subgraph Security["Security & Governance"]
+        WAF[WAF] --> APIGW[API Gateway]
+        IAM[IAM] --> Vault[Vault]
+    end
+
+    subgraph Processing["AI Processing Pipeline"]
+        ObjStore[Object Storage] --> Functions[OCI Functions]
+        Functions --> DocAI[Document Understanding]
+        DocAI --> GenAI[OCI GenAI - Cohere Command A]
+        GenAI --> Embed[Cohere Embed 4]
+    end
+
+    subgraph Data["Data Platform"]
+        ADB[(AI Database 26ai)]
+        VectorIdx[Vector Index]
+        Graph[Property Graph]
+    end
+
+    subgraph Presentation["Presentation Layer"]
+        WebApp[Web Application]
+        ORDS[REST API - ORDS]
+        Dashboard[Dashboard]
+    end
+
+    APIGW --> Functions
+    Embed --> ADB
+    ADB --> GenAI
+    GenAI --> ORDS
+    ORDS --> WebApp
+
+Open this in Draw.io via the MCP so I can refine the layout and add colors.
 ```
 
-**Limitations:** No OCI icons. No layered architecture styling. No security/governance overlays. Good for process flows, not architecture.
+**After opening:** Add colors, resize boxes, adjust layout, add OCI icons from the sidebar library. The Mermaid gives you the structure; you polish in Draw.io.
 
-**Prompt engineering tip:** Keep Mermaid diagrams to 15-20 nodes max. Beyond that, they become unreadable. For complex architectures, use Tier 2 or D2.
+**Prompt engineering tips:**
+- Use `subgraph` for layer grouping — maps to Draw.io containers
+- Keep to 15-25 nodes for readability
+- Label edges with data flow descriptions
+- Use `TB` (top-bottom) for architecture layers, `LR` (left-right) for pipelines
 
 ---
 
-### Tier 2: Python Generators (Production Quality)
+### Option B: XML → Draw.io MCP (Professional Layouts)
 
-**When:** Client-facing architecture diagrams with proper OCI icons, layering, and professional polish. **This is the reliable path for production diagrams.**
+**When:** You want Claude to generate a polished, color-coded architecture with precise positioning that opens ready-to-present in Draw.io.
 
-**How it works:** Python scripts clone embedded OCI icon stencils from the official toolkit into new .drawio files. Icons render correctly in any environment — no library imports needed.
+**How:** Claude generates Draw.io XML, calls `open_drawio_xml`, diagram opens styled and positioned.
+
+```
+Generate a Draw.io XML architecture diagram and open it via the Draw.io MCP.
+
+Layout: 4 horizontal bands (top to bottom), dark background (#0D1117):
+
+Band 1 — SECURITY (fillColor=#1a1a2e, fontColor=#FFFFFF):
+  WAF | API Gateway | IAM | Cloud Guard | Vault
+
+Band 2 — AI PROCESSING (fillColor=#16213e, fontColor=#FFFFFF):
+  Object Storage → OCI Functions → Document Understanding → OCI GenAI (Cohere Command A)
+  → Cohere Embed 4 → Rerank 3.5
+
+Band 3 — DATA PLATFORM (fillColor=#0f3460, fontColor=#FFFFFF):
+  AI Database 26ai (Vector Store + Property Graph + Relational)
+  Object Storage (Raw Documents)
+
+Band 4 — PRESENTATION (fillColor=#C74634, fontColor=#FFFFFF):
+  Web Application | REST API (ORDS) | Dashboard
+
+Use rounded rectangles (rounded=1;whiteSpace=wrap;html=1;).
+Orthogonal edge routing with labeled arrows showing data flow.
+No grid (grid=0). Professional spacing between bands.
+
+Open via open_drawio_xml so I can refine in Draw.io.
+```
+
+**Result:** A styled, layered architecture diagram that opens in Draw.io. You can then drag OCI icons from the sidebar library onto the service boxes to add visual polish.
+
+**Known quirks with XML generation:**
+- Don't use `shape=mxgraph.oci.*` in generated XML — these need the OCI library loaded. Use styled rectangles instead; add OCI icons manually from the Draw.io sidebar after opening.
+- Edge z-ordering: If arrows appear on top of boxes, reorder layers in Draw.io (Edit → Bring to Front/Send to Back).
+- Cell IDs must be unique — Claude handles this, but if you're editing XML manually, watch for duplicates.
+
+---
+
+### Option C: Clone & Customize Templates (89 .drawio files)
+
+**When:** An existing template is close to what you need. Fastest path to a production-quality diagram.
+
+```
+I need an architecture diagram for [use case] in [industry].
+
+Check the drawio/ directory — which existing template is closest?
+List the top 3 matches from:
+- drawio/domain-architectures/ (4 industry architectures)
+- drawio/usecase-architectures/ (60 use-case architectures)
+- drawio/oci ai architectures/ (6 OCI reference architectures)
+- drawio/meta-architectures/ (6 AI Factory pages)
+
+Then clone the best match and adapt:
+- Replace [old service] → [new service]
+- Update labels to match our architecture
+- Keep the layout structure intact
+
+Open the result via Draw.io MCP so I can refine.
+```
+
+**Template inventory:**
+
+| Category | Count | Examples |
+|----------|-------|---------|
+| **Domain Architectures** | 4 | Healthcare, Automotive, DB Migration, Software/SaaS |
+| **Use-Case Architectures** | 60 | 10 per domain across 4 industries |
+| **OCI Reference Architectures** | 6 | Agentic AI, GenAI Enterprise, ERP, Select AI, Multi-tenant, Integration |
+| **Meta-Architectures** | 6 | AI Factory: Logical, Physical, Execution, User Flows, Governance, Portal |
+| **Master Portfolios** | 3 | Multi-page packs |
+| **OCI Style Guide** | 2 | Official diagram toolkit v24.2 |
+
+---
+
+### Option D: Python Generators (Icon-Native at Scale)
+
+**When:** You need production diagrams with **embedded OCI icon stencils** that render correctly everywhere — Confluence, SharePoint, email attachments — without the recipient needing OCI libraries installed. Use for portfolio generation or client-facing deliverables where icon fidelity matters.
+
+**How:** Python scripts clone OCI icon groups from the official toolkit into new .drawio files. Icons are embedded as base64 stencil data — zero external dependencies.
 
 **Available generators (4,146 LOC across 9 tools):**
 
 | Script | What It Builds |
 |--------|---------------|
-| `build_oci_coe_domain_architectures.py` | Industry-specific architectures (healthcare, automotive, db-migration, software-saas) |
-| `build_ai_factory_meta_architecture.py` | 6-page AI Factory meta-architecture pack |
-| `build_agentic_rag_diagram.py` | Agentic RAG architecture with icon-native stencils |
-| `build_oci_coe_use_case_portfolio.py` | Multi-page use-case portfolio packs |
-| `build_oci_coe_use_case_tracker.py` | CSV/markdown portfolio tracker with BOM data |
+| `build_oci_coe_domain_architectures.py` | Industry-specific architectures |
+| `build_ai_factory_meta_architecture.py` | 6-page AI Factory meta-architecture |
+| `build_agentic_rag_diagram.py` | Agentic RAG with icon-native stencils |
+| `build_oci_coe_use_case_portfolio.py` | Multi-page use-case packs |
+| `build_oci_coe_use_case_tracker.py` | CSV/markdown portfolio tracker |
 
-**Production workflow:**
+**Workflow:**
 
-```
-Step 1 — Generate the diagram:
-
+```bash
+# Generate
 python3 drawio/tools/build_oci_coe_domain_architectures.py \
-  --domain healthcare \
-  --output drawio/domain-architectures/
+  --domain healthcare --output drawio/domain-architectures/
 
-Step 2 — Validate icon integrity (MANDATORY before sharing):
-
+# Validate (MANDATORY before sharing)
 python3 drawio/tools/validate_drawio_icon_integrity.py \
   --file drawio/domain-architectures/OCI_AICoE_healthcare_Agentic_Architecture.drawio \
   --diagram "Healthcare Agentic Architecture"
+# Must report: mxgraph_oci_refs=0, VALIDATION: PASS
 
-# MUST report:
-#   mxgraph_oci_refs=0         (no fallback icons)
-#   VALIDATION: PASS
-
-Step 3 — Optional: Run pack-level QA:
-
+# Optional: pack-level QA
 python3 drawio/tools/qa_oci_architecture_pack.py \
   --file drawio/OCI_AICoE_Hub_Domain_Architectures.drawio
-
-Step 4 — Open in Draw.io for manual refinement, then share.
 ```
-
-**Why this works:** The Python generators embed icon geometry as base64-encoded stencil data directly in the XML. No external library dependency. Icons render correctly whether you open the file in Draw.io desktop, web, VS Code extension, or embed in Confluence.
-
-**Prompt to customize an existing template:**
-```
-Read the healthcare domain architecture template at
-drawio/domain-architectures/OCI_AICoE_healthcare_Agentic_Architecture.drawio
-
-Adapt it for a document processing use case:
-- Replace Clinical Decision Support → Document Classification
-- Replace Patient Data → Document Store
-- Replace EHR Integration → ERP Integration
-- Keep the OCI service layer structure (Security → Processing → Data → Presentation)
-- Keep all embedded icon stencils intact
-- Save as drawio/domain-architectures/OCI_AICoE_document_processing_Architecture.drawio
-
-Then validate:
-python3 drawio/tools/validate_drawio_icon_integrity.py --file <new_file> --diagram <name>
-```
-
----
-
-### Tier 3: Direct XML Generation (Advanced)
-
-**When:** You need a completely custom architecture diagram not covered by existing templates. Requires understanding Draw.io XML structure.
-
-**Why this is hard:**
-1. **Icon embedding:** OCI icons must use `shape=stencil(...)` with base64-encoded geometry — NOT `shape=mxgraph.oci.*` (renders as red blocks without library)
-2. **Z-ordering:** Edges (arrows) must be inserted before foreground elements in XML document order
-3. **Clone geometry:** Icon groups have parent-child hierarchies; only the root gets absolute positioning, descendants use relative offsets
-4. **Cell IDs:** Every `mxCell` needs a unique ID; parent references must be consistent
-
-**If you must generate raw XML, use this pattern:**
-
-```
-Generate a Draw.io XML architecture diagram. CRITICAL RULES:
-
-1. DO NOT use shape=mxgraph.oci.* — these require external libraries
-2. Use simple labeled rectangles with professional styling instead of OCI icons
-3. Use rounded=1;whiteSpace=wrap; for service boxes
-4. Layer structure (top to bottom):
-   - Security band: fillColor=#1a1a2e (dark), fontColor=#FFFFFF
-   - Processing: fillColor=#16213e, fontColor=#FFFFFF
-   - Data tier: fillColor=#0f3460, fontColor=#FFFFFF
-   - Presentation: fillColor=#C74634 (Oracle Red), fontColor=#FFFFFF
-5. Edges: orthogonal routing, strokeColor=#888888, endArrow=block
-6. Overall: background=#0D1117 (dark), grid=0
-
-Services to show:
-[list your OCI services and data flows]
-
-Open the result in Draw.io using open_drawio_xml.
-```
-
-**Important:** Tier 3 produces professional-looking diagrams with labeled boxes and color-coded layers. For actual OCI icons, use Tier 2 (Python generators) or manually add icons in Draw.io after opening.
 
 ---
 
 ### Alternative: D2 Language (No MCP Required)
 
-**When:** You don't have Draw.io MCP, or you want version-controlled diagrams in text form. Better than Mermaid for architecture diagrams — supports layers, nested containers, and the TALA layout engine.
+**When:** You don't have Draw.io MCP available, or you want version-controlled diagram-as-code that renders to SVG/PNG. Better than Mermaid for architecture — supports nested containers, layers, and the TALA layout engine.
 
 **Install:** `curl -fsSL https://d2lang.com/install.sh | sh -s --`
 
@@ -628,23 +666,26 @@ processing.genai.command -> presentation.api: Response
 presentation.api -> presentation.app: Display
 ```
 
-**Export options:** SVG, PNG, PDF. Embed SVGs directly in HTML portals.
-
-**Prompt engineering for D2:**
+**Prompt:**
 ```
 Create a D2 architecture diagram for [use case] on OCI.
-
-Requirements:
-- 4 horizontal layers: Security, Processing, Data, Presentation
-- Use dark fills with white text (see D2 style examples above)
-- Oracle Red (#C74634) for the presentation layer
-- Show data flow with labeled arrows
-- Nest related services inside containers
-- Save as diagrams/[name].d2
-
-Then render:
-d2 diagrams/[name].d2 diagrams/[name].svg --layout=elk
+4 layers: Security, Processing, Data, Presentation.
+Dark fills, white text, Oracle Red (#C74634) for presentation.
+Save as diagrams/[name].d2, then render to SVG.
 ```
+
+---
+
+### When to Use What
+
+| Situation | Use | Why |
+|-----------|-----|-----|
+| Quick architecture overview | **Option A** (Mermaid → Draw.io MCP) | Fastest, editable, good enough for internal review |
+| Styled presentation diagram | **Option B** (XML → Draw.io MCP) | Color-coded bands, professional layout, opens ready |
+| Close template exists | **Option C** (Clone template) | Fastest to production quality, leverages existing work |
+| Client-facing with OCI icons everywhere | **Option D** (Python generators) | Icon-native, renders correctly in any viewer |
+| No Draw.io MCP available | **D2 language** | Diagram-as-code, SVG/PNG export, better than Mermaid |
+| Quick process flow only | **Option A** (Mermaid → Draw.io MCP) | Mermaid excels at flowcharts and sequences |
 
 ---
 
@@ -846,31 +887,27 @@ Full 8-section Solution Design Document with 3 tiers (Basic/Advanced/Premium).
 
 Choose your approach based on the situation:
 
-| Situation | Use | Prompt |
-|-----------|-----|--------|
-| Quick internal review | D2 or Mermaid → Draw.io | "Create D2/Mermaid diagram of the architecture" |
-| Client presentation (with OCI icons) | Python generators (Tier 2) | "Generate using build_oci_coe_domain_architectures.py" |
-| Custom architecture (no template fits) | Draw.io XML (Tier 3) | "Generate Draw.io XML with colored layers, no mxgraph.oci.*" |
-| Executive one-pager visual | `/oracle-infogenius` (needs Nano Banana) | "Architecture visual, dark theme, Oracle Red, NO logos" |
-| Client wants to see the full template library | Clone from `drawio/` | "Find the closest template and customize" |
+| Situation | Use | Section |
+|-----------|-----|---------|
+| Quick architecture overview | Mermaid → Draw.io MCP (Option A) | Section 6 |
+| Styled presentation diagram | XML → Draw.io MCP (Option B) | Section 6 |
+| Template exists for this domain | Clone & customize (Option C) | Section 6 |
+| Icon-native at scale | Python generators (Option D) | Section 6 |
+| Executive one-pager image | `/oracle-infogenius` (needs Nano Banana) | Optional |
+| No Draw.io MCP available | D2 language | Section 6 |
 
-**Prompt for D2 (recommended for quick professional diagrams):**
+**Prompt to generate architecture and open in Draw.io:**
 ```
-Create a D2 architecture diagram for our [use case] architecture.
+Generate an architecture diagram for our [use case] and open it in Draw.io.
 
-4 layers (top to bottom):
-1. Security & Governance — dark navy (#1a1a2e)
-   [list security services]
-2. AI Processing Pipeline — medium navy (#16213e)
-   [list processing services and flow]
-3. Data Platform — deep blue (#0f3460)
-   [list data services]
-4. Presentation — Oracle Red (#C74634)
-   [list presentation services]
+4 bands (top to bottom), dark background:
+1. Security & Governance — [list security services]
+2. AI Processing — [list processing services and data flow]
+3. Data Platform — [list data services]
+4. Presentation — [list user-facing services]
 
-Show data flow arrows between layers with labels.
-Nest related services inside containers.
-Save as diagrams/[name].d2 and render to SVG.
+Use color-coded bands, labeled arrows for data flow.
+Open via Draw.io MCP so I can add OCI icons and refine layout.
 ```
 
 **Quality Gate 3:**
@@ -1098,9 +1135,9 @@ Keep the Oracle Redwood design system styling.
 | "OCI is 80x cheaper" | Cite specific model comparison with source and date |
 | Include Oracle logos in diagrams | Text labels only, Oracle Red (#C74634) accents |
 | Build from scratch without checking | Check oracle-quickstart and AI Blueprints FIRST |
-| Use `mxgraph.oci.*` in Draw.io | Tier 2 Python generators, or Tier 3 with `shape=stencil()` |
+| Use `mxgraph.oci.*` in generated XML | Use styled rectangles in XML; add OCI icons from sidebar after opening |
 | Store client names in files | Codenames only, context in conversation |
-| Generate production diagrams from Mermaid | Mermaid for drafts, Tier 2/D2 for production |
+| Spend hours on diagram XML manually | Use Mermaid/XML via Draw.io MCP, refine visually in Draw.io |
 | Skip the ASK prompt | 5 minutes of ASK saves hours of rework |
 | Assume you know OCI pricing | VERIFY at oracle.com/cloud/price-list/ — models change monthly |
 
