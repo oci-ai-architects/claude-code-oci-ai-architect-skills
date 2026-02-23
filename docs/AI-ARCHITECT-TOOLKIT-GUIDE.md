@@ -2,726 +2,478 @@
 ## Complete Workflow Guide: From Idea to Working Prototype
 
 > **For:** Oracle AI Architect Team
-> **Version:** 1.0 — February 2026
+> **Version:** 2.0 — February 2026
 > **Disclaimer:** Unofficial community project. Not affiliated with or endorsed by Oracle Corporation.
 
 ---
 
-## Table of Contents
+## 1. The Pipeline at a Glance
 
-1. [The AI-First Prompting Philosophy](#1-the-ai-first-prompting-philosophy)
-2. [Setup: Oracle ADB MCP (All Tools)](#2-setup-oracle-adb-mcp)
-3. [The Complete Pipeline](#3-the-complete-pipeline)
-4. [Phase-by-Phase Guide with Prompts](#4-phase-by-phase-guide)
-5. [Skill Integration Map](#5-skill-integration-map)
-6. [Hub Portal Integration](#6-hub-portal-integration)
-7. [Worked Example: End-to-End](#7-worked-example)
-8. [Quick Reference Card](#8-quick-reference-card)
-
----
-
-## 1. The AI-First Prompting Philosophy
-
-> **The single biggest mistake:** Telling the AI exactly what to build before asking it what's best.
-
-Most architects jump straight to "Build me X with Y services." This wastes the AI's most valuable capability — **its ability to reason about your problem before you've committed to a solution.**
-
-### The Two-Prompt Pattern
-
-Every phase in this guide follows a **two-prompt pattern:**
-
-| Step | Prompt Type | Purpose | Example |
-|------|------------|---------|---------|
-| **1. ASK** | Intelligence prompt | Get the AI's analysis, options, trade-offs | "What's the best approach for...?" |
-| **2. DIRECT** | Execution prompt | Build the thing, with informed decisions | "Build it using approach B because..." |
-
-**The ASK prompt is where the magic happens.** The AI has seen thousands of architecture patterns, knows OCI service capabilities in depth, and can identify trade-offs you haven't considered. Skip it, and you're using a supercomputer as a typewriter.
-
-### Phase-by-Phase: What to ASK Before You DIRECT
-
-#### Phase 1: Discovery — ASK for Research Strategy
-
-**Don't start with:** "Research document AI on OCI"
-
-**Start with:**
-```
-I have a client who needs [high-level problem description].
-Before I start researching:
-
-1. What are the 3-5 most critical questions I should answer first?
-2. What existing OCI solutions or blueprints might already solve this?
-3. What are the non-obvious technical considerations I might miss?
-4. What's the fastest path to a validated architecture — what should
-   I research in parallel vs. sequentially?
-5. Based on your knowledge, what's the most common mistake teams
-   make when building this type of solution?
-
-Help me build an efficient research plan before I start searching.
-```
-
-**Why this works:** The AI will identify blind spots, suggest existing solutions you didn't know about, and save hours of undirected research.
-
-#### Phase 2: PRD — ASK for Requirements You're Missing
-
-**Don't start with:** "Write a PRD with these requirements: [list]"
-
-**Start with:**
-```
-Here's what we know about the client's needs: [paste discovery findings]
-
-Before I write the PRD:
-1. What requirements are implied but not stated? (security, compliance,
-   observability, DR, data residency)
-2. What questions should I go back to the client with before finalizing?
-3. For requirements like [X], are there OCI-native solutions that would
-   change how we frame the requirement?
-4. What's the minimum viable architecture that would let us validate
-   the concept in 2 weeks?
-5. Where have you seen similar projects fail — what should our
-   "must have" list protect against?
-```
-
-**Why this works:** The AI catches missing NFRs (non-functional requirements) that architects commonly forget until production — like data residency, audit logging, cost alerting, and graceful degradation.
-
-#### Phase 3: User Flows — ASK for the Critical Path
-
-**Don't start with:** "Create user flows for 4 personas"
-
-**Start with:**
-```
-We're building [solution] with these personas: [list]
-
-Before I design the flows:
-1. Which persona's workflow is most critical to get right first?
-   What makes their experience make-or-break for adoption?
-2. Where should AI augment vs. automate? What decisions need
-   a human-in-the-loop gate?
-3. What error states and edge cases should the flows account for?
-4. What's the simplest possible happy path that still demonstrates
-   the full value proposition?
-5. From a UX perspective, what's the #1 thing that would make
-   an executive say "wow" in a 5-minute demo?
-```
-
-**Why this works:** The AI identifies which flow to prototype first (the one with highest demo impact), where human oversight is critical (builds trust), and what edge cases will bite you later.
-
-#### Phase 4: Architecture — ASK for Trade-offs
-
-**Don't start with:** "Design an OCI architecture with these services: [list]"
-
-**Start with:**
-```
-Here's our PRD and key requirements: [paste or reference]
-
-Before I commit to an architecture:
-1. What are the 2-3 valid architecture approaches for this?
-   Compare them on: cost, complexity, time-to-deploy, scalability.
-2. Which OCI services have overlapping capabilities here?
-   Help me pick the simplest option that meets requirements.
-3. Are there any OCI AI Blueprints or oracle-quickstart patterns
-   that already solve 80% of this? Show me before I build custom.
-4. What's the biggest cost driver in this architecture?
-   How would you optimize it?
-5. If we had to cut the timeline in half, what would you simplify
-   while keeping the core value?
-```
-
-**Why this works:** You get architecture *options* with reasoned trade-offs instead of a single design you can't evaluate. The AI often finds existing patterns that save weeks of work.
-
-#### Phase 5: Visuals — ASK for Diagram Strategy
-
-**Don't start with:** "Create an architecture diagram"
-
-**Start with:**
-```
-I need to present this architecture to [audience: executives / technical team / both].
-
-Before I generate diagrams:
-1. What's the right set of diagrams for this audience?
-   (master architecture, data flow, deployment, sequence?)
-2. For each diagram, what level of detail is appropriate?
-   Executives need outcomes, engineers need service names.
-3. What's the one visual that would be most impactful if I
-   could only show one slide?
-4. How should I layer the information so it tells a story
-   from problem → solution → value?
-```
-
-#### Phase 6: Engineering — ASK for Prototype Strategy
-
-**Don't start with:** "Build an HTML prototype with [feature list]"
-
-**Start with:**
-```
-We need a prototype to demonstrate [solution] to [audience].
-The demo slot is [X minutes].
-
-Before I build:
-1. What's the ONE interaction that best demonstrates the AI value?
-   That's what we build perfectly — everything else is secondary.
-2. Should this be a clickable mockup, a simulated demo with mock data,
-   or a live prototype connected to ADB? What's the right fidelity
-   for this stage?
-3. What mock data would make the demo feel real and domain-specific?
-4. What processing states and animations would make the AI feel
-   "alive" during the demo?
-5. What's the simplest architecture for the prototype that we could
-   later evolve into production code?
-```
-
-**Why this works:** You build the right thing at the right fidelity. A connected prototype impresses; a disconnected one with the wrong focus wastes effort.
-
-#### Phase 7: Delivery — ASK for Presentation Strategy
-
-**Don't start with:** "Package everything for delivery"
-
-**Start with:**
-```
-I'm presenting this solution to [audience role] on [date].
-The meeting is [X minutes]. They care about [business outcome].
-
-Before I package the delivery:
-1. What's the ideal narrative arc for this presentation?
-   (Problem → Vision → Architecture → Demo → Next Steps?)
-2. Which deliverables should I walk through vs. leave as reference?
-3. What objections should I prepare for? What questions will they ask?
-4. How should I frame the cost — total investment, per-unit savings,
-   or ROI comparison?
-5. What's the one thing that would make them approve budget in
-   this meeting vs. asking for a follow-up?
-```
-
-### The Compound Effect
-
-Each ASK prompt doesn't just improve one phase — it improves all downstream phases:
+This is the complete delivery pipeline. Every client engagement follows these 8 phases.
 
 ```
-ASK: Research strategy     → Better discovery    → Better requirements
-ASK: Missing requirements  → Better PRD          → Better architecture
-ASK: Architecture options  → Better design       → Better prototype
-ASK: Prototype strategy    → Better demo         → Better approval rate
+ INTAKE → DISCOVER → PRD → USER FLOWS → ARCHITECT → VISUALIZE → BUILD → DELIVER
+   │         │        │        │           │           │          │        │
+   ▼         ▼        ▼        ▼           ▼           ▼          ▼        ▼
+ Scope    Research   Reqts    Journeys   OCI Design  Diagrams   Working   Package
+ Client   Industry   MoSCoW   Personas   Services    Draw.io    Proto-    Audit
+ Brief    Patterns   KPIs     Screens    BOM         Mockups    type      Present
 ```
 
-**Teams that ask first, build second, deliver faster.** The initial 5-minute ASK prompt saves hours of rework.
-
-### Golden Rules
-
-1. **Always ask "what am I missing?" before finalizing** — the AI catches blind spots
-2. **Request options, not answers** — "give me 3 approaches" beats "do it this way"
-3. **Share context generously** — the more the AI knows about your client's constraints, the better its reasoning
-4. **Challenge the AI's first answer** — "what's the downside of that approach?" often reveals the best path
-5. **Use the AI's analysis to make YOUR decision** — you're the architect, it's your judgment call
-
----
-
-## 2. Setup: Oracle ADB MCP
-
-The Oracle SQLcl MCP server gives your AI coding assistant **direct access to Oracle Autonomous Database**. It works with every major AI coding tool.
-
-### What You Get
-
-| Capability | Tool | Description |
-|------------|------|-------------|
-| `run-sql` | Execute SQL | Run queries, get CSV results |
-| `run-sqlcl` | Execute SQLcl | APEX exports, DBMS_CLOUD, Data Pump, Liquibase, `AI` command |
-| `schema-information` | Inspect schema | Tables, columns, relationships, constraints |
-| `connect` / `disconnect` | Manage connections | Switch between saved database connections |
-| `list-connections` | Browse connections | See all saved SQLcl connections with details |
-| `run-sql-async` | Async queries | Long-running queries without timeout |
-
-### Prerequisites
-
-1. **SQLcl 25.4+** installed (`sql -version` to check)
-2. **Wallet downloaded** from OCI Console (Autonomous Database → DB Connection → Download Wallet)
-3. **Saved connection** created in SQLcl:
-   ```bash
-   sql /nolog
-   SQL> conn -save MyADB -savepwd agent_admin/YourPassword@adb_medium \
-        -wallet /path/to/Wallet_ADB
-   ```
-
-### Configuration by Tool
-
-All tools use the same pattern: launch `sql -mcp` as a stdio MCP server.
-
-#### Claude Code (`.mcp.json`)
-
-```json
-{
-  "mcpServers": {
-    "sqlcl": {
-      "command": "sql",
-      "args": ["-mcp"],
-      "timeout": 120
-    }
-  }
-}
-```
-
-**WSL variant** (if SQLcl is installed in WSL):
-```json
-{
-  "mcpServers": {
-    "sqlcl": {
-      "command": "wsl.exe",
-      "args": ["-d", "Ubuntu-24.04", "--", "bash", "-lc", "sql -mcp"],
-      "timeout": 120
-    }
-  }
-}
-```
-
-#### Cline (VS Code — `cline_mcp_settings.json`)
-
-```json
-{
-  "mcpServers": {
-    "sqlcl": {
-      "command": "sql",
-      "args": ["-mcp"],
-      "timeout": 120,
-      "disabled": false
-    }
-  }
-}
-```
-
-Location: VS Code Settings → Cline → MCP Servers → Edit
-
-#### OpenCode (`opencode.json` or settings)
-
-```json
-{
-  "mcpServers": {
-    "sqlcl": {
-      "command": "sql",
-      "args": ["-mcp"]
-    }
-  }
-}
-```
-
-#### Codex (OpenAI — `codex_mcp.json`)
-
-```json
-{
-  "mcpServers": {
-    "sqlcl": {
-      "command": "sql",
-      "args": ["-mcp"]
-    }
-  }
-}
-```
-
-#### Gemini CLI (`gemini_mcp_settings.json`)
-
-```json
-{
-  "mcpServers": {
-    "sqlcl": {
-      "command": "sql",
-      "args": ["-mcp"]
-    }
-  }
-}
-```
-
-#### Cursor / Windsurf (`.cursor/mcp.json` or `.windsurf/mcp.json`)
-
-```json
-{
-  "mcpServers": {
-    "sqlcl": {
-      "command": "sql",
-      "args": ["-mcp"]
-    }
-  }
-}
-```
-
-### Verify Connection
-
-After configuring, test with these prompts in any tool:
-
-```
-List my Oracle database connections
-```
-
-```
-Connect to MyADB and show me the database version
-```
-
-```
-Show me all tables in my current schema with row counts
-```
-
-### What the ADB MCP Enables
-
-| Use Case | Example Prompt |
-|----------|---------------|
-| **Schema exploration** | "What tables exist? Show me the ERD relationships" |
-| **Data analysis** | "Analyze the patient_core table — show distributions by diagnosis" |
-| **Select AI Agent** | "Run: SELECT AI 'summarize sales trends' FROM dual" |
-| **Vector search** | "Find similar documents using VECTOR_DISTANCE on my embeddings table" |
-| **Performance tuning** | "Show me the top 10 slowest queries from V$SQL" |
-| **Prototype data** | "Generate realistic mock data for the demo and insert 100 rows" |
-
----
-
-## 3. The Complete Pipeline
-
-```
- INTAKE → DISCOVER → PRD → USER FLOWS → ARCHITECT → VISUALIZE → ENGINEER → DELIVER
-   │         │        │        │           │           │           │          │
-   ▼         ▼        ▼        ▼           ▼           ▼           ▼          ▼
- Scope    Research   Reqts    Journeys   OCI Design  Diagrams   Prototype  Package
- Client   Industry   MoSCoW   Personas   Services    Mockups    HTML/Code  Audit
- Brief    Patterns   KPIs     Screens    BOM         Draw.io    Database   Present
-```
-
-### Pipeline at a Glance
-
-| # | Phase | Time | Primary Skill | Output |
-|---|-------|------|---------------|--------|
-| 0 | **Intake** | 15 min | Manual / conversation | Client brief, codename assigned |
-| 1 | **Discover** | 30 min | `/oracle-research` | Discovery notes, industry context |
-| 2 | **PRD** | 30 min | `/oracle-solution-design` | Requirements document (MoSCoW) |
-| 3 | **User Flows** | 20 min | Direct prompting | Persona maps, journey diagrams |
-| 4 | **Architect** | 45 min | `/oci-services-expert` | Architecture, BOM, SDD |
-| 5 | **Visualize** | 30 min | `/oracle-infogenius` | Architecture diagrams (logo-free) |
-| 6 | **Engineer** | 60-120 min | `/oracle-solution-design` | Working HTML prototype |
-| 7 | **Deliver** | 20 min | `/oracle-confidentiality` | Audited package, presentation |
+| # | Phase | Time | Skill | One-Liner Prompt | Output |
+|---|-------|------|-------|------------------|--------|
+| 0 | **Intake** | 15 min | Conversation | "Starting codename K — they need [problem]. Structure the brief." | Client brief |
+| 1 | **Discover** | 30 min | `/oracle-research` | "What exists on OCI for [use case]? Check quickstart + AI Blueprints first." | Discovery notes |
+| 2 | **PRD** | 30 min | Direct | "Create MoSCoW requirements. What am I missing for [domain]?" | Requirements doc |
+| 3 | **User Flows** | 20 min | Direct + Draw.io MCP | "Design user flows for [3 personas]. What's the critical path?" | Journey diagrams |
+| 4 | **Architect** | 45 min | `/oci-services-expert` | "Give me 2-3 architecture options. Compare cost, complexity, time." | Architecture + BOM |
+| 5 | **Visualize** | 30 min | Draw.io MCP | "Generate Draw.io XML for the architecture with OCI service layers." | .drawio files |
+| 6 | **Build** | 60-120 min | Direct + ADB MCP | "Build working prototype — single HTML, connected to ADB, dark theme." | Working prototype |
+| 7 | **Deliver** | 20 min | `/oracle-confidentiality` | "Run pre-delivery audit. Grep for real names. Check logo compliance." | Audited package |
 
 **Total: 4-6 hours for a complete solution design with working prototype.**
 
 ---
 
+## 2. Skills & Activation
+
+### How Skills Work
+
+All skills live in `.claude/skills/` as SKILL.md files. Claude auto-loads them based on context. There is **no auto-activation system** — you trigger skills explicitly via slash commands or by describing what you need.
+
+### Core Oracle Skills
+
+| Skill | Trigger | What It Does | When to Use |
+|-------|---------|-------------|-------------|
+| **oracle-research** | `/oracle-research` or "research [topic]" | Confidentiality-aware web research with OCI pattern checks | Phase 1: Discovery |
+| **oci-services-expert** | `/oci-services-expert` or "OCI architecture" | Service selection + mandatory pricing verification | Phase 4: Architecture |
+| **oracle-sdd-generator** | `/oracle-sdd-generator` or "generate SDD" | Structured Solution Design Document (8 sections) | Phase 4: After architecture |
+| **oracle-diagram-generator** | "create OCI diagram" or "Draw.io architecture" | Draw.io XML templates + Mermaid + Python diagrams | Phase 5: Visualize |
+| **oci-drawio-icon-native** | Manual (for production diagrams) | Ensures embedded icons, no mxgraph fallback | Phase 5: Quality gate |
+| **oracle-adk** | `/adk-agent` or "build an agent" | Oracle Agent Development Kit patterns | Phase 6: If building agents |
+| **oracle-agent-spec** | "agent spec" or "portable agents" | Framework-agnostic agent definitions (JSON/YAML) | Phase 6: Agent design |
+| **oracle-confidentiality** | `/oracle-confidentiality` or auto at delivery | Pre-delivery audit with VETO power | Phase 7: Always |
+| **oracle-solution-design** | `/oracle-solution-design` | Master orchestrator (chains all above) | Full engagement |
+
+### Optional Skills
+
+| Skill | Trigger | What It Does | Dependency |
+|-------|---------|-------------|------------|
+| **oracle-infogenius** | `/oracle-infogenius` | AI-generated architecture images (PNG) via Nano Banana | Requires Nano Banana MCP |
+| **oracle-ai-architect-infogenius** | `/oracle-ai-architect-infogenius` | Audience-aware visuals (research/executive/technical) | Requires Nano Banana MCP |
+
+> **Note:** Infogenius generates beautiful raster images but requires the Nano Banana MCP server. Draw.io MCP is the primary diagram tool — it produces editable, version-controlled `.drawio` files that work everywhere.
+
+### Skill Chaining
+
+```
+/oracle-solution-design (orchestrates everything)
+├── Phase 1 → /oracle-research (parallel research agents)
+├── Phase 2 → /oci-services-expert (service selection + pricing)
+│           → /oracle-sdd-generator (document generation)
+├── Phase 3 → Draw.io MCP (architecture diagrams)
+│           → /oracle-infogenius (optional: raster images)
+├── Phase 4 → /oracle-adk (if building agents)
+│           → ADB MCP (database schema + data)
+└── Phase 5 → /oracle-confidentiality (audit before delivery)
+```
+
+---
+
+## 3. Setup: MCP Servers
+
+Two MCP servers are essential. Both work with **every AI coding tool**.
+
+### 3.1 Oracle ADB MCP (SQLcl)
+
+Direct access to Oracle Autonomous Database from your AI assistant.
+
+**Prerequisites:**
+1. SQLcl 25.4+ installed (`sql -version`)
+2. Wallet downloaded from OCI Console (ADB → DB Connection → Download Wallet)
+3. Saved connection: `sql /nolog` then `conn -save MyADB -savepwd user/pass@adb_medium -wallet /path/to/Wallet`
+
+**Capabilities:**
+
+| Tool | What It Does |
+|------|-------------|
+| `run-sql` | Execute SQL queries, get CSV results |
+| `run-sqlcl` | SQLcl commands (APEX, DBMS_CLOUD, Data Pump, `AI` command) |
+| `schema-information` | Tables, columns, relationships, constraints |
+| `connect` / `disconnect` | Switch between saved connections |
+| `run-sql-async` | Long-running queries without timeout |
+
+### 3.2 Draw.io MCP
+
+Create and open editable architecture diagrams directly from Claude.
+
+**Capabilities:**
+
+| Tool | Input | Best For |
+|------|-------|---------|
+| `open_drawio_xml` | Draw.io XML | Production architectures from templates |
+| `open_drawio_mermaid` | Mermaid syntax | Quick flowcharts, sequence diagrams |
+| `open_drawio_csv` | CSV data | Org charts, structured layouts |
+
+### 3.3 Configuration (All Tools)
+
+The config is **identical JSON** for every tool — only the file location changes.
+
+```json
+{
+  "mcpServers": {
+    "sqlcl": {
+      "command": "sql",
+      "args": ["-mcp"],
+      "timeout": 120
+    },
+    "drawio": {
+      "command": "npx",
+      "args": ["-y", "@drawio/mcp"]
+    }
+  }
+}
+```
+
+| Tool | Config File Location |
+|------|---------------------|
+| **Claude Code** | `.mcp.json` in project root |
+| **Cline** (VS Code) | VS Code Settings → Cline → MCP Servers |
+| **Cursor** | `.cursor/mcp.json` |
+| **Windsurf** | `.windsurf/mcp.json` |
+| **OpenCode** | `opencode.json` or settings |
+| **Codex** (OpenAI) | `codex_mcp.json` |
+| **Gemini CLI** | `gemini_mcp_settings.json` |
+
+**WSL variant** (if SQLcl is in WSL, not Windows PATH):
+```json
+{
+  "sqlcl": {
+    "command": "wsl.exe",
+    "args": ["-d", "Ubuntu-24.04", "--", "bash", "-lc", "sql -mcp"],
+    "timeout": 120
+  }
+}
+```
+
+### 3.4 Draw.io MCP: Known Quirks & Best Practices
+
+| Quirk | Impact | Workaround |
+|-------|--------|-----------|
+| **mxgraph.oci.* fallback** | OCI icons render as red blocks if library not loaded | Use icon-native mode (embedded stencils) for production diagrams |
+| **CSV import not idempotent** | Re-import may render differently | Use XML templates for reproducible output; CSV for exploration only |
+| **Large multi-page files** | 40+ pages can be slow in web UI | Generate standalone .drawio per use case; aggregate into master pack separately |
+| **Clone geometry** | Cloned icon groups pile up at origin if root x/y missing | Generator must write explicit x/y on clone roots; descendants stay relative |
+| **Lightbox mode** | `lightbox=true` makes diagram read-only | Use for sharing/review; omit for editing |
+
+**Best Practice:** Always validate production diagrams with:
+```bash
+python3 drawio/tools/validate_drawio_icon_integrity.py --file <file> --diagram <name>
+# Must report: mxgraph_oci_refs=0, VALIDATION: PASS
+```
+
+### 3.5 Draw.io Template Library
+
+We maintain **67 production .drawio files** ready to customize:
+
+| Category | Count | Examples |
+|----------|-------|---------|
+| **Meta-Architectures** | 6 | AI Factory: Logical, Physical, Execution, User Flows, Governance, Portal |
+| **Domain Architectures** | 4 | Healthcare, Automotive, DB Migration, Software/SaaS |
+| **Use-Case Architectures** | 37+ | Clinical decision support, fraud detection, supply chain, etc. |
+| **Master Portfolios** | 3 | Multi-page packs (4-page domain, 40-page use case, 6-page AI Factory) |
+| **OCI Style Guide** | 2 | Official OCI Architecture Diagram Toolkit v24.2 |
+
+**Location:** `drawio/` directory. Use these as starting templates — clone and customize rather than building from scratch.
+
+---
+
 ## 4. Phase-by-Phase Guide
+
+> **Prompting principle:** At each phase, **ASK the AI what's best before telling it what to build.** This surfaces blind spots, existing solutions, and trade-offs you haven't considered. Each phase below shows the ASK prompt first, then the DIRECT prompt.
 
 ### Phase 0: Intake & Scoping
 
-**What happens:** Client makes a request or you identify an opportunity. You create a codename and capture the initial brief.
+**What happens:** Client makes a request. You assign a codename and capture the brief.
 
 **Steps:**
 1. Assign a codename (A-Z) — never use real client names in any file
-2. Create `clients/[CODE]/README.md` with status and your role only
+2. Create `clients/[CODE]/README.md` with status and role only
 3. Capture the brief in conversation (not in files)
 
-**Example prompt:**
+**Prompt:**
 ```
-I'm starting work on a new engagement. Codename: K.
-They need an AI-powered document processing system that can:
-- Extract data from scanned invoices
-- Classify documents by type
-- Route to appropriate department
-- Integrate with their existing ERP
+I'm starting work on codename K. They need an AI-powered document processing
+system — extract data from scanned invoices, classify documents, route to
+departments, integrate with ERP.
 
 Help me structure the initial brief and identify what we need to discover.
 ```
-
-**Output:** Structured brief with open questions for discovery phase.
 
 ---
 
 ### Phase 1: Discover & Research
 
-**Primary skill:** `/oracle-research`
+**Skill:** `/oracle-research`
 
-**What happens:** Parallel research into OCI capabilities, industry patterns, existing solutions, and pricing. This is where you validate that you're not reinventing the wheel.
+**What happens:** Research OCI capabilities, industry patterns, existing solutions, and pricing. The key question: **does something already exist that solves this?**
 
-**Step 1 — Check existing solutions FIRST:**
+**ASK first:**
+```
+Before I start researching document AI on OCI:
+1. What existing OCI solutions or blueprints might already solve this?
+2. What are the 3-5 most critical questions I should answer?
+3. What's the most common mistake teams make building this?
+4. What non-obvious technical considerations should I investigate?
+```
 
+**Then DIRECT:**
 ```
 /oracle-research
 
-Research what already exists on OCI for intelligent document processing:
-1. Check oracle-quickstart for any document AI blueprints
-2. Check OCI Document Understanding service capabilities
-3. Look at OCI AI Blueprints for relevant accelerator packs
-4. What industry patterns exist for invoice processing on Oracle?
+Deep dive for intelligent document processing on OCI:
+1. Check oracle-quickstart for document AI blueprints
+2. OCI Document Understanding capabilities and limits
+3. OCI AI Blueprints — any relevant accelerator packs?
+4. Pricing: Document Understanding, GenAI models, ADB, Functions
+5. Industry benchmarks for invoice extraction accuracy
 
-Save findings to research/topics/ (no client references).
+Save to research/topics/ — no client references.
 ```
 
-**Step 2 — Industry & competitor research:**
-
-```
-Research enterprise document processing AI platforms in 2026:
-- What are the key capabilities expected?
-- What compliance requirements apply (GDPR, SOC2)?
-- What are typical accuracy benchmarks for invoice extraction?
-- What OCI services map to each capability?
-```
-
-**Step 3 — Pricing research:**
-
-```
-/oci-services-expert
-
-I need verified pricing for these OCI services for a document processing solution:
-- OCI Document Understanding (per page)
-- OCI GenAI - Cohere Command A (for classification)
-- OCI Object Storage (for document storage)
-- Oracle AI Database 26ai (Autonomous, for metadata + vector search)
-- OCI Functions (for processing pipeline)
-
-Verify all prices against oracle.com/cloud/price-list/ with dates.
-```
-
-**Quality Gate 1 checklist:**
+**Quality Gate 1:**
 - [ ] Top 3 use cases identified
 - [ ] OCI services mapped to each requirement
 - [ ] Existing oracle-quickstart patterns checked
 - [ ] AI Blueprints decision tree consulted
-- [ ] Pricing verified with sources
 - [ ] Zero real client names in any file
 
 ---
 
 ### Phase 2: Product Requirements Document
 
-**Primary skill:** `/oracle-solution-design` (Phase 2: ARCHITECT)
+**Skill:** Direct prompting (or `/oracle-solution-design` Phase 2)
 
-**What happens:** Transform discovery findings into structured requirements with MoSCoW prioritization.
+**What happens:** Transform discovery into structured requirements with MoSCoW prioritization.
 
-**Example prompt:**
+**ASK first:**
 ```
-Based on our discovery for codename K, create a PRD with:
+Here's what we found in discovery: [paste key findings]
 
-## Requirements (MoSCoW)
-
-MUST HAVE:
-- Invoice data extraction (vendor, amount, date, line items)
-- Document classification (invoice, PO, receipt, contract)
-- Searchable document archive with metadata
-
-SHOULD HAVE:
-- Automated routing to department based on classification
-- Duplicate detection
-- Approval workflow integration
-
-COULD HAVE:
-- Natural language querying ("show me all invoices over $10K from Q1")
-- Anomaly detection (unusual amounts, vendors)
-
-WON'T HAVE (this phase):
-- ERP write-back integration
-- Multi-language support
-
-For each requirement, map the OCI service and estimate effort.
-Format as a table: Requirement | Priority | OCI Service | Effort | Notes
+Before I write the PRD:
+1. What requirements are implied but not stated? (security, compliance,
+   observability, DR, data residency)
+2. What questions should I go back to the client with?
+3. What's the minimum viable scope we could demo in 2-4 weeks?
 ```
 
-**Output:** Structured PRD with service mappings.
+**Then DIRECT:**
+```
+Create a PRD for codename K with MoSCoW prioritization:
+
+MUST: Invoice extraction, document classification, searchable archive
+SHOULD: Automated routing, duplicate detection, approval workflow
+COULD: Natural language querying, anomaly detection
+WON'T (this phase): ERP write-back, multi-language
+
+For each requirement, map: OCI Service | Effort | Priority | Notes
+```
 
 ---
 
 ### Phase 3: User Flows & Journeys
 
-**What happens:** Map the user personas and their journeys through the solution. This drives the prototype design.
+**Skill:** Direct prompting + Draw.io MCP for diagrams
 
-**Example prompt:**
+**What happens:** Map personas, their journeys, and the screens they interact with.
+
+**ASK first:**
 ```
-Create user flow diagrams for our document processing solution.
+We're building a document processing platform for 3 personas:
+AP Clerk, Finance Manager, Auditor.
 
-Personas:
-1. **AP Clerk** — Uploads/scans invoices daily, needs fast processing
-2. **Finance Manager** — Reviews flagged items, approves exceptions
-3. **Auditor** — Searches historical documents, runs compliance checks
-
-For each persona, create:
-1. A step-by-step user journey (5-7 steps)
-2. Key screens they interact with
-3. Decision points and branching logic
-4. AI touchpoints (where the system adds intelligence)
-
-Format as Mermaid flowcharts I can embed in documentation.
+Before I design flows:
+1. Which persona's workflow is most critical to demo first?
+2. Where should AI augment vs. automate? Where's the human-in-the-loop?
+3. What's the simplest happy path that shows the full value?
 ```
 
-**For visual journey maps:**
+**Then DIRECT:**
 ```
-/oracle-infogenius
+Create user flows for each persona as Mermaid flowcharts.
+Show: steps, decision points, AI touchpoints, and screens.
 
-Create a user journey diagram showing:
-- 3 personas (AP Clerk, Finance Manager, Auditor)
-- Their workflow from document upload to final action
-- AI decision points highlighted in Oracle Red (#C74634)
-- Dark background, professional style, NO Oracle logos
-- Show the OCI services powering each step as subtle labels
+Then open them in Draw.io so I can edit:
+```
+
+The AI can then use the Draw.io MCP to open the Mermaid directly:
+```
+Tool: open_drawio_mermaid
+Content: <the generated Mermaid code>
 ```
 
 ---
 
 ### Phase 4: Technical Architecture
 
-**Primary skill:** `/oci-services-expert` + `/oracle-sdd-generator`
+**Skill:** `/oci-services-expert` + `/oracle-sdd-generator`
 
-**What happens:** Design the full OCI architecture with service selection, security, networking, and cost estimation.
+**What happens:** Design the OCI architecture with service selection, security, and cost estimation.
 
-**Step 1 — Architecture design:**
+**ASK first — this is the most important ASK in the entire pipeline:**
+```
+Based on our PRD, I need an OCI architecture.
 
+Before you design it:
+1. What are 2-3 valid architecture approaches? Compare on:
+   cost, complexity, time-to-deploy, scalability.
+2. Which OCI services overlap here? What's the simplest option?
+3. Are there AI Blueprints or quickstart patterns that solve 80% of this?
+4. What's the biggest cost driver? How would you optimize it?
+5. If we cut the timeline in half, what would you simplify?
+```
+
+**Then DIRECT:**
 ```
 /oci-services-expert
 
-Design a 3-tier OCI architecture for intelligent document processing:
-
-REQUIREMENTS:
-- Process 10,000 documents/day
-- 99.9% availability
-- GDPR compliant (EU region)
-- Sub-5-second classification
-- Searchable archive with vector similarity
-
-CONSTRAINTS:
-- Must use EU Frankfurt region
-- Budget: target under $5K/month for production
-- Integration: REST API for ERP connectivity
-
-Include:
-1. Architecture overview (compute, storage, AI, networking, security)
-2. OCI service selection with rationale for EACH service
-3. Data flow: upload → classify → extract → store → search
-4. Security architecture (IAM, encryption, network isolation)
-5. Cost estimate (BOM) with verified pricing
+Design the OCI architecture for document processing:
+- 10K documents/day, 99.9% availability
+- EU Frankfurt region (GDPR), budget <$5K/month
+- Include: service selection with rationale, data flow, security, BOM
+- Verify all prices against oracle.com/cloud/price-list/
 ```
 
-**Step 2 — Generate the SDD:**
-
+**Then generate the SDD:**
 ```
 /oracle-sdd-generator
 
-Generate a complete Solution Design Document for the document processing
-architecture we just designed. Include all 8 sections:
-1. Executive Summary
-2. Business Context
-3. Requirements Summary
-4. Solution Architecture (with all sub-sections)
-5. Implementation Approach (3 tiers + phased roadmap)
-6. Cost Estimation (BOM with verified prices)
-7. Risk Assessment (minimum 5 risks)
-8. Success Criteria (KPIs)
+Generate the complete Solution Design Document with all 8 sections.
+Include 3 tiers (Basic/Advanced/Premium) and phased roadmap.
 ```
 
-**Quality Gate 2 checklist:**
-- [ ] Every OCI service verified against official docs
-- [ ] Pricing sourced from oracle.com/cloud/price-list/ with date
+**Quality Gate 2:**
+- [ ] Every service verified against official docs
+- [ ] Pricing sourced with date from oracle.com/cloud/price-list/
 - [ ] No blanket "X times cheaper" claims
-- [ ] AI Blueprints decision tree consulted
-- [ ] Model selection justified per use case
-- [ ] Security architecture complete (IAM, encryption, network)
+- [ ] AI Blueprints decision tree documented
+- [ ] Security architecture complete
 
 ---
 
-### Phase 5: Architecture Visuals & Mockups
+### Phase 5: Visualize (Architecture Diagrams)
 
-**Primary skill:** `/oracle-infogenius` or `/oracle-diagram-generator`
+**Skill:** Draw.io MCP (primary) + `/oracle-infogenius` (optional, for raster images)
 
-**What happens:** Create professional, logo-free architecture diagrams and UI mockups.
+**What happens:** Create professional, editable architecture diagrams.
 
-**Step 1 — Master architecture diagram:**
+**ASK first:**
+```
+I need to present this architecture to [executives / technical team / both].
+1. What's the right set of diagrams for this audience?
+2. What level of detail per diagram?
+3. Which single visual would be most impactful?
+```
 
+**Option A — Generate Draw.io from XML template (recommended):**
+```
+Generate a Draw.io XML architecture diagram for the document processing platform.
+
+Layers (top to bottom):
+1. SECURITY: WAF, API Gateway, IAM, Cloud Guard
+2. INGESTION: Object Storage → Events → Functions
+3. AI PROCESSING: Document Understanding → GenAI → Functions (routing)
+4. DATA: Oracle AI Database 26ai (metadata + vectors) + Object Storage
+5. PRESENTATION: API Gateway → Web App
+
+Use Oracle Red (#C74634) for accents, dark background.
+Show data flow arrows. Label all OCI services.
+```
+
+The AI generates Draw.io XML and opens it via `open_drawio_xml`.
+
+**Option B — Generate from Mermaid (quick):**
+```
+Create a Mermaid flowchart of the data processing pipeline:
+Upload → Validate → OCR/Extract → Classify → Store → Index → Search
+
+Then open in Draw.io for editing.
+```
+
+**Option C — Customize existing template:**
+```
+Take the healthcare domain architecture template from
+drawio/domain-architectures/OCI_AICoE_healthcare_Agentic_Architecture.drawio
+and adapt it for our document processing use case.
+Replace the healthcare-specific services with document AI services.
+```
+
+**Option D — Generate raster image (optional, requires Nano Banana MCP):**
 ```
 /oracle-infogenius
 
-Create a master architecture diagram for an intelligent document processing
-platform on OCI:
-
-LAYERS (top to bottom):
-1. SECURITY & GOVERNANCE: WAF, API Gateway, IAM, Cloud Guard, Data Safe
-2. INGESTION: Object Storage upload → OCI Events → Functions (preprocessing)
-3. AI PROCESSING: Document Understanding (OCR/extraction) → GenAI (classification) → Functions (routing)
-4. DATA PLATFORM: Oracle AI Database 26ai (metadata + vectors) → Object Storage (documents)
-5. PRESENTATION: API Gateway → Web Application (search, dashboard, reports)
-6. OBSERVABILITY: Logging, Monitoring, APM
-
-STYLE:
-- Dark background, Oracle Red (#C74634) accents
-- NO Oracle logos — text labels only
-- Clean, professional, McKinsey-grade
-- Show data flow arrows between layers
-- Include service names as labels
+Create master architecture diagram. Dark background, Oracle Red accents,
+NO Oracle logos. Professional, executive-ready quality.
 ```
 
-**Step 2 — Data flow diagram:**
-
-```
-/oracle-infogenius
-
-Create a data flow diagram showing:
-Document Upload → Object Storage → Event Trigger → Function (validate) →
-Document Understanding (OCR + extract) → GenAI Cohere Command A (classify) →
-Oracle AI Database 26ai (store metadata + embeddings) → API (search/query)
-
-Show each step as a node with the OCI service name.
-Dark theme, horizontal flow, Oracle Red highlights.
-NO Oracle logos.
-```
-
-**Step 3 — Draw.io for editable diagrams:**
-
-```
-/oracle-diagram-generator
-
-Generate a Draw.io XML file for the document processing architecture.
-Use the OCI icon shapes where available.
-Include: VCN boundary, subnet layout, all services with correct icons.
-Output as XML I can import into draw.io.
-```
-
-**Quality Gate 3 checklist:**
-- [ ] ZERO Oracle logos in any image
+**Quality Gate 3:**
+- [ ] ZERO Oracle logos
 - [ ] Service names match official branding (AI Database 26ai)
-- [ ] No spelling errors
-- [ ] Readable at 1920x1080
 - [ ] Architecture matches the SDD
-- [ ] Brand colors applied correctly
+- [ ] For Draw.io: validate with `validate_drawio_icon_integrity.py`
 
 ---
 
-### Phase 6: Engineering & Prototype
+### Phase 6: Build (Working Prototype)
 
-**Primary skill:** `/oracle-solution-design` (Phase 4: PROTOTYPE)
+**Skill:** Direct prompting + ADB MCP + Draw.io MCP
 
-**What happens:** Build a working interactive prototype that demonstrates the core workflow with realistic mock data.
+**What happens:** Build a working interactive prototype. This is beyond architecture — you're writing real code with real data.
 
-**Step 1 — Define prototype scope:**
-
+**ASK first:**
 ```
-Build an interactive HTML prototype for the document processing solution.
+We need a prototype for a 15-minute demo with the CTO.
 
-CORE WORKFLOW TO DEMONSTRATE:
-1. Document upload (drag-and-drop zone)
-2. AI processing animation (show Document Understanding + GenAI classification)
-3. Extracted data display (vendor, amount, date, line items in structured view)
-4. Classification result with confidence score
-5. Document search with AI-powered natural language query
+Before I build:
+1. What's the ONE interaction that best demonstrates the AI value?
+2. Should I connect to ADB for live data, or use embedded mock data?
+3. What processing animations make AI feel "alive" in a demo?
+4. What mock data would feel authentic for this domain?
+5. What's the "wow moment" they'll remember?
+```
+
+**Then DIRECT the prototype:**
+```
+Build a working prototype for the document processing platform.
+
+TECH STACK:
+- Single index.html with embedded CSS/JS (no build tools needed)
+- Connected to Oracle ADB via ORDS REST endpoints
+- Dark theme, Oracle Red (#C74634) accents
+
+SCREENS:
+1. Upload zone (drag-and-drop) with processing animation
+2. Extracted data view (vendor, amount, date, line items)
+3. Classification result with confidence score
+4. Search interface with AI-powered natural language query
 
 REQUIREMENTS:
-- Single index.html with embedded CSS/JS (no build tools)
-- Dark theme with Oracle Red (#C74634) accents
-- Realistic mock data (5-10 sample invoices)
-- Processing state animations (loading spinners, progress bars)
-- "PROTOTYPE" banner clearly visible
+- PROTOTYPE banner visible
+- Realistic mock data (10 sample invoices)
+- Processing state animations (loading, progress bars)
 - Mobile responsive
-- Professional enough for executive demo
-
-DO NOT:
-- Use real customer data
-- Include non-functional buttons (label "Coming Soon" if needed)
-- Include Oracle logos
+- NO Oracle logos, NO real customer data
 ```
 
-**Step 2 — Add database connectivity (optional, with ADB MCP):**
-
+**To set up the database layer:**
 ```
-Connect to ADB and create the schema for our document processing prototype:
+Connect to ADB and create the schema:
 
 CREATE TABLE doc_metadata (
   doc_id VARCHAR2(36) DEFAULT SYS_GUID() PRIMARY KEY,
   filename VARCHAR2(500),
   doc_type VARCHAR2(50),
-  classification_confidence NUMBER,
+  confidence NUMBER,
   vendor_name VARCHAR2(200),
   invoice_amount NUMBER,
   invoice_date DATE,
@@ -730,151 +482,101 @@ CREATE TABLE doc_metadata (
   uploaded_at TIMESTAMP DEFAULT SYSTIMESTAMP
 );
 
-Then insert 10 realistic sample rows for the prototype demo.
+Insert 10 realistic sample rows for the demo.
 ```
 
-**Step 3 — Connect prototype to live data (advanced):**
-
+**To enable REST API for the prototype:**
 ```
-Update the prototype to fetch data from our ADB via a REST API.
-Use ORDS (Oracle REST Data Services) endpoints:
-- GET /documents — list all processed documents
-- GET /documents/:id — document detail with extracted data
-- POST /documents/search — vector similarity search
-
-Show me how to enable ORDS for the doc_metadata table.
+Enable ORDS on the doc_metadata table so the prototype can fetch live data.
+Show me the curl commands to test each endpoint.
 ```
 
-**Quality Gate 4 checklist:**
+**Quality Gate 4:**
 - [ ] Core workflow works end-to-end
-- [ ] Processing states visible (loading, progress)
-- [ ] No broken buttons or dead links
-- [ ] PROTOTYPE/DEMO banner displayed
+- [ ] Processing states visible
+- [ ] No dead links or broken buttons
+- [ ] PROTOTYPE banner displayed
 - [ ] No real customer data
-- [ ] Responsive layout works on mobile
 
 ---
 
-### Phase 7: Delivery & Audit
+### Phase 7: Deliver & Audit
 
-**Primary skill:** `/oracle-confidentiality`
+**Skill:** `/oracle-confidentiality`
 
-**What happens:** Package everything, run confidentiality audit, prepare for client presentation.
+**What happens:** Package everything, run audit, prepare for presentation.
 
-**Step 1 — Package deliverables:**
-
+**ASK first:**
 ```
-Package the complete solution for codename K:
+I'm presenting to [audience] on [date]. Meeting is [X minutes].
+1. What's the ideal narrative arc?
+2. What objections should I prepare for?
+3. How should I frame the cost?
+4. What would make them approve budget in this meeting?
+```
 
-Expected structure:
+**Then DIRECT the packaging:**
+```
+Package deliverables for codename K:
+
 clients/K/
-  README.md                    # Status + role only (codename, no industry)
+  README.md                    # Status + role only
   deliverables/
-    docs/
-      SOLUTION-DESIGN.md       # Full SDD
-      DISCOVERY.md             # Requirements captured
-      BOM.md                   # Bill of Materials
-    images/
-      architecture-master.png  # Full architecture (logo-free)
-      data-flow.png            # Processing pipeline
-      user-journey.png         # Persona flows
-    prototype/
-      index.html               # Interactive demo
-
-Verify all files are in place and the prototype loads standalone.
+    docs/SOLUTION-DESIGN.md    # Full SDD
+    docs/BOM.md                # Bill of Materials
+    images/architecture.png    # Master diagram
+    images/data-flow.png       # Pipeline
+    diagrams/architecture.drawio # Editable
+    prototype/index.html       # Working demo
 ```
 
-**Step 2 — Confidentiality audit:**
-
+**Then audit:**
 ```
 /oracle-confidentiality
 
-Run a full pre-delivery audit on clients/K/:
-1. Grep all files for real customer names, industry terms, geographic identifiers
-2. Verify README.md contains ONLY status + role + codename
-3. Check .gitignore blocks deliverables from git
-4. Verify all images are logo-free
-5. Confirm no internal pricing beyond published list prices
-6. Run the McKinsey test: Would a top firm present this?
-
-Report: PASS/FAIL for each check.
+Full pre-delivery audit on clients/K/:
+- Grep for real customer names → must return zero
+- Verify README has codename only
+- Check images are logo-free
+- Confirm BOM uses published pricing with sources
+- Run McKinsey test
 ```
 
-**Quality Gate 5 checklist:**
-- [ ] All files in correct structure
-- [ ] README contains codename only
-- [ ] Images are logo-free (visual inspection)
-- [ ] Prototype loads standalone
-- [ ] BOM pricing verified with sources and dates
+**Quality Gate 5:**
 - [ ] Confidentiality audit PASSED
-- [ ] McKinsey test: YES
+- [ ] All files in correct structure
+- [ ] Prototype loads standalone
+- [ ] BOM pricing verified with sources
+- [ ] Would McKinsey present this? YES
 
 ---
 
 ## 5. Skill Integration Map
-
-### How Skills Chain Together
-
-```
-                              ┌─────────────────────────────────┐
-                              │      /oracle-solution-design     │
-                              │      (Master Orchestrator)       │
-                              └──────────────┬──────────────────┘
-                                             │
-          ┌──────────────┬──────────────┬────┴────┬──────────────┐
-          ▼              ▼              ▼         ▼              ▼
-    ┌──────────┐  ┌──────────┐  ┌──────────┐ ┌────────┐  ┌──────────┐
-    │ DISCOVER │  │ ARCHITECT│  │ VISUALIZE│ │ENGINEER│  │ DELIVER  │
-    │          │  │          │  │          │ │        │  │          │
-    │/research │  │/oci-svc  │  │/infogeni │ │ coder  │  │/confiden │
-    │          │  │/sdd-gen  │  │/diagram  │ │ agent  │  │ -tiality │
-    └──────────┘  └──────────┘  └──────────┘ └────────┘  └──────────┘
-         │              │              │          │              │
-    ┌────┴────┐    ┌────┴────┐   ┌────┴──┐  ┌───┴───┐    ┌────┴────┐
-    │Research │    │Pricing  │   │Nano   │  │ADB    │    │Grep     │
-    │agents   │    │verify   │   │Banana │  │MCP    │    │audit    │
-    │(x3)     │    │agent    │   │MCP    │  │       │    │         │
-    └─────────┘    └─────────┘   └───────┘  └───────┘    └─────────┘
-```
-
-### When to Use Each Skill
-
-| I need to... | Use this skill | Example trigger |
-|--------------|---------------|-----------------|
-| Design a complete solution end-to-end | `/oracle-solution-design` | "Design an AI solution for codename K" |
-| Research OCI capabilities or industry patterns | `/oracle-research` | "What exists for document AI on OCI?" |
-| Get OCI architecture guidance with pricing | `/oci-services-expert` | "Which OCI services for invoice processing?" |
-| Generate a Solution Design Document | `/oracle-sdd-generator` | "Create the SDD for our architecture" |
-| Create architecture diagrams | `/oracle-infogenius` | "Create master architecture diagram" |
-| Create editable Draw.io diagrams | `/oracle-diagram-generator` | "Generate Draw.io XML for the architecture" |
-| Build an agent system on OCI | `/oracle-adk` | "Build a document routing agent with ADK" |
-| Design framework-agnostic agents | `/oracle-agent-spec` | "Define the agent spec in YAML" |
-| Audit before client delivery | `/oracle-confidentiality` | "Run pre-delivery audit on clients/K/" |
-| Query the live database | ADB MCP (direct) | "Show me the schema" / "Run this query" |
 
 ### Decision Tree
 
 ```
 Client request arrives
     │
-    ├── Need full solution design?
-    │   └── YES → /oracle-solution-design (orchestrates everything)
+    ├── Need full end-to-end design?
+    │   └── /oracle-solution-design (orchestrates everything)
     │
-    ├── Need OCI service advice?
-    │   └── YES → /oci-services-expert (pricing + architecture)
+    ├── Need OCI service advice + pricing?
+    │   └── /oci-services-expert
     │
     ├── Need research first?
-    │   └── YES → /oracle-research (check oracle-quickstart FIRST)
+    │   └── /oracle-research (check oracle-quickstart FIRST)
     │
     ├── Need a diagram?
-    │   ├── Image (PNG) → /oracle-infogenius (Nano Banana)
-    │   └── Editable (XML) → /oracle-diagram-generator (Draw.io)
+    │   ├── Editable (.drawio) → Draw.io MCP + oracle-diagram-generator
+    │   ├── Raster image (PNG) → /oracle-infogenius (needs Nano Banana MCP)
+    │   └── Quick flowchart → Draw.io MCP with Mermaid input
     │
     ├── Need database work?
-    │   └── YES → ADB MCP (schema, queries, ORDS setup)
+    │   └── ADB MCP (schema, queries, ORDS, Select AI)
     │
     ├── Building agents?
-    │   ├── On OCI specifically → /oracle-adk
+    │   ├── On OCI → /oracle-adk
     │   └── Framework-agnostic → /oracle-agent-spec
     │
     └── Ready to deliver?
@@ -887,106 +589,51 @@ Client request arrives
 
 ### The AI CoE Hub
 
-We maintain an **AI Center of Excellence Hub** with 11 industry portals and 86 solution pages. This is your starting point for any client engagement.
+We maintain an **AI Center of Excellence Hub** with 11 industry portals and 86 solution pages. Use these as **starting templates** for client work.
 
 ```
-AI CoE Hub (index.html)
+AI CoE Hub (projects/hub/index.html)
     │
-    ├── Healthcare Portal (10 use cases)
-    ├── Financial Services Portal (10 use cases)
-    ├── Telecommunications Portal (10 use cases)
-    ├── Automotive Portal (10 use cases)
-    ├── Retail & Consumer Portal (10 use cases)
-    ├── Energy & Utilities Portal (10 use cases)
-    ├── Public Sector Portal (10 use cases)
-    ├── AEC & Consulting Portal
-    ├── AI CoE Patterns (cross-cutting)
-    └── Database Migration Portal (6 agents)
+    ├── Healthcare (10 use cases)      ├── Energy & Utilities (10)
+    ├── Financial Services (10)        ├── Public Sector (10)
+    ├── Telecommunications (10)        ├── AEC & Consulting
+    ├── Automotive (10)                ├── AI CoE Patterns
+    ├── Retail & Consumer (10)         └── Database Migration (6 agents)
 ```
 
-### How to Use the Hub in Client Engagements
+### Using Hub Portals in Client Engagements
 
-#### Step 1: Start from the industry portal
-
-Before designing anything custom, check if the hub already has a relevant solution page.
-
+**Step 1 — Find the closest template:**
 ```
-I'm working on codename K — they need document AI capabilities.
-Check our AI CoE Hub portals for relevant pre-built solution pages.
-Which industry portal and use cases are closest to what they need?
+Check the AI CoE Hub — which portal and use case page is closest
+to what codename K needs? Show me the top 3 matches.
 ```
 
-#### Step 2: Use solution pages as architecture templates
-
-Each of the 86 solution pages includes:
-- Problem statement (3 challenges)
-- Stakeholder personas (3-4 roles)
-- Discovery questions (tabbed)
-- Solution architecture (layered with OCI services)
-- Model selection guide
-- 4-phase implementation roadmap
-- Industry success patterns
-
-**These are ready-made templates** — adapt them rather than starting from scratch.
-
-#### Step 3: Clone and customize for the client
-
+**Step 2 — Clone and customize:**
 ```
-Take the Healthcare portal's "Medical Document Intelligence" solution page
-(healthcare/05-medical-document-intelligence.html) as a starting template.
-
-Adapt it for codename K's specific requirements:
-- Change the use case focus from medical to [their domain]
-- Update the OCI services to match our architecture
-- Replace the mock data with domain-relevant examples
-- Keep the Oracle Redwood design system and styling
-- Add our custom prototype as an embedded demo
+Take healthcare/05-medical-document-intelligence.html as a template.
+Adapt it for codename K's document processing requirements:
+- Update OCI services to match our architecture
+- Replace mock data with domain-relevant examples
+- Keep the Oracle Redwood design system
 ```
 
-#### Step 4: Link everything into a client portal
-
+**Step 3 — Link into a client portal:**
 ```
-Create a client-specific portal page for codename K that links:
-1. Executive overview (from our SDD executive summary)
-2. Architecture diagram (from Phase 5 visuals)
-3. Interactive prototype (from Phase 6)
-4. Implementation roadmap (from the SDD)
-5. Cost estimate summary (from the BOM)
-
-Use the same Oracle Redwood design system as the hub portals.
-Single self-contained HTML file, dark theme, professional.
-```
-
-### Portal Architecture Pattern
-
-Every portal follows this proven structure:
-
-```
-Portal Page (industry.html)
-├── Hero Section (stats, CTA)
-├── Executive Brief (3 callout cards)
-├── Stakeholder Profiles (4 personas with pain/gain)
-├── Industry Verticals (4 sub-segments)
-├── Use Case Grid (10 cards with priority badges)
-├── Interactive Assessment Tool
-├── Methodology (Discover → Design → Build → Scale)
-├── Cross-Portal Links (3 related industries)
-└── Footer + CTA
+Create a client portal page for codename K that links:
+1. Executive overview → from SDD
+2. Architecture diagram → from Phase 5
+3. Interactive prototype → from Phase 6
+4. Roadmap → from SDD
+5. Cost summary → from BOM
 ```
 
 ### Generator Scripts (for scale)
 
-If you need to generate many solution pages quickly:
-
 ```bash
-# Generate solution pages for a new industry
-python projects/hub/generate-pages.py
-
-# Generate a new portal hub page
-python projects/hub/generate-portals.py
-
-# Enhance all pages with animations
-python projects/hub/enhance-solutions.py
+python projects/hub/generate-pages.py      # Bulk solution pages
+python projects/hub/generate-portals.py     # Portal hub pages
+python projects/hub/enhance-solutions.py    # Add animations + styling
 ```
 
 ---
@@ -995,263 +642,121 @@ python projects/hub/enhance-solutions.py
 
 ### Scenario: "Build an AI-powered patent analysis platform"
 
-Here's every prompt in sequence for a complete engagement:
+Every prompt below follows the ASK → DIRECT pattern.
 
 ---
 
-#### 0. Intake
-
+**0. Intake:**
 ```
-I'm starting a new engagement. Codename: P.
-They want an AI platform that can:
-- Analyze patent documents (text + chemical structures)
-- Find prior art automatically
-- Generate freedom-to-operate reports
-- Support multiple technical domains (chemistry, electronics, biotech)
-
-Set up the client folder and help me plan the discovery phase.
+Starting codename P — patent analysis platform. Needs: document analysis
+(text + chemical structures), prior art search, FTO reports, multi-domain.
+Structure the brief and identify what to discover.
 ```
 
----
-
-#### 1. Discover — ASK First
-
+**1. Discover — ASK:**
 ```
-I need to build an AI-powered patent analysis platform on OCI.
-Before I start researching:
-
-1. What are the hardest technical challenges in patent AI?
-   (OCR quality? Claim parsing? Chemical structure recognition?)
-2. Does oracle-quickstart or OCI AI Blueprints already have something
-   for document-heavy analysis? What should I check first?
-3. What's the typical architecture pattern for hybrid search
-   (semantic + keyword + structural) on Oracle?
-4. What OCI GenAI models would you recommend evaluating for
-   patent text analysis, and why each one?
-5. What's the biggest risk in this type of project that I should
-   validate early?
+Before I research patent AI on OCI:
+1. What's hardest — OCR, claim parsing, or chemical structure recognition?
+2. Does oracle-quickstart have document analysis blueprints?
+3. What architecture pattern works for hybrid search (text + vector + graph)?
+4. Biggest risk in this type of project?
 ```
 
-Then, based on the AI's analysis, DIRECT the research:
-
+**1. Discover — DIRECT:**
 ```
 /oracle-research
-
-Deep dive research for a patent AI platform on OCI:
-1. Check oracle-quickstart for document analysis blueprints
-2. Research: What AI models are best for patent text analysis?
-3. Research: Chemical structure recognition — what OCI services apply?
-4. Research: Prior art search — vector similarity vs keyword vs graph?
-5. Check OCI AI Blueprints for any relevant accelerator packs
-6. Verify pricing for: OCI GenAI, Document Understanding, AI Database 26ai
-
-Save to research/topics/patent-ai-platform-capabilities-2026.md
+Research patent AI platform on OCI. Check: quickstart, AI Blueprints,
+Document Understanding, GenAI models for patent text. Verify pricing.
 ```
 
----
-
-#### 2. PRD — ASK for Gaps
-
+**2. PRD — ASK:**
 ```
-Here are my discovery findings for codename P: [paste key findings]
-
-Before I write the PRD:
-1. What non-functional requirements am I likely missing for a
-   patent platform? (IP security? Data isolation between clients?
-   Audit trails for legal defensibility?)
-2. For the chemical structure search requirement — is this a MUST
-   or a SHOULD? What's the complexity vs. value trade-off?
-3. What would a Phase 1 MVP look like that we could demo in 4 weeks?
-4. What compliance frameworks apply to patent data processing?
+What non-functional requirements am I missing for patent data?
+(IP security? Data isolation? Audit trails for legal defensibility?)
 ```
 
-Then DIRECT the PRD creation:
-
+**2. PRD — DIRECT:**
 ```
-Create a PRD for codename P's patent analysis platform:
-
-MUST HAVE:
-- Patent document ingestion (PDF, XML/WIPO ST.36)
-- Full-text extraction with structure preservation
-- Prior art search (semantic + keyword hybrid)
-- Chemical substructure search (Markush recognition)
-
-SHOULD HAVE:
-- Freedom-to-operate analysis with AI-generated reports
-- Multi-domain classification (chemistry, electronics, biotech)
-- Patent family tracking and citation analysis
-
-COULD HAVE:
-- Natural language patent querying
-- Automated patent landscape mapping
-- Competitive intelligence dashboards
-
-Map each requirement to OCI services with MoSCoW priority.
+Create PRD: MUST: extraction, classification, prior art search.
+SHOULD: FTO reports, multi-domain classification. COULD: NL querying.
+Map each to OCI services.
 ```
 
----
-
-#### 3. User Flows
-
+**3. User Flows:**
 ```
-Design user flows for 4 personas:
-
-1. Patent Analyst — Searches prior art, reviews AI findings
-2. Patent Attorney — Generates FTO reports, reviews legal risk
-3. R&D Scientist — Searches for related patents in their domain
-4. IP Executive — Views portfolio dashboards, strategic insights
-
-Create Mermaid flowcharts showing each persona's primary workflow.
-Include AI decision points and human review gates.
+Design flows for: Patent Analyst, Patent Attorney, R&D Scientist, IP Executive.
+Which persona's workflow should I prototype first for maximum demo impact?
+Then create Mermaid flowcharts and open in Draw.io.
 ```
 
----
-
-#### 4. Architect — ASK for Options
-
+**4. Architect — ASK:**
 ```
-Based on our PRD, I need an OCI architecture for patent analysis.
-
-Before you design it, help me think through:
-1. What are the 2-3 valid architecture approaches? Compare:
-   - Serverless (Functions + GenAI API) vs. Container-based (OKE + vLLM)
-   - OCI GenAI managed models vs. Dedicated AI Cluster (fine-tuned)
-   - Single ADB vs. Separate search + storage
-2. For hybrid search (text + vector + graph), what's the simplest
-   way to do this on Oracle AI Database 26ai?
-3. What's the biggest cost driver? If budget is $5K/month, what
-   gets squeezed first?
-4. EU data residency is required — which models and services are
-   available in Frankfurt? Any gotchas?
+Give me 2-3 architecture options. Compare: serverless vs OKE,
+managed GenAI vs dedicated cluster, single ADB vs separate search layer.
 ```
 
-Then DIRECT the architecture:
-
+**4. Architect — DIRECT:**
 ```
 /oci-services-expert
+Design OCI architecture: 100K patents/month, 500 users,
+hybrid search (vector + keyword + graph), EU data residency, BOM with pricing.
 
-Design the OCI architecture for a patent analysis platform:
-
-Scale: 100,000 patents/month ingestion, 500 concurrent users
-Requirements:
-- Hybrid search (vector + keyword + graph)
-- Chemical structure processing
-- Multi-model AI pipeline (extraction → classification → analysis → generation)
-- EU data residency required
-
-Must include:
-1. Full service selection with rationale
-2. Data architecture (Oracle AI Database 26ai with vector + graph)
-3. AI pipeline (which GenAI models for each stage)
-4. Security (GDPR, data isolation, encryption)
-5. BOM with verified OCI pricing
+Then: /oracle-sdd-generator — full SDD with 3 tiers.
 ```
 
-Then:
-
+**5. Visualize:**
 ```
-/oracle-sdd-generator
-
-Generate the complete SDD from our architecture.
-Include 3 tiers: Essential / Professional / Enterprise.
+Generate Draw.io XML: 5 layers (Security, Ingestion, AI Pipeline,
+Data Platform, Presentation). Show multi-model pipeline:
+Document Understanding → Cohere Command A → Embed 4 → AI Database 26ai.
 ```
 
----
-
-#### 5. Visualize
-
+**6. Build — ASK:**
 ```
-/oracle-infogenius
-
-Create master architecture diagram:
-- 5 layers: Security, Ingestion, AI Processing, Data Platform, Presentation
-- Show the multi-model pipeline: Document Understanding → Cohere Command A (classification)
-  → Cohere Embed 4 (embeddings) → Oracle AI Database 26ai (hybrid search + graph)
-- Dark background, Oracle Red accents, NO logos
-- Professional, executive-ready quality
+15-minute demo with Head of IP. What's the one interaction
+that would be most impressive? Prior art search? AI-generated FTO?
+What mock data feels authentic to a patent professional?
 ```
 
----
-
-#### 6. Engineer — ASK for Demo Strategy
-
+**6. Build — DIRECT:**
 ```
-We have a 15-minute demo slot with the client's CTO and Head of IP.
-They want to see the patent analysis platform in action.
-
-Before I build the prototype:
-1. What's the ONE interaction that would be most impressive?
-   Prior art search? AI-generated FTO report? Classification?
-2. What mock data would feel authentic to a patent professional?
-   (Real-looking patent numbers, realistic chemical names, etc.)
-3. Should I connect to our ADB for live queries, or is simulated
-   data better for a controlled demo?
-4. What processing animations would make the AI feel intelligent
-   rather than just fast?
-5. What's the "wow moment" — the thing they'll remember after
-   the meeting?
+Build working prototype: search interface with mode toggle
+(semantic/keyword/structure), results grid with relevance scores,
+patent detail panel, FTO report generator.
+Connect to ADB. 8 mock patents. Dark theme. PROTOTYPE banner.
 ```
 
-Then DIRECT the build:
-
-```
-Build an interactive prototype for the patent analysis platform:
-
-Single index.html, dark theme, Oracle Redwood design system.
-
-SCREENS:
-1. Search interface — query bar with mode toggle (semantic/keyword/structure)
-2. Results grid — patent cards with relevance scores, domain tags, dates
-3. Patent detail — extracted text, chemical structures, AI analysis panel
-4. FTO Report generator — AI-generated freedom-to-operate summary
-
-INTERACTIONS:
-- Type a search query → show loading animation → display 8 mock results
-- Click a result → slide in detail panel with extracted data
-- Click "Generate FTO Report" → show AI processing animation → display report
-
-Include 8 realistic mock patents with chemistry/biotech examples.
-PROTOTYPE banner visible. No Oracle logos.
-```
-
----
-
-#### 7. Deliver
-
+**7. Deliver:**
 ```
 /oracle-confidentiality
-
-Run pre-delivery audit on all codename P deliverables.
-Check for: real names, industry-specific leaks, pricing compliance,
-logo violations, broken links, README compliance.
+Full audit on clients/P/. Grep for real names. Check logos. Verify BOM.
 ```
 
 ---
 
 ## 8. Quick Reference Card
 
-### Slash Commands
+### Core Commands
 
 | Command | Phase | What It Does |
 |---------|-------|-------------|
-| `/oracle-solution-design` | All | Master orchestrator (5-phase pipeline) |
+| `/oracle-solution-design` | All | Master orchestrator (chains all skills) |
 | `/oracle-research` | Discover | Confidentiality-aware research |
 | `/oci-services-expert` | Architect | OCI service selection + pricing |
 | `/oracle-sdd-generator` | Architect | Generate Solution Design Document |
-| `/oracle-infogenius` | Visualize | Generate architecture images |
-| `/oracle-diagram-generator` | Visualize | Generate Draw.io XML diagrams |
-| `/oracle-adk` | Engineer | Build agents on OCI with ADK |
-| `/oracle-agent-spec` | Engineer | Framework-agnostic agent definitions |
 | `/oracle-confidentiality` | Deliver | Pre-delivery audit (VETO power) |
+| `/oracle-adk` | Build | Oracle Agent Development Kit |
+| `/oracle-agent-spec` | Build | Framework-agnostic agent definitions |
+| `/oracle-infogenius` | Visualize | *Optional:* AI-generated images (needs Nano Banana) |
 
 ### MCP Servers
 
-| Server | Purpose | Key Commands |
-|--------|---------|-------------|
+| Server | Purpose | Key Tools |
+|--------|---------|-----------|
 | **SQLcl** | Oracle ADB access | `run-sql`, `schema-information`, `connect` |
-| **Nano Banana** | Image generation | `generate_image` |
-| **Draw.io** | Editable diagrams | `open_drawio_xml`, `open_drawio_mermaid` |
-| **Playwright** | Browser testing | Validate prototypes |
+| **Draw.io** | Editable diagrams | `open_drawio_xml`, `open_drawio_mermaid`, `open_drawio_csv` |
+| **Nano Banana** | Image generation *(optional)* | `generate_image` |
+| **Playwright** | Browser testing *(optional)* | Validate prototypes |
 
 ### Mandatory Checks (Every Engagement)
 
@@ -1262,34 +767,23 @@ logo violations, broken links, README compliance.
 | Model selection | Architecture phase | OCI GenAI Model Selection Matrix |
 | Logo compliance | Every visual | NO Oracle logos — text labels only |
 | Confidentiality | Before delivery | `/oracle-confidentiality` audit |
+| Draw.io validation | Production diagrams | `validate_drawio_icon_integrity.py` |
 
-### Quality Gates Summary
+### Quality Gates
 
 | Gate | Phase | Key Criteria |
 |------|-------|-------------|
 | G1 | Discover | 3+ use cases, services mapped, patterns checked |
-| G2 | Architect | Pricing verified, no blanket claims, WAF principles |
+| G2 | Architect | Pricing verified, no blanket claims, security complete |
 | G3 | Visualize | Zero logos, correct branding, matches SDD |
-| G4 | Engineer | Core workflow works, no dead links, PROTOTYPE label |
+| G4 | Build | Core workflow works, no dead links, PROTOTYPE label |
 | G5 | Deliver | Confidentiality PASS, McKinsey test YES |
 
-### Anti-Patterns
-
-| Don't | Do Instead |
-|-------|-----------|
-| "OCI is 80x cheaper" | Cite specific model comparison with source |
-| Hallucinate pricing | Verify at oracle.com/cloud/price-list/ |
-| Include Oracle logos in diagrams | Text labels only, Oracle Red accents |
-| Build from scratch without checking | Check oracle-quickstart FIRST |
-| Use non-functional prototype buttons | Either make it work OR label "Coming Soon" |
-| Store client names in files | Codenames only, conversation-only context |
-| Skip confidentiality audit | ALWAYS run `/oracle-confidentiality` before delivery |
-
-### OCI Model Selection Quick Reference
+### OCI Model Selection
 
 | Use Case | Best Model | Why |
 |----------|-----------|-----|
-| Complex reasoning | Cohere Command A Reasoning | Multi-step, 256K context |
+| Complex reasoning | Cohere Command A Reasoning | 256K context, multi-step |
 | Multimodal (images+text) | Cohere Command A Vision | Charts, documents |
 | Agentic workflows | Llama 4 Maverick | Tool-calling, MoE |
 | Coding | Grok Code Fast 1 | Code-optimized |
@@ -1297,8 +791,19 @@ logo violations, broken links, README compliance.
 | Embeddings | Cohere Embed 4 | Text + image |
 | Speed / Budget | Gemini 2.5 Flash-Lite | High-volume, low-cost |
 | EU data residency | Cohere Command A series | EU deployable |
-| Long context (2M) | Grok 4.1 Fast | Massive documents |
 | Fine-tuning | Llama 3.3 70B (LoRA) | Dedicated AI Clusters |
+
+### Anti-Patterns
+
+| Don't | Do Instead |
+|-------|-----------|
+| Jump straight to "build me X" | ASK: "What are 2-3 approaches? Compare trade-offs" |
+| "OCI is 80x cheaper" | Cite specific model comparison with source and date |
+| Include Oracle logos in diagrams | Text labels only, Oracle Red (#C74634) accents |
+| Build from scratch without checking | Check oracle-quickstart and AI Blueprints FIRST |
+| Use mxgraph.oci.* in production Draw.io | Use icon-native mode, validate with Python script |
+| Store client names in files | Codenames only, conversation-only context |
+| Skip the ASK prompt | 5 minutes of ASK saves hours of rework |
 
 ---
 
@@ -1306,44 +811,34 @@ logo violations, broken links, README compliance.
 
 ```
 oracle-work/
-├── .claude/
-│   └── skills/                         # All skills live here
-│       ├── oracle-solution-design/     # Master orchestrator
-│       ├── oracle-sdd-generator/       # SDD generation
-│       ├── oracle-confidentiality/     # Pre-delivery audit
-│       ├── oracle-research/            # Research protocols
-│       │   └── references/             # Pricing, patterns, lessons learned
-│       ├── oracle-diagram-generator/   # Draw.io + Python diagrams
-│       ├── oci-services-expert/        # OCI architecture guidance
-│       ├── oracle-adk/                 # Agent Development Kit
-│       └── oracle-agent-spec/          # Open Agent Specification
-├── clients/
-│   └── [CODE]/                         # One folder per client codename
-│       ├── README.md                   # Status + role ONLY
-│       └── deliverables/               # (gitignored) SDD, images, prototype
-├── projects/
-│   └── hub/
-│       ├── index.html                  # AI CoE Hub landing page
-│       ├── portals/                    # 11 industry portals
-│       │   ├── healthcare.html         # + healthcare/ (10 use cases)
-│       │   ├── financial-services.html # + financial-services/ (10 use cases)
-│       │   ├── automotive.html         # + automotive/ (10 use cases)
-│       │   └── ...                     # 8 more portals
-│       ├── generate-pages.py           # Bulk solution page generator
-│       └── generate-portals.py         # Portal page generator
-├── research/
-│   └── topics/                         # Research docs (never codename-linked)
-├── templates/                          # Reusable templates
-│   ├── DAILY-CAPTURE.md
-│   ├── WEEKLY-REPORT.md
-│   └── WORKSHOP-TEMPLATE.md
+├── .claude/skills/                         # All skills
+│   ├── oracle-solution-design/             # Master orchestrator
+│   ├── oracle-sdd-generator/               # SDD generation
+│   ├── oracle-confidentiality/             # Pre-delivery audit
+│   ├── oracle-research/                    # Research protocols
+│   │   └── references/                     # Pricing, patterns, lessons
+│   ├── oracle-diagram-generator/           # Draw.io + Python + Mermaid
+│   ├── oci-drawio-icon-native/             # Icon-native validation
+│   ├── oci-services-expert/                # OCI architecture
+│   ├── oracle-adk/                         # Agent Development Kit
+│   ├── oracle-agent-spec/                  # Open Agent Specification
+│   └── oracle-infogenius/                  # Image generation (optional)
+├── drawio/                                 # 67 .drawio templates
+│   ├── meta-architectures/                 # 6 AI Factory architecture pages
+│   ├── domain-architectures/               # 4 industry-specific architectures
+│   ├── use-case-architectures/             # 37+ use-case diagrams
+│   ├── tools/                              # Python validation + generation scripts
+│   └── OCI Style Guide for Drawio/        # Official OCI diagram toolkit
+├── clients/[CODE]/                         # Client work by codename
+├── projects/hub/portals/                   # 11 industry portals, 86 pages
+├── research/topics/                        # Research docs (never codename-linked)
 └── docs/
-    └── AI-ARCHITECT-TOOLKIT-GUIDE.md   # This guide
+    └── AI-ARCHITECT-TOOLKIT-GUIDE.md       # This guide
 ```
 
 ## Appendix B: MCP Configuration Template
 
-Copy this complete `.mcp.json` for all your tools:
+Complete `.mcp.json` — copy to your project root:
 
 ```json
 {
@@ -1351,21 +846,21 @@ Copy this complete `.mcp.json` for all your tools:
     "sqlcl": {
       "command": "sql",
       "args": ["-mcp"],
-      "description": "Oracle ADB access via SQLcl (schema, SQL, ORDS, Select AI)",
+      "description": "Oracle ADB access (SQL, ORDS, Select AI, APEX)",
       "timeout": 120
     },
     "drawio": {
       "command": "npx",
       "args": ["-y", "@drawio/mcp"],
-      "description": "Create and open draw.io diagrams from XML, CSV, or Mermaid"
+      "description": "Create and edit Draw.io diagrams from XML, CSV, or Mermaid"
     }
   }
 }
 ```
 
-Add Nano Banana (image generation) and Playwright (browser testing) as needed for your workflow.
+Add Nano Banana (oracle-infogenius images) and Playwright (browser testing) as needed.
 
 ---
 
-*Last updated: 2026-02-23*
+*Version 2.0 — February 2026*
 *For questions or contributions: Open an issue or PR on the repo.*
