@@ -187,6 +187,7 @@ Every skill includes:
 
 ## Documentation
 
+- **[AI Architect Toolkit Guide](docs/AI-ARCHITECT-TOOLKIT-GUIDE.md)** - Complete workflow: Idea to Working Prototype (8 phases, prompts, ADB MCP setup)
 - **[GitHub Pages](https://frankxai.github.io/claude-code-oracle-skills/)** - Interactive skill catalog
 - **[Skill Catalog](docs/skills.html)** - Filterable plugin list
 - **[Diagram Gallery](docs/diagrams.html)** - Architecture examples
