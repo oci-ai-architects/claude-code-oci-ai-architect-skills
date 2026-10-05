@@ -234,4 +234,4 @@ resolution: "high"   # 1024px, 2048px, or 4096px
 ---
 
 *Last Updated: January 2026*
-*Part of the FrankX Oracle Work System*
+*Independent community project*

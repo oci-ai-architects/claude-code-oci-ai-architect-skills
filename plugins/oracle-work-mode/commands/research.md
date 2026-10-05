@@ -1,89 +1,83 @@
 ---
-description: Start confidential research session with web search, synthesis, and project linking
+description: Start a source-backed research session on an OCI or AI topic, linked to a study lab
 thinking: false
 ---
 
-# Research Session Mode
+# Research Session
 
-Conduct research for Oracle consulting while maintaining strict confidentiality.
+Research an OCI, cloud architecture or AI topic for independent study, using public sources.
 
-## Research Protocol
+**Do not submit confidential engagement data.** Research questions and notes must not contain
+customer or client names, employer-internal material, credentials or tenancy details. Ask about
+the pattern, never about a specific organisation's systems.
 
-### Step 1: Define Scope
+## Research protocol
 
-1. **Topic**: What are you researching?
-2. **Purpose**: Learning / Problem-solving / Customer preparation / Certification
-3. **Project Link**: Related to a project codename or General knowledge?
-4. **Depth**: Quick overview / Moderate / Deep dive
+### Step 1: Define scope
 
-### Step 2: Conduct Research
+1. **Topic**: what are you researching?
+2. **Purpose**: learning, a lab problem, certification or writing
+3. **Lab link**: a fictional lab label, or general knowledge
+4. **Depth**: quick overview, moderate or deep dive
 
-Using WebSearch with confidentiality:
+### Step 2: Conduct research
 
-**Search Strategy:**
-- Use current year for latest information
-- Focus on: Oracle, OCI, enterprise AI, cloud architecture
-- Cross-reference multiple sources
-- Prioritize: Oracle docs, official blogs, reputable tech sources
+Use WebSearch:
 
-**Confidentiality Rules:**
-- NEVER include customer names in search queries
-- Search generic patterns, not specific implementations
-- Example: "OCI OKE networking best practices" NOT "Customer XYZ OKE setup"
+- Include the current year for recent information
+- Cross-reference several sources
+- Prefer the official OCI documentation, official blogs and reputable technical sources
+- Search for generic patterns, for example "OCI OKE private endpoint networking"
 
-### Step 3: Synthesize Findings
+### Step 3: Synthesise findings
 
-I create structured research documents:
+Create a structured research note:
 
 ```markdown
-# [Topic Title]
+# [Topic title]
 
 **Researched:** YYYY-MM-DD
-**Purpose:** [Learning/Problem-solving/etc.]
-**Project Link:** [Codename/General]
+**Purpose:** [learning / lab problem / certification / writing]
+**Lab link:** [lab label or general]
 
-## Key Findings
+## Key findings
 
-### Finding 1: [Title]
+### Finding 1: [title]
 [Summary]
 - Source: [URL]
-- Relevance: [How this applies]
+- Relevance: [how this applies to the lab]
 
 ## Synthesis
-[Cross-cutting insights from multiple sources]
+[Cross-cutting insights from several sources]
 
-## Action Items
-- [ ] [What to do with this knowledge]
-- [ ] [How to apply to current projects]
+## Next steps
+- [ ] [What to try in the lab]
 ```
 
-### Step 4: Link to Projects
+### Step 4: Link to a lab
 
-If research is relevant to a project:
-1. Reference the project codename
-2. Suggest how findings might help (abstractly)
-3. Store in project-specific research folder
+If the research applies to a lab, reference its label and store the note in that lab's folder.
 
-## Quick Research Syntax
+## Quick research syntax
 
-- `research: [topic]` → Quick overview
-- `deep dive: [topic]` → Comprehensive research
-- `[CODENAME] research: [topic]` → Project-linked research
+- `research: [topic]`: quick overview
+- `deep dive: [topic]`: comprehensive research
+- `[LAB] research: [topic]`: lab-linked research
 
-### Examples
+### Examples (fictional)
 
 ```
 research: OCI GPU shapes for LLM inference
-deep dive: Kubernetes service mesh patterns for enterprise
-A research: AI for network optimization use cases
+deep dive: Service mesh options on OKE
+lab-rag research: Hybrid keyword and vector search in Oracle Database
 ```
 
-## Output Location
+## Output location
 
 Configure in your workspace:
 - General: `research/topics/[topic-slug].md`
-- Project-specific: `research/projects/[CODENAME]/[topic-slug].md`
+- Lab-specific: `research/labs/[LAB]/[topic-slug].md`
 
 ---
 
-**Start researching:** What topic would you like to explore?
+**Start researching:** what topic would you like to explore?

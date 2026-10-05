@@ -1,67 +1,64 @@
 ---
-description: Quick capture of daily wins, learnings, and blockers with automatic confidentiality
+description: Quick capture of what you learned, built or got stuck on in your OCI study labs
 thinking: false
 ---
 
-# Daily Capture Mode
+# Daily Learning Log
 
-Quickly log your Oracle consulting work with automatic confidentiality transformation.
+Log your independent OCI study work: what you learned, what you built and what blocked you.
 
-## Capture Protocol
+**Do not submit confidential engagement data.** This log is for personal study on public or
+synthetic material. Never record customer or client names, employer-internal information,
+credentials, OCIDs or network details. If an entry contains any of these, decline to store it and
+ask for a rewrite.
 
-### Step 1: Gather Information
+## Capture protocol
 
-Provide:
-1. **Project Context**: Which project codename? (or General)
-2. **Entry Type**: Win / Learning / Blocker
-3. **Description**: What happened?
+### Step 1: Gather information
 
-### Step 2: Automatic Confidentiality
+Ask for:
+1. **Lab**: which fictional lab label (or "general")?
+2. **Entry type**: built / learned / blocked
+3. **Description**: what happened?
 
-Before storing, I automatically transform:
+### Step 2: Check the entry
 
-| If You Say | I Transform To |
-|------------|----------------|
-| Customer name | Project codename |
-| "$2.3M" | "multi-million dollar" |
-| "47 users" | "approximately 50 users" |
-| "December 15" | "mid-Q4" |
-| Specific IP/endpoints | "customer infrastructure" |
+Before storing, check the entry against the data rules above. Replace any identifier that slipped
+in (a region-specific endpoint, an OCID, an IP range) with a placeholder such as `<your-region>` or
+`<compartment-ocid>`.
 
-### Step 3: Store Entry
+### Step 3: Store the entry
 
-I append to your daily log with this format:
+Append to the daily log in this format:
 
 ```markdown
-### [TIME] - [PROJECT] - [TYPE]
-**Context:** [Project codename or General]
-**Entry:** [Abstracted description]
-**Skills Applied:** [Relevant skills]
-**Business Value:** [Impact in business terms]
+### [TIME] - [LAB] - [TYPE]
+**Entry:** [description]
+**Skills practised:** [relevant skills]
+**Sources:** [docs or labs used, with links]
 ```
 
-## Quick Capture Syntax
+## Quick capture syntax
 
-For rapid entry, use this format:
-- `[CODENAME] win: [description]`
-- `[CODENAME] learning: [description]`
-- `[CODENAME] blocker: [description]`
+- `[LAB] built: [description]`
+- `[LAB] learned: [description]`
+- `[LAB] blocked: [description]`
 
-### Examples
+### Examples (fictional)
 
 ```
-A win: Resolved Kubernetes networking issue
-B learning: Discovered new OCI GenAI capability
-C blocker: Waiting on customer access credentials
-general learning: Completed OCI AI certification module
+lab-oke built: Three-node OKE cluster with a private API endpoint
+lab-rag learned: Embedding chunk size changed answer quality more than the model choice
+lab-agents blocked: Tool-call schema rejected by the agent runtime, reading the docs next
+general learned: Finished the OCI Generative AI learning path module on prompt design
 ```
 
-## Output Location
+## Output location
 
 Configure in your workspace:
-- Daily logs: `reports/daily/YYYY-MM-DD.md`
-- Project updates: `projects/[CODENAME].md`
+- Daily logs: `notes/daily/YYYY-MM-DD.md`
+- Lab notes: `labs/[LAB].md`
 
 ---
 
-**Start capturing:** What would you like to log?
+**Start capturing:** what would you like to log?

@@ -8,12 +8,15 @@
   },
   "repository": "https://github.com/frankxai/claude-code-oracle-skills",
   "license": "MIT",
-  "keywords": ["oracle", "ai", "vector-search", "select-ai", "nim", "genai", "rag", "embeddings", "database-23ai"],
-  "category": "ai-ml",
-  "difficulty": "advanced",
-  "components": {
-    "skills": 1,
-    "commands": 1,
-    "agents": 0
-  }
+  "keywords": [
+    "oracle",
+    "ai",
+    "vector-search",
+    "select-ai",
+    "nim",
+    "genai",
+    "rag",
+    "embeddings",
+    "database-23ai"
+  ]
 }
