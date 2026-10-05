@@ -10,7 +10,7 @@
 
 ## 1. The Pipeline at a Glance
 
-Every client engagement follows 8 phases. `/oci-ai-architect` routes you to the right skill at each step.
+Every architecture project follows 8 phases. `/oci-ai-architect` routes you to the right skill at each step.
 
 ```
  INTAKE → DISCOVER → PRD → USER FLOWS → ARCHITECT → VISUALIZE → BUILD → DELIVER
@@ -32,7 +32,7 @@ Every client engagement follows 8 phases. `/oci-ai-architect` routes you to the 
 | 6 | **Build** | Direct + ADB MCP | Working prototype with live data |
 | 7 | **Deliver** | `/oracle-confidentiality` | Audited, presentation-ready package |
 
-**For a complete end-to-end engagement:** `/oracle-solution-design` chains all phases automatically with quality gates.
+**For a complete end-to-end project:** `/oracle-solution-design` chains all phases automatically with quality gates.
 
 **Total: 4-6 hours from blank page to working prototype with live database.**
 
@@ -268,7 +268,7 @@ It routes your request to the optimal skill:
 
 ### The Full Orchestrator: `/oracle-solution-design`
 
-For complete client engagements, this runs the full 5-phase pipeline:
+For a complete architecture project, this runs the full 5-phase pipeline:
 
 ```
 DISCOVER → ARCHITECT → VISUALIZE → PROTOTYPE → DELIVER
@@ -313,14 +313,14 @@ All skills live in `.claude/skills/` as SKILL.md files. They activate via slash 
 ```
 /oci-ai-architect (entry point — routes to the right skill)
     │
-    ├── /oracle-solution-design (full engagement — chains everything below)
+    ├── /oracle-solution-design (full project: chains everything below)
     │       ├── Phase 1 → /oracle-research (parallel research agents)
     │       ├── Phase 2 → /oci-services-expert + /oracle-sdd-generator
     │       ├── Phase 3 → Draw.io MCP or /oracle-infogenius
     │       ├── Phase 4 → /oracle-adk (if agents) + ADB MCP (if database)
     │       └── Phase 5 → /oracle-confidentiality (ALWAYS)
     │
-    ├── Individual skills (for focused work outside full engagement)
+    ├── Individual skills (for focused work outside a full project)
     │       ├── /oci-services-expert → "What OCI services for [X]? Cost?"
     │       ├── /oracle-research → "Research [technology] on OCI"
     │       └── /oracle-adk → "Build an agent for [use case]"
@@ -728,7 +728,7 @@ Validate the output with validate_drawio_icon_integrity.py.
 ```
 /oci-ai-architect
 
-Starting a new engagement — codename K.
+Starting a new practice project: codename K.
 
 Context (conversation only, not in files):
 - [Industry/domain]
@@ -1099,7 +1099,7 @@ Keep the Oracle Redwood design system styling.
 | Command | When |
 |---------|------|
 | `/oci-ai-architect` | **Start here** — routes to the right skill |
-| `/oracle-solution-design` | Full 5-phase engagement with quality gates |
+| `/oracle-solution-design` | Full 5-phase project with quality gates |
 | `/oracle-research` | Research OCI capabilities for a use case |
 | `/oci-services-expert` | OCI service selection + pricing verification |
 | `/oracle-sdd-generator` | Generate Solution Design Document |
@@ -1116,7 +1116,7 @@ Keep the Oracle Redwood design system styling.
 | **Nano Banana** | Image generation *(optional)* | `generate_image` |
 | **Playwright** | Browser testing *(optional)* | Validate prototypes |
 
-### Mandatory Checks (Every Engagement)
+### Mandatory Checks (Every Project)
 
 | Check | When | How |
 |-------|------|-----|

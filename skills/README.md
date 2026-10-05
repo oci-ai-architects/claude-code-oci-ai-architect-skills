@@ -25,7 +25,7 @@ The Oracle InfoGenius skill family provides tiered image generation for Oracle a
 | Skill | Model | Resolution | Cost/Image | Best For |
 |-------|-------|------------|------------|----------|
 | `/oracle-infogenius-flash` | Gemini 2.5 Flash | 1024px | **$0.039** | Drafts, iterations, volume |
-| `/oracle-infogenius-pro` | Gemini 3 Pro | 1K-2K | **$0.134** | Client presentations |
+| `/oracle-infogenius-pro` | Gemini 3 Pro | 1K-2K | **$0.134** | Presentations |
 | `/oracle-infogenius-premium` | Gemini 3 Pro | 4K | **$0.24** | Print, large displays |
 
 ## Quick Selection Guide
@@ -38,7 +38,7 @@ The Oracle InfoGenius skill family provides tiered image generation for Oracle a
 │  "I need quick drafts or many images"                          │
 │       → /oracle-infogenius-flash ($0.039/image)                │
 │                                                                 │
-│  "I need client-ready presentation visuals"                    │
+│  "I need polished presentation visuals"                        │
 │       → /oracle-infogenius-pro ($0.134/image)                  │
 │                                                                 │
 │  "I need print-quality or 4K resolution"                       │
@@ -64,7 +64,7 @@ The Oracle InfoGenius skill family provides tiered image generation for Oracle a
   - 1K/2K images (up to 2048px): **$0.134/image**
   - 4K images (up to 4096px): **$0.24/image**
 - **Features:** Extended thinking, web grounding
-- **Best For:** Client presentations, final deliverables
+- **Best For:** Presentations, final deliverables
 
 ## Usage Examples
 
@@ -117,7 +117,7 @@ enable_grounding: true
 | Scenario | Flash | Pro | Premium |
 |----------|-------|-----|---------|
 | 10 draft iterations | $0.39 | $1.34 | $2.40 |
-| 5 client slides | $0.20 | $0.67 | $1.20 |
+| 5 presentation slides | $0.20 | $0.67 | $1.20 |
 | 1 conference poster | $0.04 | $0.13 | $0.24 |
 | Full deck (20 images) | $0.78 | $2.68 | $4.80 |
 

@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <strong>Production-grade Claude Code skills for Oracle Cloud AI Architects</strong>
+  <strong>Claude Code skills and implementation examples for AI architects working on Oracle Cloud Infrastructure (OCI)</strong>
 </p>
 
 ---
@@ -33,7 +33,7 @@
 
 | Plugin | Command | Description | Difficulty |
 |--------|---------|-------------|------------|
-| **[oracle-adk](plugins/oracle-adk/)** | `/adk-agent` | Build production agents with Oracle ADK | Intermediate |
+| **[oracle-adk](plugins/oracle-adk/)** | `/adk-agent` | Agent implementation examples with Oracle ADK | Intermediate |
 | **[oracle-agent-spec](plugins/oracle-agent-spec/)** | `/agent-spec` | Framework-agnostic agent specifications | Intermediate |
 | **[oci-services-expert](plugins/oci-services-expert/)** | `/oci-cost` | OCI services, architecture & cost optimization | Beginner |
 | **[oracle-ai-architect](plugins/oracle-ai-architect/)** | `/vector-search` | Vector Search, Select AI, NVIDIA NIM | Advanced |
@@ -43,7 +43,7 @@
 | **[oracle-infogenius-pro](skills/oracle-infogenius-pro/)** | `/oracle-infogenius-pro` | Professional visuals ($0.134/image) | Intermediate |
 | **[oracle-infogenius-premium](skills/oracle-infogenius-premium/)** | `/oracle-infogenius-premium` | 4K print-ready ($0.24/image) | Intermediate |
 | **[agentic-orchestration](plugins/agentic-orchestration/)** | `/orchestrate` | Multi-agent coordination patterns | Advanced |
-| **[oracle-work-mode](plugins/oracle-work-mode/)** | `/oracle-work` | Consulting workflow with confidentiality | Beginner |
+| **[oracle-work-mode](plugins/oracle-work-mode/)** | `/oracle-work` | Independent OCI learning and research workflow (public or synthetic data only) | Beginner |
 
 ## Oracle InfoGenius Tiers
 
@@ -52,7 +52,7 @@ Cost-optimized image generation using Google Gemini models:
 | Tier | Command | Cost/Image | Resolution | Best For |
 |------|---------|------------|------------|----------|
 | **Flash** | `/oracle-infogenius-flash` | $0.039 | 1024px | Drafts, iterations, volume |
-| **Pro** | `/oracle-infogenius-pro` | $0.134 | 2048px | Client presentations |
+| **Pro** | `/oracle-infogenius-pro` | $0.134 | 2048px | Presentations |
 | **Premium** | `/oracle-infogenius-premium` | $0.24 | 4096px | Print, large displays |
 
 See [skills/README.md](skills/README.md) for detailed pricing and usage guide.
@@ -65,7 +65,7 @@ See [skills/README.md](skills/README.md) for detailed pricing and usage guide.
   <img src="examples/visuals/rag-architecture.png" alt="RAG Architecture on OCI" width="80%">
 </p>
 
-Generated with `/oracle-ai-architect-infogenius` — shows 3-tier enterprise architecture:
+Generated with `/oracle-ai-architect-infogenius`. It shows a 3-tier enterprise architecture:
 - **Security & Governance** layer (IAM, Vault, Audit, Data Lineage)
 - **Core pipeline**: Data Sources → Processing → Embedding → Vector Store → Retrieval → Generation
 - **Observability & Evaluation** layer (Monitoring, Traces, LLM-as-Judge, Feedback Loops)
@@ -105,10 +105,10 @@ Generated with:
 # Estimate OCI costs
 /oci-cost "RAG platform with 10K daily queries"
 
-# Oracle consulting workflow
-/oracle-work              # Activate confidentiality mode
-/daily-capture            # Log wins, learnings, blockers
-/research "OCI GPU shapes" # Confidential research session
+# Independent OCI learning workflow (public or synthetic data only)
+/oracle-work              # Start a study session
+/daily-capture            # Log what you built, learned or got stuck on
+/research "OCI GPU shapes" # Source-backed research from public documentation
 ```
 
 ## Who Is This For?
@@ -146,7 +146,7 @@ All 7 plugins cover the complete AI development lifecycle on Oracle Cloud:
 <td>
 
 ### Sales Engineers
-- **oracle-infogenius** - Customer-ready visuals
+- **oracle-infogenius** - Presentation-ready visuals
 - **oracle-diagram-generator** - Quick architecture diagrams
 - Cost estimates for proposals
 
@@ -158,7 +158,7 @@ All 7 plugins cover the complete AI development lifecycle on Oracle Cloud:
 
 **Important**: For Draw.io diagrams, import official Oracle icons first:
 
-1. Download: [OCI-Style-Guide-for-Drawio.zip](https://docs.oracle.com/iaas/Content/Resources/Assets/OCI-Style-Guide-for-Drawio.zip)
+1. Download: [OCI-Style-Guide-for-Drawio.zip](https://docs.oracle.com/en-us/iaas/Content/Resources/Assets/OCI-Style-Guide-for-Drawio.zip)
 2. Extract the ZIP
 3. In Draw.io: **File → Open Library From → Device** → select the XML
 4. OCI icons appear in left sidebar
@@ -170,12 +170,14 @@ Full guide: [plugins/oracle-diagram-generator/ORACLE_ICONS_SETUP.md](plugins/ora
 Every skill includes:
 
 - **When to Use** - Clear activation triggers at the top
-- **Code Examples** - Production-ready, tested patterns
+- **Code Examples** - Implementation examples to adapt and test in your own tenancy
 - **Quality Checklist** - 15-20 verification points
 - **Decision Framework** - When to use vs. alternatives
 - **Official Resources** - Links to Oracle documentation
 
-## Tested With
+## Target Versions
+
+The examples were written against these versions. They have not been re-run for this revision.
 
 | Component | Version |
 |-----------|---------|
@@ -195,10 +197,10 @@ Every skill includes:
 
 ## Related Resources
 
-- [Oracle Agent Development Kit](https://docs.oracle.com/en-us/iaas/Content/generative-ai-agents/adk/)
+- [Oracle Agent Development Kit](https://docs.oracle.com/en-us/iaas/Content/generative-ai-agents/adk/api-reference/introduction.htm)
 - [Oracle Agent Spec](https://github.com/oracle/agent-spec)
 - [OCI Generative AI](https://docs.oracle.com/en-us/iaas/Content/generative-ai/home.htm)
-- [OCI Architecture Center](https://docs.oracle.com/en/solutions/)
+- [OCI Architecture Center](https://docs.oracle.com/solutions/)
 
 ## Contributing
 
@@ -215,8 +217,7 @@ MIT License - see [LICENSE](LICENSE)
 ---
 
 <p align="center">
-  <strong>Maintained by FrankX</strong> | Oracle AI Architect<br>
-  <em>Building the future of enterprise AI on Oracle Cloud</em>
+  <strong>Maintained by FrankX</strong> as an independent community project
 </p>
 
 

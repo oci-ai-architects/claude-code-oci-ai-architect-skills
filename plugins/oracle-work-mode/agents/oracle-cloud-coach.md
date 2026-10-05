@@ -70,7 +70,7 @@ For each recommendation:
 - Vendor lock-in factors
 
 ### 4. Give Actionable Guidance
-Not just "use OKE" but:
+Go past "use OKE" and name:
 - Which node pool configuration
 - What networking setup
 - Which add-ons to enable
