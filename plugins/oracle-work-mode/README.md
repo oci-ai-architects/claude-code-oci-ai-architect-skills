@@ -1,123 +1,108 @@
-# Oracle Work Mode Plugin
+# oracle-work-mode
 
-A comprehensive plugin for Oracle consulting work with built-in confidentiality protocols.
+An independent OCI learning and research workflow for Claude Code: study sessions, a daily
+learning log, source-backed research and a privacy check before you publish.
+
+Independent community project. Not affiliated with, endorsed by, or sponsored by Oracle
+Corporation. Oracle and OCI are trademarks or registered trademarks of Oracle Corporation. Other
+names are marks of their respective owners.
+
+> The plugin id `oracle-work-mode` is kept for compatibility with existing installs. A rename is
+> tracked separately.
+
+## Do not submit confidential engagement data
+
+This plugin is for personal study on public or synthetic material. Do not paste or type customer
+or client names, employer-internal documents, contract or pricing terms, unreleased product
+information, credentials, OCIDs, IP ranges or any other non-public material into a session. Use the
+official OCI documentation, your own sandbox tenancy or synthetic data. The commands and agents
+are instructed to stop and ask for a public substitute when they see such material.
 
 ## Features
 
 ### Commands
 
+Claude Code discovers these from the plugin's `commands/` directory.
+
 | Command | Description |
 |---------|-------------|
-| `/oracle-work` | Activate Oracle work context with confidentiality mode |
-| `/daily-capture` | Quick capture wins, learnings, blockers |
-| `/research [topic]` | Start confidential research session |
+| `/oracle-work` | Start a study session with the data rules and agents loaded |
+| `/daily-capture` | Log what you built, learned or got stuck on |
+| `/research [topic]` | Start a source-backed research session |
 
 ### Agents
 
+Claude Code discovers these from the plugin's `agents/` directory.
+
 | Agent | Purpose |
 |-------|---------|
-| `oracle-cloud-coach` | OCI architecture guidance and technical coaching |
-| `research-analyst` | Web research with automatic confidentiality |
-| `confidentiality-guardian` | Review content before external sharing |
+| `oracle-cloud-coach` | OCI architecture coaching for study labs |
+| `research-analyst` | Source-backed web research and synthesis |
+| `confidentiality-guardian` | Privacy check before a post, talk or repo goes public |
 
 ## Installation
 
-```bash
-# Via plugin marketplace
-/plugin install oracle-work-mode
+This plugin is not listed in the repository's `.claude-plugin/marketplace.json` yet, so `/plugin install`
+will not find it. Load it from a local clone instead:
 
-# Or manually
-git clone https://github.com/frankxai/claude-code-oracle-skills.git
-cp -r claude-code-oracle-skills/plugins/oracle-work-mode ~/.claude/plugins/
+```bash
+claude --plugin-dir ./plugins/oracle-work-mode
 ```
 
 ## Setup
 
-### 1. Define Your Codenames
+### 1. Name your labs
 
-Create a codename mapping in your workspace (keep private, don't commit):
+Give each study project a short fictional label and keep the list in `notes/labs.md`:
 
 ```markdown
-<!-- .private/codename-registry.md -->
-| Codename | Real Customer | Industry |
-|----------|---------------|----------|
-| A | [Customer 1] | Telecom |
-| B | [Customer 2] | Finance |
-| C | [Customer 3] | Healthcare |
+| Label | What it is (fictional) | Status |
+|-------|------------------------|--------|
+| lab-rag | RAG over the public OCI docs, in a personal free-tier tenancy | Active |
+| lab-agents | A toy travel-booking agent with synthetic data | Active |
+| lab-oke | A three-node OKE cluster for practice | Planning |
 ```
 
-### 2. Create Directory Structure
+### 2. Create a directory structure
 
 ```
 your-workspace/
-├── projects/
-│   ├── A.md
-│   ├── B.md
-│   └── C.md
-├── reports/
-│   ├── daily/
-│   └── weekly/
-├── research/
-│   ├── topics/
-│   └── projects/
-└── .private/           ← Never commit
-    └── codename-registry.md
-```
-
-### 3. Add to .gitignore
-
-```
-.private/
+├── labs/
+│   ├── lab-rag.md
+│   ├── lab-agents.md
+│   └── lab-oke.md
+├── notes/
+│   ├── labs.md
+│   └── daily/
+└── research/
+    ├── topics/
+    └── labs/
 ```
 
 ## Usage
 
-### Start Work Session
+### Start a study session
 ```
 /oracle-work
 ```
 
-### Log Daily Activity
+### Log the day
 ```
 /daily-capture
-A win: Resolved customer's OKE networking issue
+lab-oke built: Three-node OKE cluster with a private API endpoint
 ```
 
-### Research a Topic
+### Research a topic
 ```
 /research OCI GPU shapes for LLM inference
 ```
 
-### Review Before Sharing
+### Check before publishing
 ```
-Ask: "Review this weekly report before I send it"
-→ confidentiality-guardian agent scans for sensitive info
+Ask: "Review this lab-rag write-up before I publish it"
+→ the confidentiality-guardian agent checks for identifiers, secrets and non-public information
 ```
-
-## Confidentiality Protocol
-
-This plugin automatically:
-- Uses codenames instead of customer names
-- Abstracts specific numbers to ranges
-- Replaces dates with quarters
-- Blocks output of: pricing, security configs, internal roadmaps
-
-### Transformation Examples
-
-| You Say | Plugin Transforms To |
-|---------|---------------------|
-| "Acme Corp" | Project codename or "the customer" |
-| "$2.3M contract" | "multi-million dollar engagement" |
-| "47 users" | "approximately 50 users" |
-| "December 15 go-live" | "mid-Q4 launch" |
-
-## Best Practices
-
-1. **Always use codenames** in conversation
-2. **Run confidentiality-guardian** before sharing any content externally
-3. **Store sensitive mappings** only in `.private/` (not committed)
-4. **Use daily-capture** to build evidence of value delivered
 
 ## License
 
-MIT - Part of the Claude Code Oracle Skills collection.
+MIT. See the repository [LICENSE](../../LICENSE).

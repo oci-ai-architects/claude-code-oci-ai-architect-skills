@@ -206,7 +206,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 
 ## Disclaimer
-> **Disclaimer:** Unofficial community project. Not affiliated with, endorsed by, or sponsored by Oracle Corporation. Oracle, OCI, and related marks are trademarks of Oracle Corporation.
+> **Disclaimer:** Unofficial community project. Not affiliated with, endorsed by, or sponsored by Oracle Corporation. Oracle and OCI are trademarks or registered trademarks of Oracle Corporation. Other names are marks of their respective owners.
 
 ## License
 

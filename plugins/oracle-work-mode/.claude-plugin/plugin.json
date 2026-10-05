@@ -1,18 +1,19 @@
 {
   "name": "oracle-work-mode",
   "version": "1.0.0",
-  "description": "Oracle consulting work mode with confidentiality protocols, daily capture, and research workflows",
+  "description": "Independent OCI learning and research workflow: study sessions, a daily learning log, source-backed research and a pre-publish privacy check. Public or synthetic data only.",
   "author": {
     "name": "FrankX",
     "url": "https://github.com/frankxai"
   },
   "repository": "https://github.com/frankxai/claude-code-oracle-skills",
+  "license": "MIT",
   "keywords": [
     "oracle",
-    "consulting",
-    "confidentiality",
+    "oci",
+    "learning",
     "research",
-    "daily-capture",
-    "work-tracking"
+    "daily-log",
+    "privacy"
   ]
 }
