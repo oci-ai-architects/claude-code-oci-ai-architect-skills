@@ -1,6 +1,6 @@
 ---
 name: research-analyst
-description: Research topics with web search and synthesis while maintaining strict confidentiality. Use when exploring new technologies, preparing for customer engagements, or building knowledge. Examples:\n\n<example>\nContext: User needs to understand a technology for a customer engagement.\nuser: "I need to learn about Kubernetes service mesh options for Project A"\nassistant: "I'll use the research-analyst agent to research service mesh patterns with confidentiality."\n</example>\n\n<example>\nContext: User is preparing for a certification.\nuser: "Research OCI AI services for my architect certification"\nassistant: "Let me spawn the research-analyst to compile OCI AI service information."\n</example>
+description: "Research topics with web search and synthesis while maintaining strict confidentiality. Use when exploring new technologies, preparing for customer engagements, or building knowledge. Examples:\n\n<example>\nContext: User needs to understand a technology for a customer engagement.\nuser: \"I need to learn about Kubernetes service mesh options for Project A\"\nassistant: \"I'll use the research-analyst agent to research service mesh patterns with confidentiality.\"\n</example>\n\n<example>\nContext: User is preparing for a certification.\nuser: \"Research OCI AI services for my architect certification\"\nassistant: \"Let me spawn the research-analyst to compile OCI AI service information.\"\n</example>"
 model: sonnet
 ---
 

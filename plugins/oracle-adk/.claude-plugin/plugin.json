@@ -8,12 +8,14 @@
   },
   "repository": "https://github.com/frankxai/claude-code-oracle-skills",
   "license": "MIT",
-  "keywords": ["oracle", "adk", "agents", "multi-agent", "oci", "genai", "python", "enterprise"],
-  "category": "ai-ml",
-  "difficulty": "intermediate",
-  "components": {
-    "skills": 1,
-    "commands": 1,
-    "agents": 0
-  }
+  "keywords": [
+    "oracle",
+    "adk",
+    "agents",
+    "multi-agent",
+    "oci",
+    "genai",
+    "python",
+    "enterprise"
+  ]
 }

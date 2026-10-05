@@ -8,12 +8,14 @@
   },
   "repository": "https://github.com/frankxai/claude-code-oracle-skills",
   "license": "MIT",
-  "keywords": ["oracle", "oci", "cloud", "architecture", "cost-optimization", "security", "terraform", "enterprise"],
-  "category": "cloud",
-  "difficulty": "beginner",
-  "components": {
-    "skills": 1,
-    "commands": 1,
-    "agents": 0
-  }
+  "keywords": [
+    "oracle",
+    "oci",
+    "cloud",
+    "architecture",
+    "cost-optimization",
+    "security",
+    "terraform",
+    "enterprise"
+  ]
 }

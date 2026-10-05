@@ -1,6 +1,6 @@
 ---
 name: confidentiality-guardian
-description: Review content for confidentiality compliance before sharing externally. Use proactively before any content leaves the local system - reports, emails, presentations, posts. Examples:\n\n<example>\nContext: User is about to share a report with management.\nuser: "Review this weekly report before I send it"\nassistant: "I'll use the confidentiality-guardian to scan for any sensitive information."\n</example>\n\n<example>\nContext: User drafted a LinkedIn post about their work.\nuser: "Check this post for any confidentiality issues"\nassistant: "Let me spawn the confidentiality-guardian to review before you publish."\n</example>
+description: "Review content for confidentiality compliance before sharing externally. Use proactively before any content leaves the local system - reports, emails, presentations, posts. Examples:\n\n<example>\nContext: User is about to share a report with management.\nuser: \"Review this weekly report before I send it\"\nassistant: \"I'll use the confidentiality-guardian to scan for any sensitive information.\"\n</example>\n\n<example>\nContext: User drafted a LinkedIn post about their work.\nuser: \"Check this post for any confidentiality issues\"\nassistant: \"Let me spawn the confidentiality-guardian to review before you publish.\"\n</example>"
 model: haiku
 ---
 

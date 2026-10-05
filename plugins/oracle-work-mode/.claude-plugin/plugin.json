@@ -2,7 +2,10 @@
   "name": "oracle-work-mode",
   "version": "1.0.0",
   "description": "Oracle consulting work mode with confidentiality protocols, daily capture, and research workflows",
-  "author": "FrankX",
+  "author": {
+    "name": "FrankX",
+    "url": "https://github.com/frankxai"
+  },
   "repository": "https://github.com/frankxai/claude-code-oracle-skills",
   "keywords": [
     "oracle",
@@ -11,33 +14,5 @@
     "research",
     "daily-capture",
     "work-tracking"
-  ],
-  "commands": [
-    {
-      "name": "oracle-work",
-      "description": "Activate Oracle work context with confidentiality protocols"
-    },
-    {
-      "name": "daily-capture",
-      "description": "Quick capture of wins, learnings, and blockers"
-    },
-    {
-      "name": "research",
-      "description": "Start confidential research session"
-    }
-  ],
-  "agents": [
-    {
-      "name": "oracle-cloud-coach",
-      "description": "OCI architecture guidance and technical coaching"
-    },
-    {
-      "name": "research-analyst",
-      "description": "Web research with confidentiality enforcement"
-    },
-    {
-      "name": "confidentiality-guardian",
-      "description": "Review content before external sharing"
-    }
   ]
 }

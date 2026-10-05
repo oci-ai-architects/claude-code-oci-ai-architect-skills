@@ -1,7 +1,7 @@
 ---
 description: Design multi-agent orchestration pattern for OCI
 allowed-tools: Read, Write
-argument-hint: [use-case] [--pattern=conductor|pipeline|swarm]
+argument-hint: "[use-case] [--pattern=conductor|pipeline|swarm]"
 ---
 
 ## Context

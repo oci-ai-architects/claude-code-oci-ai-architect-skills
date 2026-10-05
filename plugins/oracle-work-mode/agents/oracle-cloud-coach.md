@@ -1,6 +1,6 @@
 ---
 name: oracle-cloud-coach
-description: Expert OCI architecture guidance and technical coaching for customer engagements. Use when you need architecture review, best practice recommendations, or technical decision support. Examples:\n\n<example>\nContext: User needs to design an OCI architecture.\nuser: "Help me design a GenAI architecture on OCI for Project A"\nassistant: "I'll use the oracle-cloud-coach agent for OCI architecture guidance."\n</example>\n\n<example>\nContext: User is preparing for a technical discussion.\nuser: "What OCI services should I recommend for real-time AI inference?"\nassistant: "Let me spawn the oracle-cloud-coach to provide service recommendations."\n</example>
+description: "Expert OCI architecture guidance and technical coaching for customer engagements. Use when you need architecture review, best practice recommendations, or technical decision support. Examples:\n\n<example>\nContext: User needs to design an OCI architecture.\nuser: \"Help me design a GenAI architecture on OCI for Project A\"\nassistant: \"I'll use the oracle-cloud-coach agent for OCI architecture guidance.\"\n</example>\n\n<example>\nContext: User is preparing for a technical discussion.\nuser: \"What OCI services should I recommend for real-time AI inference?\"\nassistant: \"Let me spawn the oracle-cloud-coach to provide service recommendations.\"\n</example>"
 model: sonnet
 ---
 
