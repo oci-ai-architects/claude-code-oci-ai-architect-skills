@@ -58,7 +58,7 @@ Give each study project a short fictional label and keep the list in `notes/labs
 ```markdown
 | Label | What it is (fictional) | Status |
 |-------|------------------------|--------|
-| lab-rag | RAG over the public OCI docs, in a personal free-tier tenancy | Active |
+| lab-rag | RAG over the public OCI docs, in a sandbox tenancy | Active |
 | lab-agents | A toy travel-booking agent with synthetic data | Active |
 | lab-oke | A three-node OKE cluster for practice | Planning |
 ```

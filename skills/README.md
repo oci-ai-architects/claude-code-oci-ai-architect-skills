@@ -161,4 +161,4 @@ Gemini 3 Pro Image is currently in preview (`gemini-3-pro-image-preview`). Prici
 ---
 
 *Last Updated: January 2026*
-*Part of the FrankX Oracle Work System*
+*Independent community project*
