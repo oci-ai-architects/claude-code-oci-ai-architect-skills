@@ -4,16 +4,6 @@
   "description": "Deep technical implementations for Oracle AI architecture: Vector Search, Select AI, NVIDIA NIM, and multi-agent patterns",
   "author": {
     "name": "FrankX",
-    "url": "https://github.com/frankxai"
-  },
-  "repository": "https://github.com/frankxai/claude-code-oracle-skills",
-  "license": "MIT",
-  "keywords": ["oracle", "ai", "vector-search", "select-ai", "nim", "genai", "rag", "embeddings", "database-23ai"],
-  "category": "ai-ml",
-  "difficulty": "advanced",
-  "components": {
-    "skills": 1,
-    "commands": 1,
-    "agents": 0
+    "email": "frankx@github.com"
   }
 }

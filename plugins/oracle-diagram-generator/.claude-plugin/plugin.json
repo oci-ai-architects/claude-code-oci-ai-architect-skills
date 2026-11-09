@@ -4,16 +4,6 @@
   "description": "Generate professional OCI architecture diagrams with Python diagrams library (official OCI icons) or Mermaid.js",
   "author": {
     "name": "FrankX",
-    "url": "https://github.com/frankxai"
-  },
-  "repository": "https://github.com/frankxai/claude-code-oracle-skills",
-  "license": "MIT",
-  "keywords": ["oracle", "oci", "diagrams", "draw.io", "mermaid", "architecture", "presentations", "icons"],
-  "category": "productivity",
-  "difficulty": "beginner",
-  "components": {
-    "skills": 1,
-    "commands": 1,
-    "agents": 0
+    "email": "frankx@github.com"
   }
 }
