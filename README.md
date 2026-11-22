@@ -45,6 +45,22 @@
 | **[agentic-orchestration](plugins/agentic-orchestration/)** | `/orchestrate` | Multi-agent coordination patterns | Advanced |
 | **[oracle-work-mode](plugins/oracle-work-mode/)** | `/oracle-work` | Consulting workflow with confidentiality | Beginner |
 
+## Standalone skills for Codex and Claude Code
+
+From the project that should receive the skill, install one by its directory name.
+
+```bash
+npx skills add oci-ai-architects/claude-code-oci-ai-architect-skills --skill oci-services-expert --agent codex --copy
+```
+
+Use `--agent claude-code` for Claude Code. The five core identifiers are
+`oracle-adk`, `oracle-agent-spec`, `oci-services-expert`, `oracle-ai-architect`
+and `oracle-diagram-generator`. If a script selected a display name such as
+`"Oracle ADK Expert"`, change its `--skill` argument to `oracle-adk`.
+
+To remove the example from the same project, run
+`npx skills remove oci-services-expert --agent codex`.
+
 ## Oracle InfoGenius Tiers
 
 Cost-optimized image generation using Google Gemini models:
