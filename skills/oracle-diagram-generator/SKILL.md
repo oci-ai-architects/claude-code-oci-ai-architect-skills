@@ -1,5 +1,5 @@
 ---
-name: Oracle Diagram Generator
+name: oracle-diagram-generator
 description: Generate professional OCI architecture diagrams with verified Oracle styling and icons
 version: 1.0.0
 ---
