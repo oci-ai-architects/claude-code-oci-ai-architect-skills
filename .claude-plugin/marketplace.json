@@ -43,7 +43,7 @@
       "name": "oracle-diagram-generator",
       "source": "./plugins/oracle-diagram-generator",
       "description": "Generate professional OCI architecture diagrams with Oracle styling",
-      "version": "1.0.0",
+      "version": "3.0.0",
       "category": "productivity",
       "keywords": ["oracle", "oci", "diagrams", "draw.io", "mermaid", "architecture"]
     },
@@ -62,6 +62,13 @@
       "version": "1.0.0",
       "category": "ai-ml",
       "keywords": ["oracle", "agents", "orchestration", "multi-agent", "coordination"]
+    },
+    {
+      "name": "oracle-work-mode",
+      "source": "./plugins/oracle-work-mode",
+      "description": "Oracle consulting work mode with confidentiality protocols, daily capture, and research workflows",
+      "version": "1.0.0",
+      "category": "productivity"
     }
   ]
 }

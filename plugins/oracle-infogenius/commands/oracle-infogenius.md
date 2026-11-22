@@ -1,7 +1,7 @@
 ---
 description: Generate AI Architect-grade OCI visuals with research grounding
 allowed-tools: Read, ToolSearch, mcp__nanobanana__generate_image
-argument-hint: [description] [--style=technical|executive|simple] [--size=1920x1080]
+argument-hint: "[description] [--style=technical|executive|simple] [--size=1920x1080]"
 ---
 
 ## Context

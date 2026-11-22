@@ -21,13 +21,30 @@
 
 ## Quick Install
 
-```bash
-# Add marketplace
-/plugin marketplace add frankxai/claude-code-oracle-skills
+In Claude Code, add the marketplace and choose a plugin. For example, to install
+the OCI cost estimator, enter these commands one at a time.
 
-# Install all plugins
-/plugin install oracle-adk oracle-agent-spec oci-services-expert oracle-ai-architect oracle-diagram-generator oracle-infogenius agentic-orchestration oracle-work-mode
+```text
+/plugin marketplace add oci-ai-architects/claude-code-oci-ai-architect-skills
+/plugin install oci-services-expert@oracle-ai-architect-skills
 ```
+
+To install all eight plugins from a Bash terminal, run this block.
+
+```bash
+(
+  set -e
+  claude plugin marketplace add oci-ai-architects/claude-code-oci-ai-architect-skills
+  for plugin in oracle-adk oracle-agent-spec oci-services-expert oracle-ai-architect \
+    oracle-diagram-generator oracle-infogenius agentic-orchestration oracle-work-mode; do
+    claude plugin install "$plugin@oracle-ai-architect-skills"
+  done
+)
+```
+
+For standalone skill files, run `./install.sh` in a clone of this repository.
+It installs five core skills in `~/.claude/skills/`. To install just one, run
+`./install.sh oracle-adk`.
 
 ## Available Plugins
 

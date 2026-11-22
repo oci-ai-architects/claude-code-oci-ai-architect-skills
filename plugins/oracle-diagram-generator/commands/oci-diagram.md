@@ -1,7 +1,7 @@
 ---
 description: Generate a professional OCI architecture diagram
 allowed-tools: Read, Write, Bash(python:*)
-argument-hint: [architecture-type] [output-format]
+argument-hint: "[architecture-type] [output-format]"
 ---
 
 ## Context
