@@ -1,7 +1,7 @@
 ---
 description: Generate Oracle Database 23ai Vector Search implementation
 allowed-tools: Read, Write
-argument-hint: [use-case]
+argument-hint: "[use-case]"
 ---
 
 ## Context

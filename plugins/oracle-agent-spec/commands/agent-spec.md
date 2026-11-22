@@ -1,7 +1,7 @@
 ---
 description: Generate a framework-agnostic Oracle Agent Spec definition
 allowed-tools: Read, Write
-argument-hint: [agent-name] [format]
+argument-hint: "[agent-name] [format]"
 ---
 
 ## Context

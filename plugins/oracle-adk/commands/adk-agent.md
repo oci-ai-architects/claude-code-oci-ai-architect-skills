@@ -1,7 +1,7 @@
 ---
 description: Create or scaffold an Oracle ADK agent application
 allowed-tools: Read, Write, Bash(pip:*), Bash(python:*)
-argument-hint: [agent-name] [pattern]
+argument-hint: "[agent-name] [pattern]"
 ---
 
 ## Context

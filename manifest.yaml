@@ -1,12 +1,12 @@
 # Claude Code Oracle Skills Marketplace
-# https://github.com/FrankX/claude-code-oracle-skills
+# https://github.com/oci-ai-architects/claude-code-oci-ai-architect-skills
 
 name: oracle-ai-architect-skills
 version: 1.0.0
 description: Production-grade Claude Code skills for Oracle Cloud AI Architects
 author: FrankX
 license: MIT
-homepage: https://github.com/FrankX/claude-code-oracle-skills
+homepage: https://github.com/oci-ai-architects/claude-code-oci-ai-architect-skills
 
 # Target audiences
 audiences:

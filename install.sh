@@ -1,13 +1,13 @@
 #!/bin/bash
 # Claude Code Oracle Skills Installer
-# Usage: curl -sSL https://raw.githubusercontent.com/FrankX/claude-code-oracle-skills/main/install.sh | bash
+# Usage: curl -fsSL https://raw.githubusercontent.com/oci-ai-architects/claude-code-oci-ai-architect-skills/main/install.sh | bash
 # Or: ./install.sh [skill-name]
 
 set -e
 
-REPO_URL="https://github.com/FrankX/claude-code-oracle-skills.git"
+REPO_URL="https://github.com/oci-ai-architects/claude-code-oci-ai-architect-skills.git"
 SKILLS_DIR="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
-REPO_CACHE="${CLAUDE_SKILLS_REPOS:-$HOME/.claude/skills-repos}/claude-code-oracle-skills"
+REPO_CACHE="${CLAUDE_SKILLS_REPOS:-$HOME/.claude/skills-repos}/claude-code-oci-ai-architect-skills"
 
 # Colors for output
 RED='\033[0;31m'
@@ -26,10 +26,10 @@ mkdir -p "$(dirname "$REPO_CACHE")"
 if [ -d "$REPO_CACHE" ]; then
     echo -e "${YELLOW}Updating existing repository...${NC}"
     cd "$REPO_CACHE"
-    git pull --quiet
+    git pull --ff-only --quiet
 else
     echo -e "${YELLOW}Cloning repository...${NC}"
-    git clone --quiet "$REPO_URL" "$REPO_CACHE"
+    git clone --quiet --depth 1 "$REPO_URL" "$REPO_CACHE"
     cd "$REPO_CACHE"
 fi
 

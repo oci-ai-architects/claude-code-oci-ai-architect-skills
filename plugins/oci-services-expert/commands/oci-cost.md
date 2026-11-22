@@ -1,7 +1,7 @@
 ---
 description: Estimate OCI costs for an architecture
 allowed-tools: Read, WebSearch
-argument-hint: [architecture-description]
+argument-hint: "[architecture-description]"
 ---
 
 ## Context
